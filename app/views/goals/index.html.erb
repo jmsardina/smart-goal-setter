@@ -1,8 +1,15 @@
-Find me in views/goals/index!
+<h1><%= current_user.name %> </h1>
+
+<ul>
+  <% @goals.each do |goal| %>
+    <li> <%=link_to "#{goal.name}", goal_path(goal) %>
+      <p> <%= goal.description %></p>
+    <li>
+  <% end %>
+</ul>
+
 
 <p>This page will be the the user's dashboard.</p>
-
-<p>Once the user signs in, this will be the landing page</p>
 
 <ul> This page may include:
   <li>user name</li>
