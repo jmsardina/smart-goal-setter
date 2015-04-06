@@ -1,39 +1,28 @@
 # Goaly
 
-## Description
+We understand that change is difficult considering our multiple demands.  We believe, however, that support and accountability can really make a difference in helping us achieve the goals we may have.  This is why we created <em><strong>Goaly</strong></em>.
 
-Add a short description of your app.
-
-## Screenshots
-
-Add some spiffy screenshots of your app here.
-
-## Background
-
-Why did you want to make this app? What was your development process
-like?
-
-## Features
-
-Bullet point some of the key features of your app here.
-
-## Usage
-
-How do users use your app?
-
-## Development/Contribution
-
-Explain how people can contribute to your app. How should they write tests?
-Any things in particular you'd like to see in pull requests?
-
-## Future
-
-What features are you currently working on? Only mention things that you
-actually are implementing. No pie-in-the-sky-never-gonna-happen stuff.
+<em><strong>Goaly</strong></em>'s mission is to provide a platform for:
+<ul>
+  <li> guided goal-setting </li>
+  <li> progress-tracking </li>
+  <li> support
+    <ul>
+      <li> social network </li>
+      <li> information </li>
+      <li> reminders </li>
+    </ul>
+  </li>
+</ul>
+We believe that anybody willing to make a change can benefit from this application!  Its social feature makes it ideal for goal-setting at both the individual and at the group level.
 
 ## Author
 
-Link to your blog, twitter, etc!
+<ul>
+  <li><a href="http://thecodingsocialworker.blogspot.com/">Skylar Panuska </a></li>
+  <li><a href="http://cyzanfar.github.io/">Cyrus Ghazanfar</a></li>
+  <li><a href="https://programmingsprouts.wordpress.com/">Jennifer Sardina </a></li>
+</ul>
 
 ## License
 
