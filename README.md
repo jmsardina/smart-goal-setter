@@ -37,4 +37,4 @@ Link to your blog, twitter, etc!
 
 ## License
 
-Goaly is MIT Licensed. See LICENSE for details.
+Goaly is MIT Licensed. See LICENSE for details.# goal-tracking
