@@ -1,7 +1,12 @@
 class GoalsController < ApplicationController
 
 	def index
-		@goals = current_user.goals
+		if current_user
+			@goals = current_user.goals 
+		else
+			@goals = Goal.all
+			render 'welcome_page'
+		end
 	end
 
 	def new
