@@ -1,4 +1,4 @@
-<%= form_for(@activity, url: goal_path(@goal)) do |f| %>
+<%= form_for(@activity, url: goal_activities_path(@goal)) do |f| %>
   <div class="field">
     <%= f.label :description %>
     <%= f.text_field :description %>
@@ -11,13 +11,14 @@
 
   <div class="field">
     <%= f.label :barrier, "Potential Barriers"%>
-    <%= f.text_field :barrier %>
+    <%= f.text_area :barrier %>
   </div>
 
   <div class="field">
-    <%= f.label :facilitator, "Time Period"%>
-    <%= f.text_field :facilitator %>
+    <%= f.label :facilitator, "Facilitators"%>
+    <%= f.text_area :facilitator %>
   </div>
 
-  <% f.submit %>
+
+  <%= f.submit %>
 <% end %>
