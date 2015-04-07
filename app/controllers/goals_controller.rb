@@ -2,7 +2,7 @@ class GoalsController < ApplicationController
 
 	def index
 		if current_user
-			@goals = current_user.goals 
+			@goals = current_user.goals
 		else
 			@goals = Goal.all
 			render 'welcome_page'
@@ -19,6 +19,7 @@ class GoalsController < ApplicationController
 		if @goal.save
 			redirect_to goal_path(@goal)
 		else
+			flash[:notice] = "Something went wrong...Try again."
 			render :new
 		end
 	end

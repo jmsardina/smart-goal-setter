@@ -1,5 +1,5 @@
 <h1><%= current_user.name %> </h1>
-<%= image_tag current_user.avatar.url %>
+<%= image_tag current_user.avatar.url(:thumb) %>
 
 <ul>
   <% @goals.each do |goal| %>
