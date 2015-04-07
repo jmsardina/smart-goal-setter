@@ -1,0 +1,23 @@
+<%= form_for([@goal, @activity]) do |f| %>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :period, "Time Period"%>
+    <%= f.text_field :period %>
+  </div>
+
+  <div class="field">
+    <%= f.label :barrier, "Potential Barriers"%>
+    <%= f.text_field :barrier %>
+  </div>
+
+  <div class="field">
+    <%= f.label :facilitator, "Facilitators"%>
+    <%= f.text_field :facilitator %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,32 @@
+<%= form_for(@goal) do |f| %>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :due_date, "Date to be completed by"%>
+    <%= f.text_field :due_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :potential_barrier, "Potential Barriers"%>
+    <%= f.text_field :potential_barrier %>
+  </div>
+
+  <div class="field">
+    <%= f.label :coping_strategy, "Coping Strategies"%>
+    <%= f.text_field :coping_strategy %>
+  </div>
+
+  <div class="field">
+    <%= f.label :support, "Support"%>
+    <%= f.text_field :support %>
+  </div>
+  <%= f.submit %>
+<% end %>

@@ -5,6 +5,7 @@ class ActivitiesController < ApplicationController
 	end
 
 	def new
+		@goal = Goal.find(params[:id])
 		@activity = Activity.new
 	end
 
@@ -12,13 +13,14 @@ class ActivitiesController < ApplicationController
 		@activity = Activity.create(:description => params[:description])
 	end
 
+	def edit
+		set_activity
+	end
+
 	def update
 		set_activity.update(params[:description])
 	end
 
-	def edit
-		set_activity
-	end
 
 	def show
 		set_activity

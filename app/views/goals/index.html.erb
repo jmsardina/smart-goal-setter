@@ -2,18 +2,19 @@
 
 <ul>
   <% @goals.each do |goal| %>
-    <li> <%=link_to "#{goal.name}", goal_path(goal) %>
+    <li> <%#=link_to "#{goal.name}", goal_path(goal) %>
       <p> <%= goal.description %></p>
     <li>
   <% end %>
 </ul>
 
+<%= link_to "Create New Goal", new_goal_path %>
 
 <p>This page will be the the user's dashboard.</p>
 
 <ul> This page may include:
   <li>user name</li>
   <li>profile picture</li>
-  <li>links to goals</li>
+  <li><%#= link to goal_path %></li>
   <li>newsfeed</li>
 </ul>
