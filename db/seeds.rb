@@ -20,36 +20,43 @@ end
 
 EMAILS = emails
 
-def create_users
+lang_goal = Goal.create(name: "French", description: "Become conversationally proficient in French in 6 months", due_date: "Thu, 15 Oct 2015".to_date, motivation: "I'm traveling to France in November", potential_barrier: "I don't know how I'll find the time", coping_strategy: "Using Goaly!", support: "My friend so-and-so is learning with me.", activities: Activity.create([{description: "Practice Duolingo", period: "1x/day", barrier: "I feel like I don't have time.", facilitator: "Jennifer will always be there cheering me on!"}, {description: "Have a conversation with a native speaker", period: "2x/month", barrier: "I'm shy", facilitator: "I'm friendly"}, {description: "Watch foreign-language TV", period: "2x/week", barrier: "The weather is getting nice and I might not want to watch TV.", facilitator: "???"}, {description: "Read in the langauge", period: "1x/week", barrier: "", facilitator: ""}])) 
+
+exercise_goal = Goal.create(name: "Exercise", description: "Exercise 3x/week for the next 3 months", due_date: "2015-07-15T".to_date, motivation: "I want to go hiking this summer", potential_barrier: "I don't know how I'll find the time", coping_strategy: "Using Goaly!", support: "My friend so-and-so is doing this with me.", activities: Activity.create([
+  {description: "Do yoga", period: "1x/week", barrier: "I feel like I don't have time.", facilitator: "Jennifer will always be there cheering me on!"}, 
+  {description: "Go for a walk outside", period: "1x/week", barrier: "It's very rainy", facilitator: "I can ask a friend to come with."}, 
+  {description: "Do strength-training in the gym", period: "1x/week", barrier: "I don't like strength-training that much.", facilitator: "???"}])) 
+
+def create_users(lang_goal, exercise_goal)
   index = 0
   while index < EMAILS.length
-    User.create(name: NAMES.sample, email: EMAILS[index], password: "password123")
+    user = User.create(name: NAMES.sample, email: EMAILS[index], password: "password123", goals: [lang_goal, exercise_goal])
     index += 1
   end
 end
 
-3.times do 
-  create_users
-end
 
-def create_groups
-  index = 0
-  while index < GROUP_NAMES.length
-    Group.create(name: GROUP_NAMES[index])
-    index += 1
-  end
-end
+create_users(lang_goal, exercise_goal)
 
-create_groups
 
-def create_user_groups
-  UserGroup.create([
-    {user_id: 1, group_id: 1},
-    {user_id: 2, group_id: 2},
-    {user_id: 3, group_id: 3}]
-    )
-end
+# def create_groups
+#   index = 0
+#   while index < GROUP_NAMES.length
+#     Group.create(name: GROUP_NAMES[index])
+#     index += 1
+#   end
+# end
 
-create_user_groups
+# create_groups
+
+# def create_user_groups
+#   UserGroup.create([
+#     {user_id: 1, group_id: 1},
+#     {user_id: 2, group_id: 2},
+#     {user_id: 3, group_id: 3}]
+#     )
+# end
+
+# create_user_groups
 
 

@@ -9,7 +9,7 @@ class ActivitiesController < ApplicationController
 	end
 
 	def create
-		@goal = Goal.find(params[:id])
+		@goal = Goal.find(params[:goal_id])
 		@activity = Activity.new(activity_params)
 		@activity.goal = @goal
 		@activity.save ? redirect_to goal_path(@goal) : render :new
@@ -38,6 +38,6 @@ class ActivitiesController < ApplicationController
 		end
 
 		def activity_params
-			params.require(:activity).permit(:description, :period, :status, :barrier, :facilitator)
+			params.require(:activity).permit(:description, :period, :status, :barrier, :facilitator, :goal_id)
 		end
 end

@@ -8,7 +8,7 @@
       <li>
         <%= activity.description %>  <br>
         <%= activity.period %> <br>
-        <%= form_for(@activity) do |f| %>
+        <%= form_for(@activity, url: goal_activities_path(@goal)) do |f| %>
           <div class="field">
             <%= f.check_box :status %> <br>
             <%= f.label :status, "Completed?" %> <br>

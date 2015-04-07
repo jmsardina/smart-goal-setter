@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :activities
   end
 
-
+  get 'users/search' => 'users#search'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
