@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   root 'goals#index'
 
   resources :goals do
-    resources :comments
+    # resources :comments
+    resources :activities
   end
 
-  resources :activities
 
 
 
