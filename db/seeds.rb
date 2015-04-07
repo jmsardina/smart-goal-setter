@@ -31,7 +31,6 @@ def create_users(lang_goal, exercise_goal)
   index = 0
   while index < EMAILS.length
     user = User.create(name: NAMES.sample, email: EMAILS[index], password: "password123", goals: [lang_goal, exercise_goal])
-    binding.pry
     index += 1
   end
 end

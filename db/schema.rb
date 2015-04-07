@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20150407162920) do
   add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",                                null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
