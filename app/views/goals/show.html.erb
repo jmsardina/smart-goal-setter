@@ -1,0 +1,24 @@
+<h1><%= @goal.name %></h1>
+<h4><%= @goal.description %></h4>
+<% #links_to edit, delete, etc. %>
+
+<div>
+  <ul>
+    <% @goal.activities.each do |activity| %>
+      <li>
+        <%= activity.description %>  <br>
+        <%= activity.period %> <br>
+        <%= form_for(@activity) do |f| %>
+          <div class="field">
+            <%= f.check_box :status %> <br>
+            <%= f.label :status, "Completed?" %> <br>
+          </div>
+        <% end %>   
+        <%= activity.status %> <br>
+        <%= activity.facilitator %> <br>
+        <%= activity.barrier %> <br>
+        <%#= #activity.cheer %> <br>
+      </li>
+    <% end %>
+  </ul>
+</div>
