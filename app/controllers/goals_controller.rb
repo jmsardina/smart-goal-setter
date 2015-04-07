@@ -33,6 +33,7 @@ class GoalsController < ApplicationController
 
 	def show
 		set_goal
+		@activity = Activity.new
 	end
 
 	def destroy
