@@ -24,7 +24,11 @@ class ActivitiesController < ApplicationController
 	end
 
 	def update
-		set_activity.update(params[:description])
+		@goal = Goal.find(params[:goal_id])
+		@activity = @goal.activities.find(params[:id])
+		@activity.update(activity_params)
+
+		render nothing: true, status: :ok
 	end
 
 

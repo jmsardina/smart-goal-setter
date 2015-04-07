@@ -1,28 +1,20 @@
-<h1><%= @goal.name %></h1>
-<h4><%= @goal.description %></h4>
-<% #links_to edit, delete, etc. %>
+<header id="header">
+  <h1><%= @goal.name %></h1>
+  <h4><%= @goal.description %></h4>
+<!-- <div class="activities-form"> -->
+  <!-- <h4>What's the next step in your goal?</h4> -->
+  <%#= render 'activities/form' %>
+<!-- </div> -->
 
-<div>
-  <ol>
-    <% @goal.activities.each do |activity| %>
-      <li>
-        <%= form_for(@activity, url: goal_activities_path(@goal)) do |f| %>
-          <%= f.check_box :status %>
-        <%= activity.description %>
-        <% end %>   
-        <%= activity.period %> <br>
-        <%= activity.facilitator %> <br>
-        <%= activity.barrier %> <br>
-        <%#= #activity.cheer %> <br>
-      </li>
-    <% end %>
-  </ol>
-</div>
-
-<div class="activities-form">
-  <h4>What's the next step in your goal?</h4>
   <%= render 'activities/form' %>
-</div>
+  
+</header>
+
+<section id="main">
+  <ul id="activities-list" data-actvity-id="<%= @goal.id %>" class="list">
+    <%= render @activities %>
+  </ul>
+</section>
 
 <%= link_to "Back", goals_path %>
 <%= link_to "Edit", edit_goal_path(@goal) %>
