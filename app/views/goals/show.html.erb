@@ -3,24 +3,20 @@
 <% #links_to edit, delete, etc. %>
 
 <div>
-  <ul>
+  <ol>
     <% @goal.activities.each do |activity| %>
       <li>
-        <%= activity.description %>  <br>
-        <%= activity.period %> <br>
         <%= form_for(@activity, url: goal_activities_path(@goal)) do |f| %>
-          <div class="field">
-            <%= f.check_box :status %> <br>
-            <%= f.label :status, "Completed?" %> <br>
-          </div>
+          <%= f.check_box :status %>
+        <%= activity.description %>
         <% end %>   
-        <%= activity.status %> <br>
+        <%= activity.period %> <br>
         <%= activity.facilitator %> <br>
         <%= activity.barrier %> <br>
         <%#= #activity.cheer %> <br>
       </li>
     <% end %>
-  </ul>
+  </ol>
 </div>
 
 <div class="activities-form">
