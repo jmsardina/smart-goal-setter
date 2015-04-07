@@ -6,4 +6,5 @@ class Goal < ActiveRecord::Base
 	has_many :comments, as: :commentable, dependent: :destroy
 	belongs_to :user
 
+  validates :date, after: Date.now
 end
