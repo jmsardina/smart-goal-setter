@@ -1,38 +1,27 @@
 <h1><%= current_user.name %> </h1><br>
 <%= image_tag current_user.avatar.url(:thumb) %>
 
+<h3>My Goals</h3>
 <ul>
-  <% @goals.each do |goal| %>
-    <li> <%=link_to "#{goal.name}", goal_path(goal) %>
-      <!-- <p> <%#= goal.description %></p> -->
-    </li>
+  <% if @goals %>
+	  <% @goals.each do |goal| %>
+	    <li> <%=link_to "#{goal.name}", goal_path(goal) %>
+	    </li>
+	  <% end %>
   <% end %>
 </ul>
 
 <%= link_to "Create New Goal", new_goal_path %>
 
-<p>This page will be the user's dashboard.</p>
-
-<ul> This page may include:
-  <!-- <li>user name</li>
-  <li>profile picture</li> -->
-  <li><%#= link to goal_path %></li>
-  <li>newsfeed</li>
-</ul>
-
+<h3>My Groups</h3>
 <ul>
 	<% if @groups %>
 	  <% @groups.each do |group| %>
 	    <li> <%=link_to "#{group.name}", group_path(group) %>
-	      <!-- <p> <%#= group.description %></p> -->
-	    <li>
+	    </li>
 	  <% end %>
 	<% end %>
 </ul>
 
 <%= link_to "Create New Group", new_group_path %>
 
-<%= form_tag('/users/search', :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
-  <%= submit_tag "Search", :name => nil %>
-<% end %>
