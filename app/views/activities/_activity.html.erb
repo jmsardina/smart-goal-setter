@@ -2,19 +2,23 @@
   <div class="view">
     <%= form_for([@goal, activity]) do |f| %>
       <%= f.check_box :status, class: "toggle" %>
-    <%= activity.description %>
-    <%= activity.period %>
-    <%= activity.facilitator %>
-    <%= activity.barrier %>
+    <label><%= activity.description %></label>
+    <%#= activity.period %>
+    <%#= activity.facilitator %>
+    <%#= activity.barrier %>
     <%#= #activity.cheer %>
     <% end %>
 
+    <%#= form_for([@goal, activity], :method => :delete) do |f| %>
+      <button class="destroy"></button>
+      <%# end %>
+  </div>
 
     <%= form_for([@goal, activity], html: {class: "update"}) do |f| %>
       <%= f.text_field :description, class: "edit" %>
-      <%= f.text_field :period, class: "edit" %>
-      <%= f.text_field :facilitator, class: "edit" %>
-      <%= f.text_field :barrier, class: "edit" %>
+      <%#= f.text_field :period, class: "edit" %>
+      <%#= f.text_field :facilitator, class: "edit" %>
+      <%#= f.text_field :barrier, class: "edit" %>
+    <%#= f.submit %>
     <% end %>
-  </div>
 <% end %>
