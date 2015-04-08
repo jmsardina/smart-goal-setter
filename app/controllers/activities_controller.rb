@@ -12,7 +12,11 @@ class ActivitiesController < ApplicationController
 		@goal = Goal.find(params[:goal_id])
 		@activity = Activity.new(activity_params)
 		@activity.goal = @goal
-		@activity.save ? redirect_to goal_path(@goal) : render :new
+		if @activity.save
+		 redirect_to goal_path(@goal)
+		else
+		 render :new
+		end
 	end
 
 	def edit
