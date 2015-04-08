@@ -65,11 +65,14 @@ class Activity < ActiveRecord::Base
     upcoming
   end
 
-  def add_point_for_activity_completed
+  def add_point_and_decrement_occurences
     @user = self.user
-    @user.increment!(:points) if self.complete?
-    # binding.pry
+    if self.complete?
+      self.decrement!(:occurences)
+      @user.increment!(:points)
+    end
   end
+
   def points_for_activity
     self.number_occurences -= 1 if self.complete?
   end
