@@ -15,10 +15,11 @@ class GroupsController < ApplicationController
 
 	def create
 		@group = Group.new(group_params)
-		@user_group = UserGroup.create(group_id: @group.id, user_id: current_user.id)
-		binding.pry
+		# associations for Group/User/UserGroup aren't working correctly.
 		if @group.save
+		@user_group = UserGroup.create(group_id: @group.id, user_id: current_user.id)
 			redirect_to goals_path
+			# or should this go to groups/:id/show ?
 		else
 			flash[:notice] = "Something went wrong...Try again."
 			render :new
