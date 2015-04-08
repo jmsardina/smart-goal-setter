@@ -49,6 +49,20 @@ function hideEditInPlace($li){
   $li.removeClass("editing");
 }
 
+// Activity.clear = function(){
+//   $("button.clear-completed").on("click", function(){console.log("cats")})
+// }
+
+Activity.clear = function(e){
+  // $("button.clear-completed").parents().find($("li.completed")).fadeOut();
+  // if($("button.clear-completed").html() === "Clear Completed Activities"){
+  //   $("button.clear-completed").html("Show Completed Activities")}
+  //   else {
+  //     $("button.clear-completed").html("Clear Completed Activities")
+  //   }
+  $("button.clear-completed").parents().find($("li.completed").addClass("hidden"));
+}
+
 Activity.stopEdit = function(e){
   e.preventDefault();
   var $li = $(this).parents("li:first");
@@ -62,4 +76,5 @@ $(function(){
   $("ul.list").on("submit", "form.update", Activity.updateContent);
   $("ul.list").on("dblclick", "li label", Activity.edit);
   $("ul.list").on("blur", "li input.edit", Activity.stopEdit);
+  $("button.clear-completed").on("click", Activity.clear);
 });
