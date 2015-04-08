@@ -20,12 +20,19 @@
   <li>newsfeed</li>
 </ul>
 
+<ul>
+	<% if @groups %>
+	  <% @groups.each do |group| %>
+	    <li> <%=link_to "#{group.name}", group_path(group) %>
+	      <!-- <p> <%#= group.description %></p> -->
+	    <li>
+	  <% end %>
+	<% end %>
+</ul>
+
+<%= link_to "Create New Group", new_group_path %>
+
 <%= form_tag('/users/search', :method => "get", id: "search-form") do %>
   <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
   <%= submit_tag "Search", :name => nil %>
-<% end %>
-
-<% if @users %>
-	<h3>User Search Results:</h3>
-
 <% end %>
