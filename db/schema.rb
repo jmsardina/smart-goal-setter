@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407235649) do
+ActiveRecord::Schema.define(version: 20150408151505) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20150407235649) do
     t.boolean  "status",      default: true
     t.string   "barrier"
     t.string   "facilitator"
+    t.integer  "frequency"
   end
 
   create_table "comments", force: :cascade do |t|
