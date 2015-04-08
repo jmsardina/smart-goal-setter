@@ -2,23 +2,31 @@
   <div class="view">
     <%= form_for([@goal, activity]) do |f| %>
       <%= f.check_box :status, class: "toggle" %>
-    <label><%= activity.description %></label>
-    <%#= activity.period %>
-    <%#= activity.facilitator %>
-    <%#= activity.barrier %>
-    <%#= #activity.cheer %>
+      <label><%= activity.description %></label>
+      <button class="destroy"></button>
     <% end %>
+    <tr class="activity-li-attributes">
+      <td><%= activity.period %></td>
+      <td><%= activity.facilitator %></td>
+      <td><%= activity.barrier %></td>
+      <td><%#= #activity.cheer %></td>
+      <td><%#=link_to "Edit Activity", edit_goal_activity_path(activity) %></td>
+    </tr>
 
     <%#= form_for([@goal, activity], :method => :delete) do |f| %>
-      <button class="destroy"></button>
       <%# end %>
   </div>
 
     <%= form_for([@goal, activity], html: {class: "update"}) do |f| %>
       <%= f.text_field :description, class: "edit" %>
-      <%#= f.text_field :period, class: "edit" %>
-      <%#= f.text_field :facilitator, class: "edit" %>
-      <%#= f.text_field :barrier, class: "edit" %>
+      <div id="additional-fields" class="hidden">
+        <tr class="activity-attributes">
+          <td><%= f.text_field :period, class: "edit" %></td>
+          <td><%= f.text_field :facilitator, class: "edit" %></td>
+          <td><%= f.text_field :barrier, class: "edit" %></td>
+
+        </tr>
+      </div>
     <%#= f.submit %>
     <% end %>
 <% end %>

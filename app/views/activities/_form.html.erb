@@ -15,14 +15,15 @@
   </div>
 
   <div class="field">
-    <%= f.label :barrier, "Potential Barriers"%><br>
+    <%= f.label :barrier, "Challenge"%><br>
     <%#= f.text_area :barrier %>
-    <%= f.select :barrier, options_for_select(["Lack of time", "Lack of Support", ""]) %>
+    <%= f.select :barrier, options_for_select(["Lack of time", "Lack of Support", "I forget", "I don't like to do it", "It hurts"]) %>
   </div>
 
   <div class="field">
-    <%= f.label :facilitator, "Facilitators"%>
-    <%= f.text_area :facilitator %>
+    <%= f.label :facilitator, "How will you cope with this challenge?"%>
+    <%#= f.text_area :facilitator %>
+   <%= f.select :facilitator, options_for_select(["I will set my alarm", "I will ask a friend to remind me", "I will take a warm shower afterwards"]) %>
   </div>
 
 
