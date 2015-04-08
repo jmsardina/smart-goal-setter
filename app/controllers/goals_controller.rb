@@ -3,6 +3,7 @@ class GoalsController < ApplicationController
 	def index
 		if current_user
 			@goals = current_user.goals
+			#@groups = current_user.groups
 		else
 			@goals = Goal.all
 			render 'welcome_page'
@@ -35,6 +36,7 @@ class GoalsController < ApplicationController
 	def show
 		set_goal
 		@activity = Activity.new
+		@activities = @goal.activities.order("created_at").all
 	end
 
 	def destroy
