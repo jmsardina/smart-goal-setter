@@ -13,6 +13,9 @@ class ActivitiesController < ApplicationController
 		@activity = Activity.new(activity_params)
 		@activity.goal = @goal
 		@activity.save ? (redirect_to goal_path(@goal)) : (render :new)
+		@activity.occurences = @activity.number_occurences
+		@activity.save
+		binding.pry
 	end
 
 	def edit
@@ -23,7 +26,7 @@ class ActivitiesController < ApplicationController
 		@goal = Goal.find(params[:goal_id])
 		@activity = @goal.activities.find(params[:id])
 		@activity.update(activity_params)
-
+		@activity.add_point_for_activity_completed
 		render nothing: true, status: :ok
 	end
 
