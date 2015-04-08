@@ -26,13 +26,13 @@ class Activity < ActiveRecord::Base
   # converting the period column to a integer day ( weekly = 7, monthly = 30)
   def convert_period_to_time
   	case self.period
-  	when "daily"
+  	when "day"
   		time = 1
-  	when "weekly"
+  	when "week"
   		time = 7
-  	when "monthly"
+  	when "month"
   		time = 30
-  	when "yearly"
+  	when "year"
   		time = 365
   	end
   	time
@@ -44,7 +44,7 @@ class Activity < ActiveRecord::Base
   end
 
   def number_occurences
-  	self.frequency * time_unit
+  	self.frequency * periods_in_range
   end
 
 
