@@ -47,5 +47,27 @@ class Activity < ActiveRecord::Base
   	self.frequency * periods_in_range
   end
 
+  # number of occurences left!
+
+  def upcoming_due_dates
+    initial_date = self.created_at.to_date
+    upcoming = []
+
+    while initial_date < self.goal.due_date
+      if (self.goal.due_date - initial_date) >= periods_in_range
+        new_date = initial_date + 1.send(self.period)
+        upcoming << new_date
+        initial_date = new_date 
+      end
+        initial_date += 1.send(self.period)
+    end
+    upcoming
+  end
+    # while periods_in_range > 0
+    #   self.created_at + 1.send(self.period)
+    #   periods_in_range -= 1
+    # end
+  # end
+
 end
 
