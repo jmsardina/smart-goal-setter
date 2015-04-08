@@ -1,6 +1,6 @@
 class AddAtributesToGoals < ActiveRecord::Migration
   def change
-    add_column :goals, :status, :boolean, default: true
+    add_column :goals, :status, :boolean, default: false
     add_column :goals, :due_date, :date
     add_column :goals, :motivation, :string
     add_column :goals, :potential_barrier, :string
