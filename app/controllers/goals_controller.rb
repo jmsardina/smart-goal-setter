@@ -26,7 +26,13 @@ class GoalsController < ApplicationController
 	end
 
 	def update
-		set_goal.update(params[:description])
+		set_goal.update(goal_params)
+		if @goal.save
+			redirect_to goal_path(@goal)
+		else
+			flash[:notice] = "Something went wrong...Try again."
+			render :new
+		end
 	end
 
 	def edit
