@@ -5,6 +5,11 @@
   <!-- <h4>What's the next step in your goal?</h4> -->
   <%#= render 'activities/form' %>
 <!-- </div> -->
+
+  <%= render 'activities/form' %>
+
+</header>
+<h3>Things I have to do to achieve this goal:</h3>
 <section id="main">
   <ul id="activities-list" data-actvity-id="<%= @goal.id %>" class="list">
     <%= render @activities %>
@@ -15,6 +20,7 @@
   
 </header>
 
+<%= @goal.user.points %>
 
 <%= link_to "Back", goals_path %>
 <%= link_to "Edit", edit_goal_path(@goal) %>

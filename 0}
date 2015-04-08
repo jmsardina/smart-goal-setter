@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20150408210347_add_column_occurences_to_activities.rb

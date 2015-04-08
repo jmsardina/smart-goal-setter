@@ -1,15 +1,15 @@
 class Activity < ActiveRecord::Base
-
+  attr_accessor :number_occurences
 	belongs_to :goal
 	# has_many :comments, as: :commentable, dependent: :destroy
 	delegate :user, to: :goal
 
   def complete?
-    self.status == 1
+    self.status == true
   end
 
   def incomplete?
-    status == 0
+    status == false
   end
 
   def activity_range
@@ -46,6 +46,37 @@ class Activity < ActiveRecord::Base
   def number_occurences
   	self.frequency * periods_in_range
   end
+
+
+  # number of occurences left!
+
+  def upcoming_due_dates
+    initial_date = self.created_at.to_date
+    upcoming = []
+
+    while initial_date < self.goal.due_date
+      if (self.goal.due_date - initial_date) >= periods_in_range
+        new_date = initial_date + 1.send(self.period)
+        upcoming << new_date
+        initial_date = new_date
+      end
+        initial_date += 1.send(self.period)
+    end
+    upcoming
+  end
+
+  def add_point_and_decrement_occurences
+    @user = self.user
+    if self.complete?
+      self.decrement!(:occurences)
+      @user.increment!(:points)
+    end
+  end
+
+  def points_for_activity
+    self.number_occurences -= 1 if self.complete?
+  end
+
 
 end
 
