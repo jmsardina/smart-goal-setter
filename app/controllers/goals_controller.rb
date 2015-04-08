@@ -3,7 +3,7 @@ class GoalsController < ApplicationController
 	def index
 		if current_user
 			@goals = current_user.goals
-			#@groups = current_user.groups
+			@groups = current_user.groups
 		else
 			@goals = Goal.all
 			render 'welcome_page'
