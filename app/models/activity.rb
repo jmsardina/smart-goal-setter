@@ -47,5 +47,7 @@ class Activity < ActiveRecord::Base
   	self.frequency * time_unit
   end
 
+
+
 end
 
