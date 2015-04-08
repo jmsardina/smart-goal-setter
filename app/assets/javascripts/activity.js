@@ -63,6 +63,10 @@ Activity.clear = function(e){
   $("button.clear-completed").parents().find($("li.completed").addClass("hidden"));
 }
 
+Activity.show = function(e){
+  $("button.show-completed").parents().find($("li.completed").removeClass("hidden"));
+}
+
 Activity.stopEdit = function(e){
   e.preventDefault();
   var $li = $(this).parents("li:first");
@@ -77,4 +81,5 @@ $(function(){
   $("ul.list").on("dblclick", "li label", Activity.edit);
   $("ul.list").on("blur", "li input.edit", Activity.stopEdit);
   $("button.clear-completed").on("click", Activity.clear);
+  $("button.show-completed").on("click", Activity.show);
 });
