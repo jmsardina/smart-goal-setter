@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(version: 20150407162920) do
   create_table "activities", force: :cascade do |t|
     t.text     "description"
     t.integer  "goal_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "period"
-    t.boolean  "status",      default: false
+    t.boolean  "status",      default: true
     t.string   "barrier"
     t.string   "facilitator"
   end
@@ -47,9 +47,9 @@ ActiveRecord::Schema.define(version: 20150407162920) do
     t.string   "name"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.boolean  "status",            default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "status",            default: true
     t.date     "due_date"
     t.string   "motivation"
     t.string   "potential_barrier"

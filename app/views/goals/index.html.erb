@@ -1,11 +1,11 @@
-<h1><%= current_user.name %> </h1>
+<h1><%= current_user.name %> </h1><br>
 <%= image_tag current_user.avatar.url(:thumb) %>
 
 <ul>
   <% @goals.each do |goal| %>
     <li> <%=link_to "#{goal.name}", goal_path(goal) %>
       <!-- <p> <%#= goal.description %></p> -->
-    <li>
+    </li>
   <% end %>
 </ul>
 
@@ -19,3 +19,13 @@
   <li><%#= link to goal_path %></li>
   <li>newsfeed</li>
 </ul>
+
+<%= form_tag('/users/search', :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
+  <%= submit_tag "Search", :name => nil %>
+<% end %>
+
+<% if @users %>
+	<h3>User Search Results:</h3>
+
+<% end %>
