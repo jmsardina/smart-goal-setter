@@ -47,9 +47,6 @@ class Activity < ActiveRecord::Base
   	self.frequency * periods_in_range
   end
 
-
-  # number of occurences left!
-
   def upcoming_due_dates
     initial_date = self.created_at.to_date
     upcoming = []
@@ -65,27 +62,33 @@ class Activity < ActiveRecord::Base
     upcoming
   end
 
+  def previous_points
 
-
-
-  def upcoming_activities
-    # if today's date is less than or equal to the first upcoming date upcoming_due_dates[0]
-    # display the activity with the counter
   end
 
+  def completed_this_period
+    self.points_for_activity - self.previous_points
+  end
+
+  def activities_left_for_period
+    self.frequency - self.completed_this_period
+  end
+
+  def upcoming_activities
+  
+  end
 
   def add_point_and_decrement_occurences
     @user = self.user
     if self.complete?
       self.decrement!(:occurences)
+      self.increment!(:activity_points)
       @user.increment!(:points)
     end
   end
 
-  def points_for_activity
-    self.number_occurences -= 1 if self.complete?
-  end
-
-
+  # def points_for_activity
+  #   self.number_occurences -= 1 if self.complete?
+  # end
 end
 

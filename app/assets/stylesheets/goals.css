@@ -46,12 +46,12 @@
   display: none;
 }
 
-button,
+/*button,
 input[type="checkbox"] {
   outline: none;
-}
+}*/
 /* Checkbox label*/
-#activity-list li label {
+/*#activity-list li label {
   white-space: pre;
   word-break: break-word;
   padding: 15px 60px 15px 15px;
@@ -59,7 +59,7 @@ input[type="checkbox"] {
   display: block;
   line-height: 1.2;
   transition: color 0.4s;
-}
+}*/
 /*End checkbox label */
 
 /* Activity Destroy */
