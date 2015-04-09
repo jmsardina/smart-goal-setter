@@ -105,7 +105,7 @@ function deleteActivity(e){
   e.preventDefault();
   var $li = $(this).parents("li");
   var href = $("form", $li).attr("action");
-
+ debugger
   $.ajax(href, {
     "method": "DELETE",
     "success": function(){
