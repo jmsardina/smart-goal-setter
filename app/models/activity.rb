@@ -12,7 +12,7 @@ class Activity < ActiveRecord::Base
     status == false
   end
 
-  def activity_range
+  def activity_timeline
   	(self.goal.due_date - self.created_at.to_date).to_i
   end
 
@@ -31,7 +31,7 @@ class Activity < ActiveRecord::Base
   end
 
   def periods_in_range
-  	activity_range / days_in_period
+  	activity_timeline / days_in_period
   end
 
   def number_occurences
@@ -43,7 +43,7 @@ class Activity < ActiveRecord::Base
   end
 
   def restart_activity_counter #reset remaining_for_period to frequency at start of new period
-    if self.valid_period_dates === Time.now && !self.valid_period_dates === self.updated_at 
+    if !(self.valid_period_dates === self.updated_at) || self.updated_at == nil
       self.remaining_for_period = self.frequency 
       self.save
     end
