@@ -49,6 +49,38 @@ function hideEditInPlace($li){
   $li.removeClass("editing");
 }
 
+// Activity.clear = function(){
+//   $("button.clear-completed").on("click", function(){console.log("cats")})
+// }
+
+Activity.clear = function(e){
+  // $("button.clear-completed").parents().find($("li.completed")).fadeOut();
+  // if($("button.clear-completed").html() === "Clear Completed Activities"){
+  //   $("button.clear-completed").html("Show Completed Activities")}
+  //   else {
+  //     $("button.clear-completed").html("Clear Completed Activities")
+  //   }
+  $("button.clear-completed").parents().find($("li.completed").addClass("hidden"));
+}
+
+Activity.updateRendering = function(e){
+  var $button = $(this);
+  var $form = $(this).parents("form:first");
+  var href = $form.attr("action");
+
+  $.ajax(href, {
+    "method": "PATCH",
+    "data": $form.serialize(),
+    "success": function(response){
+      $checkbox.parents("li:first").toggleClass("completed");
+    }
+  })
+}
+
+Activity.show = function(e){
+  $("button.show-completed").parents().find($("li.completed").removeClass("hidden"));
+}
+
 Activity.stopEdit = function(e){
   e.preventDefault();
   var $li = $(this).parents("li:first");
@@ -57,9 +89,42 @@ Activity.stopEdit = function(e){
   $("form.update", $li).trigger("submit")
 }
 
+function addActivityListener(){
+  $("#show-activity-form").click(function(){
+      $("form").show();
+    });
+}
+
+// function cancelActivityListener(){
+//   $("#show-activity-form").click(function(){
+//     $("form").hide();
+//   });
+// }
+
+function deleteActivity(e){
+  e.preventDefault();
+  var $li = $(this).parents("li");
+  var href = $("form", $li).attr("action");
+
+  $.ajax(href, {
+    "method": "DELETE",
+    "success": function(){
+      $li.slideUp(function(){
+
+        $(this).remove();
+      });
+    }
+  })
+}
+
 $(function(){
   $("ul.list").on("change", "input:checkbox", Activity.updateStatus);
   $("ul.list").on("submit", "form.update", Activity.updateContent);
   $("ul.list").on("dblclick", "li label", Activity.edit);
   $("ul.list").on("blur", "li input.edit", Activity.stopEdit);
+  $("button.clear-completed").on("click", Activity.clear);
+  $("button.show-completed").on("click", Activity.show);
+  $("ul.list").on("click", "button.destroy", deleteActivity);
+  $("form").hide();
+  addActivityListener();
 });

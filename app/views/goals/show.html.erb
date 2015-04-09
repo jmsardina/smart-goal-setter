@@ -5,12 +5,14 @@
   <!-- <h4>What's the next step in your goal?</h4> -->
   <%#= render 'activities/form' %>
 <!-- </div> -->
-
+  <button id="show-activity-form">Add Activity</button>
   <%= render 'activities/form' %>
 
 </header>
 <h3>Things I have to do to achieve this goal:</h3>
 <section id="main">
+<button class="clear-completed">Clear Completed Activies</button>
+<button class="show-completed">Show Completed Activies</button>
   <ul id="activities-list" data-actvity-id="<%= @goal.id %>" class="list">
     <%= render @activities %>
   </ul>

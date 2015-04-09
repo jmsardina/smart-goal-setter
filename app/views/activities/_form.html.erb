@@ -1,30 +1,30 @@
 <%= form_for(@activity, url: goal_activities_path(@goal)) do |f| %>
   <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
   </div>
 
   <div class="field">
     <%#= f.label :period, "Time Period"%>
     <%#= f.text_field :period %>
     <label>How often will you do this activity?</label>
-    <%= f.select :frequency, options_for_select((1..12)), :include_blank => "Frequency" %>
+    <%= f.select :frequency, options_for_select((1..12)) %>
     <%= f.label :frequency, "times"%>,
     <%= f.label :period, "every"%>
-    <%= f.select :period, options_for_select(["hour", "day", "week", "month", "year"]), :include_blank => "Period" %>
-  </div>
+    <%= f.select :period, options_for_select(["day", "week", "month", "year"]) %>
+  </div><br>
 
   <div class="field">
-    <%= f.label :barrier, "Challenge"%><br>
+    <%= f.label :barrier, "Challenge"%>
     <%#= f.text_area :barrier %>
     <%= f.select :barrier, options_for_select(["Lack of time", "Lack of Support", "I forget", "I don't like to do it", "It hurts"]) %>
-  </div>
+  </div><br>
 
   <div class="field">
     <%= f.label :facilitator, "How will you cope with this challenge?"%>
     <%#= f.text_area :facilitator %>
    <%= f.select :facilitator, options_for_select(["I will set my alarm", "I will ask a friend to remind me", "I will take a warm shower afterwards"]) %>
-  </div>
+  </div><br>
 
 
   <%= f.submit %>
