@@ -42,6 +42,7 @@ class GoalsController < ApplicationController
 	def show
 		set_goal
 		@activity = Activity.new
+		@activity.restart_activity_counter
 		@activities = @goal.activities.order("created_at").all
 	end
 

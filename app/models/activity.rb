@@ -38,6 +38,17 @@ class Activity < ActiveRecord::Base
   	self.frequency * periods_in_range
   end
 
+  def valid_period_dates #returns a range (period start date..period end date)
+    ((self.upcoming_due_dates.first - 1.send(self.period))..self.upcoming_due_dates.first)
+  end
+
+  def restart_activity_counter #reset remaining_for_period to frequency at start of new period
+    if self.valid_period_dates === Time.now && !self.valid_period_dates === self.updated_at 
+      self.remaining_for_period = self.frequency 
+      self.save
+    end
+  end
+
   def upcoming_due_dates
     start_date = self.created_at.to_date
     upcoming = []
