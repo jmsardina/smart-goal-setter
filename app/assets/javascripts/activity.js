@@ -63,6 +63,20 @@ Activity.clear = function(e){
   $("button.clear-completed").parents().find($("li.completed").addClass("hidden"));
 }
 
+Activity.updateRendering = function(e){
+  var $button = $(this);
+  var $form = $(this).parents("form:first");
+  var href = $form.attr("action");
+
+  $.ajax(href, {
+    "method": "PATCH",
+    "data": $form.serialize(),
+    "success": function(response){
+      $checkbox.parents("li:first").toggleClass("completed");
+    }
+  })
+}
+
 Activity.show = function(e){
   $("button.show-completed").parents().find($("li.completed").removeClass("hidden"));
 }
@@ -75,6 +89,22 @@ Activity.stopEdit = function(e){
   $("form.update", $li).trigger("submit")
 }
 
+function deleteActivity(e){
+  e.preventDefault();
+  var $li = $(this).parents("li");
+  var href = $("form", $li).attr("action");
+
+  $.ajax(href, {
+    "method": "DELETE",
+    "success": function(){
+      $li.slideUp(function(){
+
+        $(this).remove();
+      });
+    }
+  })
+}
+
 $(function(){
   $("ul.list").on("change", "input:checkbox", Activity.updateStatus);
   $("ul.list").on("submit", "form.update", Activity.updateContent);
@@ -82,4 +112,5 @@ $(function(){
   $("ul.list").on("blur", "li input.edit", Activity.stopEdit);
   $("button.clear-completed").on("click", Activity.clear);
   $("button.show-completed").on("click", Activity.show);
+  $("ul.list").on("click", "button.destroy", deleteActivity);
 });

@@ -8,10 +8,10 @@
     <%#= f.label :period, "Time Period"%>
     <%#= f.text_field :period %>
     <label>How often will you do this activity?</label>
-    <%= f.select :frequency, options_for_select((1..12)), :include_blank => "Frequency" %>
+    <%= f.select :frequency, options_for_select((1..12)) %>
     <%= f.label :frequency, "times"%>,
     <%= f.label :period, "every"%>
-    <%= f.select :period, options_for_select(["hour", "day", "week", "month", "year"]), :include_blank => "Period" %>
+    <%= f.select :period, options_for_select(["hour", "day", "week", "month", "year"]) %>
   </div>
 
   <div class="field">

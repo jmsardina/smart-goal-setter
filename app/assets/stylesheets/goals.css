@@ -77,5 +77,18 @@ input[type="checkbox"] {
   color: #cc9a9a;
   margin-bottom: 11px;
   transition: color 0.2s ease-out;
+  float: right;
 }
+
+#activities-list li .destroy:hover {
+  color: #af5b5e;
+}
+
+#activities-list li .destroy:after {
+  content: '×';
+}
+
+/*#activities-list li:hover .destroy {
+  display: block;
+}*/
 /* End activity destroy*/

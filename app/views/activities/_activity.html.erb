@@ -1,9 +1,11 @@
 <%= li_for_activity(activity) do %>
   <div class="view">
     <%= form_for([@goal, activity]) do |f| %>
-      <%= f.check_box :status, class: "toggle" %>
-      <label><%= activity.description %></label>
-      <button class="destroy"></button>
+      <tr>
+        <td><%= f.check_box :status, class: "toggle" %></td>
+        <td><label><%= activity.description %></label></td>
+        <td><button class="destroy"></button></td>
+      </tr>
     <% end %>
     <tr class="activity-li-attributes">
       <td><%= activity.period %></td>
