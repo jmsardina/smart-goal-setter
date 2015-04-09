@@ -125,6 +125,5 @@ $(function(){
   $("button.clear-completed").on("click", Activity.clear);
   $("button.show-completed").on("click", Activity.show);
   $("ul.list").on("click", "button.destroy", deleteActivity);
-  $("form").hide();
   addActivityListener();
 });
