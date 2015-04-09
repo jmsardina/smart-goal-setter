@@ -15,7 +15,6 @@ class ActivitiesController < ApplicationController
 		@activity.save ? (redirect_to goal_path(@goal)) : (render :new)
 		@activity.occurences = @activity.number_occurences
 		@activity.save
-		# binding.pry
 	end
 
 	def edit
