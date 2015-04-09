@@ -89,6 +89,18 @@ Activity.stopEdit = function(e){
   $("form.update", $li).trigger("submit")
 }
 
+function addActivityListener(){
+  $("#show-activity-form").click(function(){
+      $("form").show();
+    });
+}
+
+// function cancelActivityListener(){
+//   $("#show-activity-form").click(function(){
+//     $("form").hide();
+//   });
+// }
+
 function deleteActivity(e){
   e.preventDefault();
   var $li = $(this).parents("li");
@@ -113,4 +125,6 @@ $(function(){
   $("button.clear-completed").on("click", Activity.clear);
   $("button.show-completed").on("click", Activity.show);
   $("ul.list").on("click", "button.destroy", deleteActivity);
+  $("form").hide();
+  addActivityListener();
 });
