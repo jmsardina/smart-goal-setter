@@ -60,7 +60,7 @@ class Activity < ActiveRecord::Base
         upcoming << new_date
         initial_date = new_date
       end
-        initial_date += 1.send(self.period)
+        # initial_date += 1.send(self.period)
     end
     upcoming
   end
