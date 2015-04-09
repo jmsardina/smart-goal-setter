@@ -63,19 +63,19 @@ Activity.clear = function(e){
   $("button.clear-completed").parents().find($("li.completed").addClass("hidden"));
 }
 
-Activity.updateRendering = function(e){
-  var $button = $(this);
-  var $form = $(this).parents("form:first");
-  var href = $form.attr("action");
+// Activity.updateRendering = function(e){
+//   var $button = $(this);
+//   var $form = $(this).parents("form:first");
+//   var href = $form.attr("action");
 
-  $.ajax(href, {
-    "method": "PATCH",
-    "data": $form.serialize(),
-    "success": function(response){
-      $checkbox.parents("li:first").toggleClass("completed");
-    }
-  })
-}
+//   $.ajax(href, {
+//     "method": "PATCH",
+//     "data": $form.serialize(),
+//     "success": function(response){
+//       $checkbox.parents("li:first").toggleClass("completed");
+//     }
+//   })
+// }
 
 Activity.show = function(e){
   $("button.show-completed").parents().find($("li.completed").removeClass("hidden"));

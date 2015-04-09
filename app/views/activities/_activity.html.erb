@@ -1,6 +1,6 @@
 <%= li_for_activity(activity) do %>
   <div class="view">
-    <%= form_for([@goal, activity] class: "hidden") do |f| %>
+    <%= form_for([@goal, activity]) do |f| %>
       <tr>
         <td><%= f.check_box :status, class: "toggle" %></td>
         <td><label><%= activity.description %></label></td>
