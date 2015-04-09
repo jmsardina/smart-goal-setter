@@ -35,6 +35,7 @@ class ActivitiesController < ApplicationController
 	end
 
 	def destroy
+		binding.pry
 		set_activity.destroy
 	end
 

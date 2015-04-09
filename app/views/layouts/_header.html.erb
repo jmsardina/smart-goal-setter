@@ -1,8 +1,42 @@
-<%= link_to "Home", root_path %>  | 
-<%= link_to "Edit Profile", edit_user_registration_path %>  |
-<%= link_to "Sign Out", destroy_user_session_path, method: :delete if current_user%>  |
-
+<div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">Goaly</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+          <% if current_user %>
+            <li>
+              <%= link_to "Dashboard", root_path %>
+            </li>
+            <li>
+              <%= link_to "Edit Profile", edit_user_registration_path %>
+            </li>
+           <%end%>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+          <% if !current_user %>
+            <li> <%= link_to "Sign In", new_user_session_path %> </li>
+            <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <%else%>
+            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete if current_user%></li>
+          <%end%>
+          </ul>
+        </div>
+      </div>
+    </div>
 <% if !current_user %>
-  <%= link_to "Sign In", new_user_session_path %>  |
-  <%= link_to "Sign Up", new_user_registration_path %>
-<% end %>
+<div class="container">
+	 <div class="jumbotron">
+	  <h1>Welcome to Goaly</h1>
+	  <p>Make smart goals and stick to them!</p>
+	  <p><%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-lg" %></a></p>
+	 </div>
+</div>
+<%end%>
+
