@@ -67,8 +67,8 @@ class Activity < ActiveRecord::Base
       end
       self.status = false
       self.save
+    else
+
     end
   end
-
 end
-
