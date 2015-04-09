@@ -60,10 +60,19 @@ class Activity < ActiveRecord::Base
         upcoming << new_date
         initial_date = new_date
       end
-        # initial_date += 1.send(self.period)
     end
+    upcoming.delete(upcoming[0]) if Time.now.to_date > upcoming[0]
     upcoming
   end
+
+
+
+
+  def upcoming_activities
+    # if today's date is less than or equal to the first upcoming date upcoming_due_dates[0]
+    # display the activity with the counter
+  end
+
 
   def add_point_and_decrement_occurences
     @user = self.user
