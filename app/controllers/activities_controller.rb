@@ -26,6 +26,8 @@ class ActivitiesController < ApplicationController
 		@goal = Goal.find(params[:goal_id])
 		@activity = @goal.activities.find(params[:id])
 		@activity.update(activity_params)
+		# @activity.restart_activity_counter
+		@activity.save
 		@activity.add_point_and_decrement_occurences
 		render nothing: true, status: :ok
 	end
