@@ -44,7 +44,6 @@ class GoalsController < ApplicationController
 		@activity = Activity.new
 		@activities = @goal.activities.order("created_at").all
 		@activities.each{|activity| activity.restart_activity_counter; activity.save}
-		# @activity.save
 	end
 
 	def destroy

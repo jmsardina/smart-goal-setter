@@ -3,6 +3,7 @@ class Activity < ActiveRecord::Base
 	belongs_to :goal
 	# has_many :comments, as: :commentable, dependent: :destroy
 	delegate :user, to: :goal
+  validates :description, :frequency, :period, presence: true
 
   def complete?
     self.status == true
