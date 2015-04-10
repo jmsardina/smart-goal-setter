@@ -4,9 +4,9 @@ class GoalsController < ApplicationController
 		if current_user
 			@goals = current_user.goals
 			@groups = current_user.groups
-			@goals.each do |goal|
-				goal.activities.each{|activity| activity.restart_activity_counter}
-			end
+			# @goals.each do |goal|
+			# 	goal.activities.each{|activity| activity.restart_activity_counter}
+			# end
 		else
 			@goals = Goal.all
 			render 'welcome_page'

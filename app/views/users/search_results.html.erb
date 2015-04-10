@@ -3,7 +3,7 @@
 		<li>
 			<%= "#{result.name} | #{result.email} |"%>
 			<% binding.pry %>
-			<%= button_to "Add user", user_groups_path, {action: "create", user_id: "#{result.id}" }, method: :post %>
+			<%= button_to "Add user", user_groups_path, {action: "create", :user_id => result.id }, method: :post %>
 		</li>
 	<% end %>
 </ul>
