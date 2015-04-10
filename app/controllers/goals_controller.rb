@@ -4,6 +4,9 @@ class GoalsController < ApplicationController
 		if current_user
 			@goals = current_user.goals
 			@groups = current_user.groups
+			@goals.each do |goal|
+				goal.activities.each{|activity| activity.restart_activity_counter}
+			end
 		else
 			@goals = Goal.all
 			render 'welcome_page'
@@ -43,7 +46,8 @@ class GoalsController < ApplicationController
 		set_goal
 		@activity = Activity.new
 		@activities = @goal.activities.order("created_at").all
-		@activities.each{|activity| activity.restart_activity_counter; activity.save}
+		@activities.each{|activity| activity.restart_activity_counter}
+		@tags = @goal.tags
 	end
 
 	def destroy
@@ -56,7 +60,6 @@ class GoalsController < ApplicationController
 		end
 
 		def goal_params
-			params.require(:goal).permit(:name, :user_id, :description, :status, :due_date, :motivation, :potential_barrier, :coping_strategy, :support)
+			params.require(:goal).permit(:name, :user_id, :description, :status, :due_date, :motivation, :potential_barrier, :coping_strategy, :support, tag_ids: [])
 		end
-
 end

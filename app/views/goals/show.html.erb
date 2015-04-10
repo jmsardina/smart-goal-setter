@@ -1,5 +1,10 @@
 <header id="header">
   <h1><%= @goal.name %></h1>
+  <strong>Tags:</strong>
+  <% @tags.each do |tag|%>
+    <%= tag.name %>
+  <% end %>
+
   <h3><%= @goal.days_left%> DAYS LEFT TO COMPLETE THIS GOAL!</h3>
   <h4><%= @goal.description %></h4>
 <!-- <div class="activities-form"> -->

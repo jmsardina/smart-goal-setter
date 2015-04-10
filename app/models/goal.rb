@@ -9,6 +9,8 @@ class Goal < ActiveRecord::Base
   validates :name, :description, presence: true
   validates :due_date, presence: true
 
+  accepts_nested_attributes_for :tags
+
   def days_left
     (self.due_date - Time.now.to_date).to_i
   end
