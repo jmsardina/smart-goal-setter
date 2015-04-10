@@ -44,6 +44,7 @@ class GoalsController < ApplicationController
 		@activity = Activity.new
 		@activities = @goal.activities.order("created_at").all
 		@activities.each{|activity| activity.restart_activity_counter; activity.save}
+		@tags = @goal.tags
 	end
 
 	def destroy
@@ -56,7 +57,6 @@ class GoalsController < ApplicationController
 		end
 
 		def goal_params
-			params.require(:goal).permit(:name, :user_id, :description, :status, :due_date, :motivation, :potential_barrier, :coping_strategy, :support)
+			params.require(:goal).permit(:name, :user_id, :description, :status, :due_date, :motivation, :potential_barrier, :coping_strategy, :support, tag_ids: [])
 		end
-
 end
