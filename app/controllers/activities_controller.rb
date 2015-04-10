@@ -14,7 +14,7 @@ class ActivitiesController < ApplicationController
 		@activity.goal = @goal
 		@activity.save ? (redirect_to goal_path(@goal)) : (render :new)
 		@activity.occurences = @activity.number_occurences
-		@activity.remaining_for_period = @activity.frequency
+		# @activity.remaining_for_period = @activity.frequency
 		@activity.save
 	end
 
@@ -26,7 +26,6 @@ class ActivitiesController < ApplicationController
 		@goal = Goal.find(params[:goal_id])
 		@activity = @goal.activities.find(params[:id])
 		@activity.update(activity_params)
-		# @activity.restart_activity_counter
 		@activity.save
 		@activity.add_point_and_decrement_occurences
 		render nothing: true, status: :ok

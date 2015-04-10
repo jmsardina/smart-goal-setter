@@ -17,4 +17,16 @@ class User < ActiveRecord::Base
     where("email like ?", "%#{query}%")
   end
 
+  def upcoming_activities
+    # activities_hash = {}
+
+    # self.activities.each do |activity|
+    #   activities_hash[activity.description] = {activity.upcoming_due_dates.first => activity.remaining_for_period}
+    # end
+    # activities_hash
+  end
+
+  def due_this_week
+
+  end
 end

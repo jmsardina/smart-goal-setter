@@ -3,6 +3,13 @@ class Activity < ActiveRecord::Base
 	belongs_to :goal
 	# has_many :comments, as: :commentable, dependent: :destroy
 	delegate :user, to: :goal
+  validates :description, :frequency, :period, presence: true
+
+  before_save :default_values
+  def default_values
+    self.remaining_for_period ||= self.frequency
+    self.occurences ||= self.number_occurences
+  end
 
   def complete?
     self.status == true
@@ -12,7 +19,7 @@ class Activity < ActiveRecord::Base
     status == false
   end
 
-  def activity_range
+  def activity_timeline
   	(self.goal.due_date - self.created_at.to_date).to_i
   end
 
@@ -30,20 +37,28 @@ class Activity < ActiveRecord::Base
   	time
   end
 
-  def periods_in_range
-  	activity_range / days_in_period
+  def periods_in_timeline #returns the number of periods within the activity timeline
+  	activity_timeline / days_in_period
   end
 
-  def number_occurences
-  	self.frequency * periods_in_range
+  def number_occurences #returns the total number of times an activity will occur
+  	self.frequency * periods_in_timeline
+  end
+
+  def cycle_start_date #returns the first date of the cycle
+    (self.upcoming_due_dates.first - 1.send(self.period))
   end
 
   def valid_period_dates #returns a range (period start date..period end date)
-    ((self.upcoming_due_dates.first - 1.send(self.period))..self.upcoming_due_dates.first)
+    self.cycle_start_date..self.upcoming_due_dates.first
+  end
+
+  def needs_counter_reset? #returns true if 
+    self.updated_at < cycle_start_date
   end
 
   def restart_activity_counter #reset remaining_for_period to frequency at start of new period
-    if self.valid_period_dates === Time.now && !self.valid_period_dates === self.updated_at 
+    if self.needs_counter_reset?
       self.remaining_for_period = self.frequency 
       self.save
     end
