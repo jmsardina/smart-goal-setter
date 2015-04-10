@@ -37,17 +37,16 @@ RSpec.describe Activity, type: :model do
     end
 
     it 'has a #frequency and #period attribute' do
-      expect(activity.frequency).to eq(4)
-      expect(activity.period).to eq("week")
+      expect(activity.frequency).to eq(6)
+      expect(activity.period).to eq("day")
     end
   end
-
 
   context 'instance methods' do
     let(:activity){create(:activity)}
 
     context "#number_occurences" do
-      xit "should return the total number of times an activity will occur" do
+      it "should return the total number of times an activity will occur" do
         expect(activity.number_occurences).to eq(84)
       end
     end
@@ -56,8 +55,7 @@ RSpec.describe Activity, type: :model do
       t = Time.local(2015, 4, 12)
       Timecop.travel(t)
 
-      
-      xit "should restart activity counter at the end of the cycle" do
+      it "should restart activity counter at the end of the cycle" do
         activity.restart_activity_counter
         expect(activity.remaining_for_period).to eq(6)
       end
