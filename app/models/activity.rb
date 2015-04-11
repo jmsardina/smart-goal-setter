@@ -53,7 +53,7 @@ class Activity < ActiveRecord::Base
     self.cycle_start_date..self.upcoming_due_dates.first
   end
 
-  def needs_counter_reset? #returns true if 
+  def needs_counter_reset? #returns true if activity has not been completed this cycle. 
     self.updated_at < cycle_start_date
   end
 

@@ -42,7 +42,7 @@ RSpec.describe Activity, type: :model do
     end
   end
 
-  context 'instance methods' do
+  describe 'instance methods' do
     let(:activity){create(:activity)}
 
     context "#number_occurences" do
