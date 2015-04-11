@@ -1,7 +1,7 @@
 class UserGroupsController < ApplicationController
 
 	def create
-		@usergroup = UserGroup.new
+		@user_group = UserGroup.new(user_group_params)
 		binding.pry
 	end	
 	# 	if params[:search]
@@ -11,5 +11,10 @@ class UserGroupsController < ApplicationController
  #     	render :text => "No results matching that query." if @results.empty?
 	#   end
 	# end
+
+	private
+		def user_group_params
+			params.require(:user_group).permit(:user_id, :group_id)
+		end
 
 end

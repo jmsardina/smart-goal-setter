@@ -15,8 +15,9 @@ class GroupsController < ApplicationController
 
 	def create
 		@group = Group.new(group_params)
+		@group.creator_id = current_user.id
 		if @group.save
-		@user_group = UserGroup.create(group_id: @group.id, creator_id: current_user.id)
+		@user_group = UserGroup.create(group_id: @group.id, user_id: current_user.id)
 			redirect_to goals_path
 		else
 			flash[:notice] = "Something went wrong...Try again."
@@ -46,7 +47,7 @@ class GroupsController < ApplicationController
 		end
 
 		def group_params
-			params.require(:group).permit(:name, :description)
+			params.require(:group).permit(:name, :description, :creator_id)
 		end
 
 end

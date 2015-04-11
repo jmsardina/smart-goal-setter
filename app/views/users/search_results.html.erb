@@ -2,8 +2,9 @@
 	<% @results.each do |result| %>
 		<li>
 			<%= "#{result.name} | #{result.email} |"%>
-			<% binding.pry %>
-			<%= button_to "Add user", user_groups_path, {action: "create", :user_id => result.id }, method: :post %>
+			<%= button_to "Add #{User.find(result.id).name}", { :controller => "user_groups", action: "create", :user_id => result.id,  method: :post } %>
+			<%= binding.pry %>
 		</li>
 	<% end %>
 </ul>
+
