@@ -46,24 +46,3 @@ end
 create_users(lang_goal, exercise_goal)
 
 
-def create_groups
-  index = 0
-  while index < GROUP_NAMES.length
-    Group.create(name: GROUP_NAMES[index])
-    index += 1
-  end
-end
-
-create_groups
-
-def create_user_groups
-  UserGroup.create([
-    {user_id: 1, group_id: 1},
-    {user_id: 2, group_id: 2},
-    {user_id: 3, group_id: 3}]
-    )
-end
-
-create_user_groups
-
-
