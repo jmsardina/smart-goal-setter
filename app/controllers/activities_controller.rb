@@ -16,6 +16,7 @@ class ActivitiesController < ApplicationController
 		@activity.occurences = @activity.number_occurences
 		# @activity.remaining_for_period = @activity.frequency
 		@activity.save
+		track_feed(@activity)
 	end
 
 	def edit
@@ -27,6 +28,7 @@ class ActivitiesController < ApplicationController
 		@activity = @goal.activities.find(params[:id])
 		@activity.update(activity_params)
 		@activity.save
+		track_feed(@activity)
 		@activity.add_point_and_decrement_occurences
 		render nothing: true, status: :ok
 	end
@@ -37,8 +39,9 @@ class ActivitiesController < ApplicationController
 	end
 
 	def destroy
-		binding.pry
+		# binding.pry
 		set_activity.destroy
+		track_feed(@activity)
 		render nothing: :true, status: :ok
 	end
 
