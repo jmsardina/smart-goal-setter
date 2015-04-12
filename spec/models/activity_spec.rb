@@ -44,9 +44,10 @@ RSpec.describe Activity, type: :model do
 
   describe 'instance methods' do
     # let(:goal) { create(:goal, :with_activity, due_date: due_date) }
-    let(:activity) { create(:activity, period: period, frequency: frequency) }
 
     describe "#number_occurences" do
+      let(:activity) { create(:activity, period: period, frequency: frequency) }
+
       context "when set on a daily basis" do
         let(:period) { 'day' }
         let(:frequency) { 3 }
@@ -89,32 +90,59 @@ RSpec.describe Activity, type: :model do
     end
 
     describe '#upcoming_due_dates' do
-      let(:goal) { create(:goal, :with_activity, due_date: due_date) }
       # let(:goal) { create(:goal, :with_activity, due_date: due_date) }
+      let(:activity) { create(:activity, period: period)}
 
       context "when set on a daily basis" do
-        let(:due_date) { 12.days.from_now }
-        let(:activity){ create(:activity, period: 'day') }
+        # let(:due_date) { 12.days.from_now }
+        let(:period) { 'day' }
 
         it "should return an array of all the daily due dates" do
-          expected_due_dates = (1..12).map { |i| i.days.from_now.to_date }
+          days_to_due_date = (activity.goal.due_date - activity.created_at.to_date)
+          expected_due_dates = (1..days_to_due_date).map { |i| i.days.from_now.to_date }
 
           expect(activity.upcoming_due_dates).to eq(expected_due_dates)
         end
       end
 
-      context "when set on a weekly basis" do
-        let(:due_date) { 51.days.from_now}
-        let(:activity){ create(:activity, period: 'week') }
+      context "when set on a daily basis" do
+        let(:period) { 'week' }
 
         it "should return an array of all the weekly due dates" do
-          expected_due_dates = (1..56).map { |i| (7*i).days.from_now.to_date }
+          weeks_to_due_date = ((activity.goal.due_date - activity.created_at.to_date)/7).to_i
+          expected_due_dates = (1..weeks_to_due_date).map { |i| i.weeks.from_now.to_date }
+
           expect(activity.upcoming_due_dates).to eq(expected_due_dates)
         end
       end
+
+      context "when set on a monthly basis" do
+        let(:period) { 'month' }
+
+        it "should return an array of all the monthly due dates" do
+          months_to_due_date = ((activity.goal.due_date - activity.created_at.to_date)/30)
+          expected_due_dates = (1..months_to_due_date).map { |i| i.months.from_now.to_date }
+
+          expect(activity.upcoming_due_dates).to eq(expected_due_dates)
+        end
+      end
+
+      context "when set on a yearly basis" do
+        let(:period) { 'year' }
+        let(:frequency){ 4 }
+
+        it "should return an array of all the yearly due dates" do
+          years_to_due_date = ((activity.goal.due_date - activity.created_at.to_date)/365)
+          expected_due_dates = (1..years_to_due_date).map { |i| i.years.from_now.to_date }
+
+          expect(activity.upcoming_due_dates).to eq(expected_due_dates)
+        end
+      end
+
     end
     
     describe "#restart_activity_counter" do
+      let(:activity) { create(:activity)}
       t = Time.local(2015, 4, 12)
       Timecop.travel(t)
 

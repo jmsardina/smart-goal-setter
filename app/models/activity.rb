@@ -63,23 +63,17 @@ class Activity < ActiveRecord::Base
     # end
   end
 
-  # def valid_period?
-  #   case self.period
-  #   when self.goal.due_date
-  #   end
-  # end
-
   def upcoming_due_dates
     start_date = self.created_at.to_date
     upcoming = []
 
     while start_date < self.goal.due_date
-      if (start_date + 1.send(self.period)) < self.goal.due_date
+      if (start_date + 1.send(self.period)) <= self.goal.due_date
         new_due_date = start_date + 1.send(self.period)
         upcoming << new_due_date
         start_date = new_due_date
       else
-        upcoming << self.goal.due_date
+        # upcoming << self.goal.due_date
         start_date = self.goal.due_date
       end
     end
