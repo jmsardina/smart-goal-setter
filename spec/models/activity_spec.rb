@@ -33,7 +33,6 @@ RSpec.describe Activity, type: :model do
     let(:activity){create(:activity)}
 
     it 'has a #description attribute' do
-      binding.pry
       expect(activity.description).to eq("I will drink more water.")
     end
 
@@ -44,17 +43,54 @@ RSpec.describe Activity, type: :model do
   end
 
   describe 'instance methods' do
-    let(:activity) { create(:activity) }
-
+    # let(:goal) { create(:goal, :with_activity, due_date: due_date) }
+    let(:activity) { create(:activity, period: period, frequency: frequency) }
 
     describe "#number_occurences" do
-      it "should return the total number of times an activity will occur" do
-        expect(activity.number_occurences).to eq(84)
+      context "when set on a daily basis" do
+        let(:period) { 'day' }
+        let(:frequency) { 3 }
+        
+        it "should return the total number of times an activity will occur" do
+          days = (activity.goal.due_date - activity.created_at.to_date)
+          expect(activity.number_occurences).to eq(activity.frequency * days)
+        end
+      end
+
+      context "when set on a weekly basis" do
+        let(:period) { 'week' }
+        let(:frequency) { 5 }
+        
+        it "should return the total number of times an activity will occur" do
+          weeks = ((activity.goal.due_date - activity.created_at.to_date)/7).to_i
+          expect(activity.number_occurences).to eq((activity.frequency * weeks))
+        end
+      end
+
+      context "when set on a monthly basis" do
+        let(:period) { 'month' }
+        let(:frequency) { 2 }
+        
+        it "should return the total number of times an activity will occur" do
+          months = ((activity.goal.due_date - activity.created_at.to_date)/30).to_i
+          expect(activity.number_occurences).to eq((activity.frequency * months))
+        end
+      end
+
+      context "when set on a yearly basis" do
+        let(:period) { 'year' }
+        let(:frequency) { 2 }
+        
+        it "should return the total number of times an activity will occur" do
+          years = ((activity.goal.due_date - activity.created_at.to_date)/365).to_i
+          expect(activity.number_occurences).to eq((activity.frequency * years))
+        end
       end
     end
 
     describe '#upcoming_due_dates' do
       let(:goal) { create(:goal, :with_activity, due_date: due_date) }
+      # let(:goal) { create(:goal, :with_activity, due_date: due_date) }
 
       context "when set on a daily basis" do
         let(:due_date) { 12.days.from_now }
@@ -68,10 +104,12 @@ RSpec.describe Activity, type: :model do
       end
 
       context "when set on a weekly basis" do
+        let(:due_date) { 51.days.from_now}
         let(:activity){ create(:activity, period: 'week') }
 
         it "should return an array of all the weekly due dates" do
-          expect(activity.upcoming_due_dates).to eq([])
+          expected_due_dates = (1..56).map { |i| (7*i).days.from_now.to_date }
+          expect(activity.upcoming_due_dates).to eq(expected_due_dates)
         end
       end
     end

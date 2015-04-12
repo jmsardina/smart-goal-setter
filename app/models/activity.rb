@@ -86,23 +86,6 @@ class Activity < ActiveRecord::Base
     upcoming.delete(upcoming[0]) if Time.now.to_date >= upcoming[0]
     upcoming
   end
-  # def upcoming_due_dates
-  #   # binding.pry
-  #   start_date = self.created_at.to_date
-  #   upcoming = []
-
-  #   while start_date < self.goal.due_date
-  #     if (start_date + self.days_in_period) >= self.goal.due_date
-  #      new_due_date = start_date + 1.send(self.period)
-  #       upcoming << new_due_date
-  #       start_date = new_due_date
-  #     else
-  #       upcoming << self.goal.due_date
-  #     end
-  #   end
-  #   upcoming.delete(upcoming[0]) if Time.now.to_date >= upcoming[0]
-  #   upcoming
-  # end
 
   def add_point_and_decrement_occurences
     @user = self.user
