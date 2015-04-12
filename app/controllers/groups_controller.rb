@@ -26,7 +26,10 @@ class GroupsController < ApplicationController
 	end
 
 	def update
-		set_group.update(params[:name])
+		@group = Group.find(params[:group_id])
+      @user_to_add = User.find(params[:user_id])
+      @group.members << @user_to_add
+      redirect_to group_path
 	end
 
 	def edit
