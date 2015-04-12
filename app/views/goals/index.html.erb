@@ -38,12 +38,10 @@
 
 <h3>My Groups</h3>
 <ul>
-	<% if @groups %>
-	  <% @groups.each do |group| %>
-	    <li> <%=link_to "#{group.name}", group_path(group) %>
-	    </li>
-	  <% end %>
-	<% end %>
+  <% @groups.each do |group| %>
+    <li> <%=link_to "#{group.name}", group_path(group) %>
+    </li>
+  <% end %>
 </ul>
 
 <%= link_to "Create New Group", new_group_path %>

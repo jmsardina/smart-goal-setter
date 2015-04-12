@@ -3,12 +3,17 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  #as creator
+  has_many :groups, foreign_key: :creator_id
 
-  has_many :user_groups
-  has_many :goals
-  has_many :comments
+  #as member
+  has_many :user_groups, foreign_key: :member_id
   has_many :groups, through: :user_groups
+
+  has_many :goals
   has_many :activities, through: :goals
+  has_many :comments
+  # has_many :groups, through: :user_groups
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "../assets   /missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/

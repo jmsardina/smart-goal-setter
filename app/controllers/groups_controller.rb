@@ -1,12 +1,12 @@
 class GroupsController < ApplicationController
 
 	def index
-		if current_user
-			@groups = current_user.groups
-		else
-			@groups = Group.all
-			render 'welcome_page'
-		end
+		# if current_user
+		# 	@groups = current_user.groups
+		# else
+		# 	@groups = Group.all
+		# 	render 'welcome_page'
+		# end
 	end
 
 	def new
@@ -17,8 +17,9 @@ class GroupsController < ApplicationController
 		@group = Group.new(group_params)
 		@group.creator_id = current_user.id
 		if @group.save
-		@user_group = UserGroup.create(group_id: @group.id, user_id: current_user.id)
-			redirect_to goals_path
+			# @user_group = UserGroup.create(group_id: @group.id, user_id: current_user.id)
+			# redirect_to goals_path
+			redirect_to group_path(@group)
 		else
 			flash[:notice] = "Something went wrong...Try again."
 			render :new
