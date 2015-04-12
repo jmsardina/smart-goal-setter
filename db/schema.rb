@@ -38,23 +38,6 @@ ActiveRecord::Schema.define(version: 20150411190605) do
     t.datetime "updated_at",       null: false
   end
 
-  create_table "events", force: :cascade do |t|
-    t.integer  "trackable_id"
-    t.string   "trackable_type"
-    t.integer  "owner_id"
-    t.string   "owner_type"
-    t.string   "key"
-    t.text     "parameters"
-    t.integer  "recipient_id"
-    t.string   "recipient_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "events", ["owner_id", "owner_type"], name: "index_events_on_owner_id_and_owner_type"
-  add_index "events", ["recipient_id", "recipient_type"], name: "index_events_on_recipient_id_and_recipient_type"
-  add_index "events", ["trackable_id", "trackable_type"], name: "index_events_on_trackable_id_and_trackable_type"
-
   create_table "feeds", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "action"
