@@ -5,9 +5,6 @@ class GoalsController < ApplicationController
 		if current_user
 			@goals = current_user.goals
 			@groups = current_user.groups
-			# @goals.each do |goal|
-			# 	goal.activities.each{|activity| activity.restart_activity_counter}
-			# end
 		else
 			@goals = Goal.all
 			render 'welcome_page'
@@ -44,10 +41,11 @@ class GoalsController < ApplicationController
 	end
 
 	def show
+		# binding.pry
 		set_goal
 		@activity = Activity.new
 		@activities = @goal.activities.order("created_at").all
-		@activities.each{|activity| activity.restart_activity_counter}
+		# @activities.each{|activity| activity.restart_activity_counter if activity.needs_counter_reset?}
 		@tags = @goal.tags
 	end
 

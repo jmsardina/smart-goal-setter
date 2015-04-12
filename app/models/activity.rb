@@ -8,7 +8,6 @@ class Activity < ActiveRecord::Base
   before_save :default_values
   def default_values
     self.remaining_for_period ||= self.frequency
-    self.occurences ||= self.number_occurences
   end
 
   def complete?
@@ -58,29 +57,52 @@ class Activity < ActiveRecord::Base
   end
 
   def restart_activity_counter #reset remaining_for_period to frequency at start of new period
-    if self.needs_counter_reset?
+    # if self.needs_counter_reset?
       self.remaining_for_period = self.frequency 
       self.save
-    end
+    # end
   end
+
+  # def valid_period?
+  #   case self.period
+  #   when self.goal.due_date
+  #   end
+  # end
 
   def upcoming_due_dates
     start_date = self.created_at.to_date
     upcoming = []
 
     while start_date < self.goal.due_date
-      if (self.goal.due_date - start_date).to_i >= self.days_in_period
-       new_due_date = start_date + 1.send(self.period)
+      if (start_date + 1.send(self.period)) < self.goal.due_date
+        new_due_date = start_date + 1.send(self.period)
         upcoming << new_due_date
         start_date = new_due_date
       else
-        upcoming.delete(upcoming[0]) if Time.now.to_date > upcoming[0]
-        upcoming
+        upcoming << self.goal.due_date
+        start_date = self.goal.due_date
       end
     end
-    upcoming.delete(upcoming[0]) if Time.now.to_date > upcoming[0]
+    upcoming.delete(upcoming[0]) if Time.now.to_date >= upcoming[0]
     upcoming
   end
+  # def upcoming_due_dates
+  #   # binding.pry
+  #   start_date = self.created_at.to_date
+  #   upcoming = []
+
+  #   while start_date < self.goal.due_date
+  #     if (start_date + self.days_in_period) >= self.goal.due_date
+  #      new_due_date = start_date + 1.send(self.period)
+  #       upcoming << new_due_date
+  #       start_date = new_due_date
+  #     else
+  #       upcoming << self.goal.due_date
+  #     end
+  #   end
+  #   upcoming.delete(upcoming[0]) if Time.now.to_date >= upcoming[0]
+  #   upcoming
+  # end
 
   def add_point_and_decrement_occurences
     @user = self.user
