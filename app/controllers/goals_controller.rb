@@ -45,7 +45,7 @@ class GoalsController < ApplicationController
 		set_goal
 		@activity = Activity.new
 		@activities = @goal.activities.order("created_at").all
-		# @activities.each{|activity| activity.restart_activity_counter if activity.needs_counter_reset?}
+		@activities.each{|activity| activity.restart_activity_counter if activity.needs_counter_reset?}
 		@tags = @goal.tags
 	end
 

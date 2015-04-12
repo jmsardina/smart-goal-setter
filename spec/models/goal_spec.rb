@@ -34,7 +34,7 @@ RSpec.describe Goal, type: :model do
     end
 
     it 'has a #due_date attribute' do
-      expect(goal.due_date).to eq(Date.new(2015, 4,23))
+      expect(goal.due_date).to eq(Date.new(2016, 4,23))
     end
   end
 end
