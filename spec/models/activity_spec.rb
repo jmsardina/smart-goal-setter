@@ -137,7 +137,7 @@ RSpec.describe Activity, type: :model do
           years_to_due_date = ((activity.goal.due_date - activity.created_at.to_date)/365)
           expected_due_dates = (1..years_to_due_date).map { |i| i.years.from_now.to_date }
           expected_due_dates << activity.goal.due_date unless expected_due_dates.include?(activity.goal.due_date)
-          
+
           expect(activity.upcoming_due_dates).to eq(expected_due_dates)
         end
       end
@@ -146,12 +146,22 @@ RSpec.describe Activity, type: :model do
     
     describe "#restart_activity_counter" do
       let(:activity) { create(:activity)}
-      t = Time.local(2015, 4, 12)
-      Timecop.travel(t)
 
-      it "should restart activity counter at the end of the cycle" do
-        activity.restart_activity_counter
-        expect(activity.remaining_for_period).to eq(6)
+      context "when an activity period ends" do
+        it "should restart activity counter" do
+          activity.remaining_for_period = 3
+          Timecop.travel(2.day.from_now)
+          activity.restart_activity_counter
+          expect(activity.remaining_for_period).to eq(6)
+        end
+      end
+
+      context "when an activity period is still current" do
+        it "should not restart activity counter" do
+          activity.remaining_for_period = 3
+          activity.restart_activity_counter
+          expect(activity.remaining_for_period).to eq(3)
+        end
       end
     end
   end

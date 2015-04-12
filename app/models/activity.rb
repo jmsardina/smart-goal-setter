@@ -57,13 +57,13 @@ class Activity < ActiveRecord::Base
   end
 
   def restart_activity_counter #reset remaining_for_period to frequency at start of new period
-    # if self.needs_counter_reset?
+    if self.needs_counter_reset?
       self.remaining_for_period = self.frequency 
       self.save
-    # end
+    end
   end
 
-  def upcoming_due_dates
+  def upcoming_due_dates #returns an array of the periodic activity due dates
     start_date = self.created_at.to_date
     upcoming = []
 
@@ -92,8 +92,6 @@ class Activity < ActiveRecord::Base
       end
       self.status = false
       self.save
-    else
-
     end
   end
 end
