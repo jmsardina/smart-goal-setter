@@ -73,7 +73,7 @@ class Activity < ActiveRecord::Base
         upcoming << new_due_date
         start_date = new_due_date
       else
-        # upcoming << self.goal.due_date
+        upcoming << self.goal.due_date unless upcoming.include?(self.goal.due_date)
         start_date = self.goal.due_date
       end
     end

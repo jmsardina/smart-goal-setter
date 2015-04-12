@@ -111,6 +111,7 @@ RSpec.describe Activity, type: :model do
         it "should return an array of all the weekly due dates" do
           weeks_to_due_date = ((activity.goal.due_date - activity.created_at.to_date)/7).to_i
           expected_due_dates = (1..weeks_to_due_date).map { |i| i.weeks.from_now.to_date }
+          expected_due_dates << activity.goal.due_date unless expected_due_dates.include?(activity.goal.due_date)
 
           expect(activity.upcoming_due_dates).to eq(expected_due_dates)
         end
@@ -122,6 +123,7 @@ RSpec.describe Activity, type: :model do
         it "should return an array of all the monthly due dates" do
           months_to_due_date = ((activity.goal.due_date - activity.created_at.to_date)/30)
           expected_due_dates = (1..months_to_due_date).map { |i| i.months.from_now.to_date }
+          expected_due_dates << activity.goal.due_date unless expected_due_dates.include?(activity.goal.due_date)
 
           expect(activity.upcoming_due_dates).to eq(expected_due_dates)
         end
@@ -134,7 +136,8 @@ RSpec.describe Activity, type: :model do
         it "should return an array of all the yearly due dates" do
           years_to_due_date = ((activity.goal.due_date - activity.created_at.to_date)/365)
           expected_due_dates = (1..years_to_due_date).map { |i| i.years.from_now.to_date }
-
+          expected_due_dates << activity.goal.due_date unless expected_due_dates.include?(activity.goal.due_date)
+          
           expect(activity.upcoming_due_dates).to eq(expected_due_dates)
         end
       end
