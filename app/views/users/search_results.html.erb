@@ -1,10 +1,15 @@
-<ul>
-	<% @results.each do |result| %>
-		<li>
-			<%= "#{result.name} | #{result.email} |"%>
-			<%= button_to "Add #{User.find(result.id).name}", { :controller => "user_groups", action: "create", :user_id => result.id,  method: :post } %>
-			<%= binding.pry %>
-		</li>
-	<% end %>
-</ul>
+	<ul>
+		<% @results.each do |result| %>
+			<li>
+				<%= "#{result.name} | #{result.email} |"%>
+	<%= form_tag('/groups/:id', :method => "patch", id: "add-user-to-group") do %>
+		<%= hidden_field_tag :group_id, params[:group_id] %>
+		<%= hidden_field_tag :user_id, result.id %>
+		<%= submit_tag "Add #{result.name}", :name => nil %>
+		<% end %>
+			</li>
+		<% end %>
+	</ul>
+
+
 
