@@ -2,10 +2,14 @@
 		<% @results.each do |result| %>
 			<li>
 				<%= "#{result.name} | #{result.email} |"%>
-				<%= form_for(@user_group, controller: "user_groups", action: "create", html: { class: "form" }) do |f| %>
-					<%= f.hidden_field :group_id, value: params[:group_id] %>
-					<%= f.hidden_field :member_id, value: result.id %>
-					<%= f.submit "Add User" %>
+				<% if !@group.members.include?(result)%>
+					<%= form_for(@user_group, controller: "user_groups", action: "create", html: { class: "form" }) do |f| %>
+						<%= f.hidden_field :group_id, value: params[:group_id] %>
+						<%= f.hidden_field :member_id, value: result.id %>
+						<%= f.submit "Add User" %>
+					<% end %>
+				<% else %>
+					<%= "Already a member of #{@group.name}!"%>
 				<% end %>
 			</li>
 		<% end %>
