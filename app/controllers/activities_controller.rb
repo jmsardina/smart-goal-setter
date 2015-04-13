@@ -38,8 +38,8 @@ class ActivitiesController < ApplicationController
 	end
 
 	def destroy
-		set_activity.destroy
 		track_feed(@activity)
+		set_activity.destroy
 		render nothing: :true, status: :ok
 	end
 
