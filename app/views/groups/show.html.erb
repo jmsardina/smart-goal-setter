@@ -1,4 +1,4 @@
-<h3><%= @group.name %></h3>
+<h3><%= image_tag @group.avatar.url(:thumb) %><%= @group.name %></h3>
 <% if @group.members.include?(current_user) %>
 	<h4>Members</h4>
 
