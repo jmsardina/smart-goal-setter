@@ -7,7 +7,8 @@
 	<title>Goaly</title>
 
 	<!-- Vendor CSS -->
-	<link href="vendor/assets/stylesheets/animate-css/animate.min.css" rel="stylesheet">
+	<%= stylesheet_link_tag "application" %>
+<!-- 	<link href="vendor/assets/stylesheets/animate-css/animate.min.css" rel="stylesheet"> -->
 
 	<!-- CSS -->
 	<link href="css/app.min.css" rel="stylesheet">
@@ -15,12 +16,13 @@
 	<%= analytics_init if Rails.env.production? %>
 
 	<!-- Javascript Libraries -->
-	<script src="vendor/assets/javascripts/jquery-2.1.1.min.js"></script>
+	<%= javascript_include_tag "application" %>
+<!-- 	<script src="vendor/assets/javascripts/jquery-2.1.1.min.js"></script>
 	<script src="vendor/assets/javascripts/bootstrap.min.js"></script>
 
 	<script src="vendor/assets/javascripts/waves/waves.min.js"></script>
 
-	<script src="vendor/assets/javascripts/functions.js"></script>
+	<script src="vendor/assets/javascripts/functions.js"></script> -->
 
 </head>
 
