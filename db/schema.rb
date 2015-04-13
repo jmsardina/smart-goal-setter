@@ -38,6 +38,23 @@ ActiveRecord::Schema.define(version: 20150411190605) do
     t.datetime "updated_at",       null: false
   end
 
+  create_table "events", force: :cascade do |t|
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.string   "key"
+    t.text     "parameters"
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["owner_id", "owner_type"], name: "index_events_on_owner_id_and_owner_type"
+  add_index "events", ["recipient_id", "recipient_type"], name: "index_events_on_recipient_id_and_recipient_type"
+  add_index "events", ["trackable_id", "trackable_type"], name: "index_events_on_trackable_id_and_trackable_type"
+
   create_table "feeds", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "action"
@@ -99,7 +116,7 @@ ActiveRecord::Schema.define(version: 20150411190605) do
   add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                                null: false
+    t.string   "name"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
