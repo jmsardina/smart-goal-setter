@@ -1,28 +1,29 @@
 <h3><%= @group.name %></h3>
+<% if @group.members.include?(current_user) %>
+	<h4>Members</h4>
 
-<h4>Members</h4>
+		<% if @group.members %>
+			<ul>
+			  <% @group.members.each do |member| %>
+			    <li>
+				    <!-- <a href="/users/<%#=member.id%>" class="group-members"%><%#=image_tag member.avatar(:thumb)%><%#=member.name%></a> -->
+				    <%=image_tag member.avatar(:thumb)%><%=member.name%>
+				    <% if (current_user = @group.creator) && (member != @group.creator) %>
+				    	<button class="destroy">Remove</button>
+				    <% end %>
+			    </li>
+			  <% end %>
+			 </ul>
+	  <% end %>
 
-	<% if @group.members %>
-		<ul>
-		  <% @group.members.each do |member| %>
-		    <li>
-			    <!-- <a href="/users/<%#=member.id%>" class="group-members"%><%#=image_tag member.avatar(:thumb)%><%#=member.name%></a> -->
-			    <%=image_tag member.avatar(:thumb)%><%=member.name%>
-			    <% if (current_user = @group.creator) && (member != @group.creator) %>
-			    	<button class="destroy">Remove</button>
-			    <% end %>
-		    </li>
-		  <% end %>
-		 </ul>
-  <% end %>
+	<h5>Search for Friends and Add Them to this Group</h5>
+		<%= form_tag('/users/search', :method => "get", id: "search-form") do %>
+		<%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
+		<%= hidden_field_tag :group_id, params[:id] %>
+		<%= submit_tag "Search", :name => nil %>
+		<% end %>
 
-<h5>Search for Friends and Add Them to this Group</h5>
-	<%= form_tag('/users/search', :method => "get", id: "search-form") do %>
-	<%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
-	<%= hidden_field_tag :group_id, params[:id] %>
-	<%= submit_tag "Search", :name => nil %>
+	<% if @search_results %>
+		<% render 'users/search_results' %>
 	<% end %>
-
-<% if @search_results %>
-	<% render 'users/search_results' %>
 <% end %>

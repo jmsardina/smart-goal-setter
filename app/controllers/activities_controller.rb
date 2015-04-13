@@ -13,11 +13,11 @@ class ActivitiesController < ApplicationController
 		@activity = Activity.new(activity_params)
 		@activity.goal = @goal
 		if @activity.save 
+			track_feed(@activity)
 			@activity.occurences = @activity.number_occurences
 			@activity.save
 		end
 		redirect_to goal_path(@goal)
-		track_feed(@activity)
 	end
 
 	def edit
@@ -42,7 +42,6 @@ class ActivitiesController < ApplicationController
 
 	def destroy
 		track_feed(@activity)
-		binding.pry
 		set_activity.destroy
 		render nothing: :true, status: :ok
 	end
