@@ -1,8 +1,3 @@
-// To mark activities as complete:
-  // Add a listener on the activity status checkbox (prop checked)
-  // When checked, the activity info should get crossed out
-  // change value to "0"
-  // Add class complete
 function Activity(){
 }
 
@@ -43,39 +38,16 @@ Activity.edit = function(e){
   var $li = $(this).parents("li:first");
   $li.addClass("editing");
   $("input.edit", $li).focus();
+  $('select', $li).focus();
 }
 
 function hideEditInPlace($li){
   $li.removeClass("editing");
 }
 
-// Activity.clear = function(){
-//   $("button.clear-completed").on("click", function(){console.log("cats")})
-// }
-
 Activity.clear = function(e){
-  // $("button.clear-completed").parents().find($("li.completed")).fadeOut();
-  // if($("button.clear-completed").html() === "Clear Completed Activities"){
-  //   $("button.clear-completed").html("Show Completed Activities")}
-  //   else {
-  //     $("button.clear-completed").html("Clear Completed Activities")
-  //   }
   $("button.clear-completed").parents().find($("li.completed").addClass("hidden"));
 }
-
-// Activity.updateRendering = function(e){
-//   var $button = $(this);
-//   var $form = $(this).parents("form:first");
-//   var href = $form.attr("action");
-
-//   $.ajax(href, {
-//     "method": "PATCH",
-//     "data": $form.serialize(),
-//     "success": function(response){
-//       $checkbox.parents("li:first").toggleClass("completed");
-//     }
-//   })
-// }
 
 Activity.show = function(e){
   $("button.show-completed").parents().find($("li.completed").removeClass("hidden"));
@@ -95,12 +67,6 @@ function addActivityListener(){
     });
 }
 
-// function cancelActivityListener(){
-//   $("#show-activity-form").click(function(){
-//     $("form").hide();
-//   });
-// }
-
 function deleteActivity(e){
   e.preventDefault();
   var $li = $(this).parents("li");
@@ -117,11 +83,19 @@ function deleteActivity(e){
   })
 }
 
+function showActivityForm(){
+  // $(this).parents().find($("form#edit-activity.hidden").removeClass("hidden"));
+  $(this).parents("div.view").children("div#edit-activity.hidden").removeClass("hidden")
+}
+
 $(function(){
   $("ul.list").on("change", "input:checkbox", Activity.updateStatus);
   $("ul.list").on("submit", "form.update", Activity.updateContent);
-  $("ul.list").on("dblclick", "li label", Activity.edit);
-  $("ul.list").on("blur", "li input.edit", Activity.stopEdit);
+  $("ul.list").on("dblclick", "li form label", showActivityForm);
+  // $("ul.list").on("dblclick", "li label", Activity.edit);
+  // $("ul.list").on("dblclick", "span.act-frequency", Activity.edit);
+  // $("ul.list").on("dblclick", "span.act-period", Activity.edit);
+  // $("ul.list").on("blur", "li input.edit", Activity.stopEdit);
   $("button.clear-completed").on("click", Activity.clear);
   $("button.show-completed").on("click", Activity.show);
   $("ul.list").on("click", "button.destroy", deleteActivity);
