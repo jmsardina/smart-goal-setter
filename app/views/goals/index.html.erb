@@ -21,21 +21,10 @@
     <h3>My Goals</h3>
     <ul class="list-goals">
       <%= render @goals %>
- <!--      <%# if @goals %>
-      <%# @goals.each do |goal| %>
-      <li class="list-group-item">
-        <span class="badge"><%#= goal.activities.count %></span>
-        <%#=link_to "#{goal.name}", goal_path(goal) %>
-      </li>
-      <%#end%>
-      <%#end%> -->
     </ul>
     <%= link_to "Create New Goal", new_goal_path, class: "btn btn-default btn-lg btn-block" %>
   </div>
 </div>
-
-
-
 
 <h3>My Groups</h3>
 <ul>

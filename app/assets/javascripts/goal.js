@@ -5,8 +5,9 @@ Goal.updateStatus = function(e){
   var $checkbox = $(this);
   var $form = $(this).parents("form:first");
   var href = $form.attr("action");
+  var id = $(this).data("id")
 
-  $.ajax(href, {
+  $.ajax(href + "/" + id, {
     "method": "PATCH",
     "data": $form.serialize(),
     "success": function(response){
@@ -19,8 +20,9 @@ function deleteGoal(e){
   e.preventDefault();
   var $li = $(this).parents("li");
   var href = $("form", $li).attr("action");
+  var id = $(this).data("id")
 
-  $.ajax(href, {
+  $.ajax(href + '/' + id, {
     "method": "DELETE",
     "success": function(){
       $li.slideUp(function(){
@@ -32,6 +34,6 @@ function deleteGoal(e){
 }
 
 $(function(){
-  $("ul.list").on("change", "input:checkbox", Goal.updateStatus);
-  $("ul.list").on("click", "button.destroy", deleteGoal);
+  $("ul.list-goals").on("change", "input:checkbox", Goal.updateStatus);
+  $("ul.list-goals").on("click", "button.destroy", deleteGoal);
 });
