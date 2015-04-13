@@ -14,4 +14,5 @@ class Goal < ActiveRecord::Base
   def days_left
     (self.due_date - Time.now.to_date).to_i
   end
+
 end

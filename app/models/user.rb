@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   def self.search(query)
-    results = where("email like ?", "%#{query}%")
+    where("email like ?", "%#{query}%")
   end
 
   # def upcoming_activities
