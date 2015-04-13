@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409175002) do
+ActiveRecord::Schema.define(version: 20150411190605) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(version: 20150409175002) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
+
+  create_table "feeds", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "action"
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "feeds", ["trackable_id"], name: "index_feeds_on_trackable_id"
+  add_index "feeds", ["user_id"], name: "index_feeds_on_user_id"
 
   create_table "goal_tags", force: :cascade do |t|
     t.integer  "goal_id"

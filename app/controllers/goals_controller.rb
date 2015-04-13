@@ -18,6 +18,7 @@ class GoalsController < ApplicationController
 		@goal = Goal.new(goal_params)
 		@goal.user = current_user
 		if @goal.save
+			track_feed(@goal)
 			redirect_to goal_path(@goal)
 		else
 			flash[:notice] = "Something went wrong...Try again."
@@ -28,6 +29,7 @@ class GoalsController < ApplicationController
 	def update
 		set_goal.update(goal_params)
 		if @goal.save
+			track_feed(@goal)
 			redirect_to goal_path(@goal)
 		else
 			flash[:notice] = "Something went wrong...Try again."
@@ -49,6 +51,7 @@ class GoalsController < ApplicationController
 
 	def destroy
 		set_goal.destroy
+		track_feed(@goal)
 	end
 
 	private

@@ -11,17 +11,22 @@ class ApplicationController < ActionController::Base
   def configure_new_column_to_devise_permitted_parameters
     registration_params = [:name, :avatar, :email, :password, :password_confirmation]
     if params[:action] == 'create'
-      devise_parameter_sanitizer.for(:sign_up) { 
-        |u| u.permit(registration_params) 
+      devise_parameter_sanitizer.for(:sign_up) {
+        |u| u.permit(registration_params)
       }
     elsif params[:action] == 'update'
-      devise_parameter_sanitizer.for(:account_update) { 
+      devise_parameter_sanitizer.for(:account_update) {
         |u| u.permit(registration_params << :current_password)
       }
     end
-  end    
+  end
 
   private
+
+    def track_feed(trackable, action = params[:action])
+      current_user.feeds.create! action: action, trackable: trackable
+      # binding.pry
+    end
 
 	  def configure_permitted_parameters
 	  	devise_parameter_sanitizer.for(:sign_up) << ([:name, :avatar])

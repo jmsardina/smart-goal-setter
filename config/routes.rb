@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :feeds
+
   devise_for :users, controllers: {sessions: 'users/sessions'}
 
   root 'goals#index'

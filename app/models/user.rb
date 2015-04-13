@@ -3,7 +3,11 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  #as creator
+
+  has_many :feeds
+  has_many :goals
+  has_many :comments
+
   has_many :groups, foreign_key: :creator_id
 
   #as member

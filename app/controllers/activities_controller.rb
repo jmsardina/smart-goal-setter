@@ -15,6 +15,7 @@ class ActivitiesController < ApplicationController
 		@activity.save ? (redirect_to goal_path(@goal)) : (render :new)
 		@activity.occurences = @activity.number_occurences
 		@activity.save
+		track_feed(@activity)
 	end
 
 	def edit
@@ -26,6 +27,7 @@ class ActivitiesController < ApplicationController
 		@activity = @goal.activities.find(params[:id])
 		@activity.update(activity_params)
 		@activity.save
+		track_feed(@activity)
 		@activity.add_point_and_decrement_occurences
 		render nothing: true, status: :ok
 	end
@@ -36,6 +38,7 @@ class ActivitiesController < ApplicationController
 	end
 
 	def destroy
+		track_feed(@activity)
 		set_activity.destroy
 		render nothing: :true, status: :ok
 	end
