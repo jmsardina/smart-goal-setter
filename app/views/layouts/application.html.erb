@@ -1,16 +1,36 @@
 <!DOCTYPE html>
-<html>
+<!--[if IE 9 ]><html class="ie9"><![endif]-->
 <head>
-  <title>Goaly</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-  <%= analytics_init if Rails.env.production? %>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Goaly</title>
+
+	<!-- Vendor CSS -->
+	<link href="vendor/assets/stylesheets/animate-css/animate.min.css" rel="stylesheet">
+
+	<!-- CSS -->
+	<link href="css/app.min.css" rel="stylesheet">
+	<%= csrf_meta_tags %>
+	<%= analytics_init if Rails.env.production? %>
+
+	<!-- Javascript Libraries -->
+	<script src="vendor/assets/javascripts/jquery-2.1.1.min.js"></script>
+	<script src="vendor/assets/javascripts/bootstrap.min.js"></script>
+
+	<script src="vendor/assets/javascripts/waves/waves.min.js"></script>
+
+	<script src="vendor/assets/javascripts/functions.js"></script>
+
 </head>
+
 <%= render 'layouts/header' %>
+
 <body>
-<div class="container">
-<%= yield %>
-</div>
+
+	<div class="container">
+		<%= yield %>
+	</div>
+
 </body>
 </html>
