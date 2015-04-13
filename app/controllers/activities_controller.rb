@@ -33,12 +33,14 @@ class ActivitiesController < ApplicationController
 	end
 
 
+
 	def show
 		set_activity
 	end
 
 	def destroy
 		track_feed(@activity)
+		binding.pry
 		set_activity.destroy
 		render nothing: :true, status: :ok
 	end
@@ -51,4 +53,5 @@ class ActivitiesController < ApplicationController
 		def activity_params
 			params.require(:activity).permit(:description, :period, :status, :barrier, :facilitator, :goal_id, :frequency)
 		end
+
 end
