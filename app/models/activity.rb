@@ -3,7 +3,8 @@ class Activity < ActiveRecord::Base
 	belongs_to :goal
 	# has_many :comments, as: :commentable, dependent: :destroy
 	delegate :user, to: :goal
-  validates :description, :frequency, :period, presence: true
+  validates :description, presence: true
+  validates :frequency, :period, presence: true
 
   before_save :default_values
   def default_values
