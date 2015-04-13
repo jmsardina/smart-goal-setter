@@ -1,7 +1,7 @@
 	<ul>
 		<% @results.each do |result| %>
-			<li>
-				<%= "#{result.name} | #{result.email} |"%>
+			<p class="user-search-result"><%= image_tag result.avatar.url(:thumb)%>
+				<%= "#{result.name}"%>
 				<% if !@group.members.include?(result)%>
 					<%= form_for(@user_group, controller: "user_groups", action: "create", html: { class: "form" }) do |f| %>
 						<%= f.hidden_field :group_id, value: params[:group_id] %>
@@ -9,9 +9,9 @@
 						<%= f.submit "Add User" %>
 					<% end %>
 				<% else %>
-					<%= "Already a member of #{@group.name}!"%>
+					<span class="member-already"><%= "Already a member of #{@group.name}!"%></span>
 				<% end %>
-			</li>
+			</p>
 		<% end %>
 	<%#= form_tag('/groups/:id', :method => "patch", id: "add-user-to-group") do %>
 		<%#= hidden_field_tag :group_id, params[:group_id] %>

@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
 
   #as member
   has_many :user_groups, foreign_key: :member_id
-  has_many :groups, through: :user_groups
 
   has_many :goals
   has_many :activities, through: :goals
