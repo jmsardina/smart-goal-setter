@@ -3,10 +3,16 @@
 <h4>Members</h4>
 
 	<% if @group.members %>
-	  <% @group.members.each do |member| %>
-	    <li> <%= member.name %>
-	    </li>
-	  <% end %>
+		<ul>
+		  <% @group.members.each do |member| %>
+		    <li>
+			    <a href="/users/<%=member.id%>" class="group-members"%><%=image_tag member.avatar(:thumb)%><%=member.name%></a>
+			    <% if (current_user = @group.creator) && (member != @group.creator) %>
+			    	<button class="destroy">Remove</button>
+			    <% end %>
+		    </li>
+		  <% end %>
+		 </ul>
   <% end %>
 
 <h5>Search for Friends and Add Them to this Group</h5>
