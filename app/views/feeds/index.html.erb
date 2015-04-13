@@ -1,0 +1,8 @@
+<h1>Feed</h1>
+
+<% @feeds.each do |feed| %>
+	<%= div_for feed do %>
+		<%= feed.user.name %>
+		<%= render "feeds/#{feed.trackable_type.underscore}/#{feed.action}", feed: feed %>
+	<%end%>
+<%end%>

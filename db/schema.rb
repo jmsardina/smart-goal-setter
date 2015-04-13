@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409175002) do
+ActiveRecord::Schema.define(version: 20150411190605) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(version: 20150409175002) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
+
+  create_table "feeds", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "action"
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "feeds", ["trackable_id"], name: "index_feeds_on_trackable_id"
+  add_index "feeds", ["user_id"], name: "index_feeds_on_user_id"
 
   create_table "goal_tags", force: :cascade do |t|
     t.integer  "goal_id"
@@ -63,10 +75,10 @@ ActiveRecord::Schema.define(version: 20150409175002) do
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
+    t.integer  "creator_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "description"
-    t.integer  "creator_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -77,16 +89,13 @@ ActiveRecord::Schema.define(version: 20150409175002) do
 
   create_table "user_groups", force: :cascade do |t|
     t.integer  "group_id"
-    t.integer  "user_id"
+    t.integer  "member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "user_groups", ["group_id"], name: "index_user_groups_on_group_id"
-  add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id"
-
   create_table "users", force: :cascade do |t|
-    t.string   "name",                                null: false
+    t.string   "name"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

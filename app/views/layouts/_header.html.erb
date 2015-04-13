@@ -19,6 +19,9 @@
               <%= link_to "Edit Profile", edit_user_registration_path %>
             </li>
             <li><%= current_user.points%></li>
+             <li>
+              <%= link_to "Feed", feeds_path %>
+            </li>
            <%end%>
           </ul>
           <ul class="nav navbar-nav navbar-right">
