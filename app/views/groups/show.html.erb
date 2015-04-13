@@ -6,7 +6,8 @@
 		<ul>
 		  <% @group.members.each do |member| %>
 		    <li>
-			    <a href="/users/<%=member.id%>" class="group-members"%><%=image_tag member.avatar(:thumb)%><%=member.name%></a>
+			    <!-- <a href="/users/<%#=member.id%>" class="group-members"%><%#=image_tag member.avatar(:thumb)%><%#=member.name%></a> -->
+			    <%=image_tag member.avatar(:thumb)%><%=member.name%>
 			    <% if (current_user = @group.creator) && (member != @group.creator) %>
 			    	<button class="destroy">Remove</button>
 			    <% end %>
