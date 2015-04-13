@@ -17,6 +17,11 @@ class UserGroupsController < ApplicationController
 	#   end
 	# end
 
+	def destroy
+		@user_group = UserGroup.find(params[:user_group])
+		@user_group.destroy
+	end
+
 	private
 		def user_group_params
 			params.require(:user_group).permit(:member_id, :group_id)
