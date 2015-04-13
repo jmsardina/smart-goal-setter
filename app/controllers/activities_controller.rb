@@ -12,9 +12,11 @@ class ActivitiesController < ApplicationController
 		@goal = Goal.find(params[:goal_id])
 		@activity = Activity.new(activity_params)
 		@activity.goal = @goal
-		@activity.save ? (redirect_to goal_path(@goal)) : (render :new)
-		@activity.occurences = @activity.number_occurences
-		@activity.save
+		if @activity.save 
+			@activity.occurences = @activity.number_occurences
+			@activity.save
+		end
+		redirect_to goal_path(@goal)
 		track_feed(@activity)
 	end
 
