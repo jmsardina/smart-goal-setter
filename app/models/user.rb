@@ -12,7 +12,6 @@ class User < ActiveRecord::Base
 
   #as member
   has_many :user_groups, foreign_key: :member_id
-  has_many :groups, through: :user_groups
 
   has_many :goals
   has_many :activities, through: :goals
@@ -23,7 +22,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   def self.search(query)
-    where("email like ?", "%#{query}%")
+    results = where("email like ?", "%#{query}%")
   end
 
   # def upcoming_activities

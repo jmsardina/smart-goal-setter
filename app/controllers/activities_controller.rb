@@ -12,9 +12,11 @@ class ActivitiesController < ApplicationController
 		@goal = Goal.find(params[:goal_id])
 		@activity = Activity.new(activity_params)
 		@activity.goal = @goal
-		@activity.save ? (redirect_to goal_path(@goal)) : (render :new)
-		@activity.occurences = @activity.number_occurences
-		@activity.save
+		if @activity.save 
+			@activity.occurences = @activity.number_occurences
+			@activity.save
+		end
+		redirect_to goal_path(@goal)
 		track_feed(@activity)
 	end
 
@@ -33,12 +35,14 @@ class ActivitiesController < ApplicationController
 	end
 
 
+
 	def show
 		set_activity
 	end
 
 	def destroy
 		track_feed(@activity)
+		binding.pry
 		set_activity.destroy
 		render nothing: :true, status: :ok
 	end
@@ -51,4 +55,5 @@ class ActivitiesController < ApplicationController
 		def activity_params
 			params.require(:activity).permit(:description, :period, :status, :barrier, :facilitator, :goal_id, :frequency)
 		end
+
 end
