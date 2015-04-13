@@ -1,7 +1,6 @@
 class GoalsController < ApplicationController
 
 	def index
-		# binding.pry
 		if current_user
 			@goals = current_user.goals
 			@groups = current_user.groups

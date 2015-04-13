@@ -2,9 +2,9 @@
 
 <h4>Members</h4>
 
-	<% if @group.users %>
-	  <% @group.users.each do |user| %>
-	    <li> <%= user.name %>
+	<% if @group.members %>
+	  <% @group.members.each do |member| %>
+	    <li> <%= member.name %>
 	    </li>
 	  <% end %>
   <% end %>
@@ -12,6 +12,7 @@
 <h5>Search for Friends and Add Them to this Group</h5>
 	<%= form_tag('/users/search', :method => "get", id: "search-form") do %>
 	<%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
+	<%= hidden_field_tag :group_id, params[:id] %>
 	<%= submit_tag "Search", :name => nil %>
 	<% end %>
 
