@@ -2,7 +2,12 @@ class UserGroupsController < ApplicationController
 
 	def create
 		@user_group = UserGroup.new(user_group_params)
-		binding.pry
+		if @user_group.save
+			redirect_to group_path(params[:user_group][:group_id])
+		else
+			flash[:notice] = "Something went wrong... Try again."
+			render 'users/search_results'
+		end
 	end	
 	# 	if params[:search]
  #   # binding.pry
@@ -14,7 +19,6 @@ class UserGroupsController < ApplicationController
 
 	private
 		def user_group_params
-			params.require(:user_group).permit(:user_id, :group_id)
+			params.require(:user_group).permit(:member_id, :group_id)
 		end
-
 end
