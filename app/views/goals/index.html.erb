@@ -19,15 +19,16 @@
   <div class="row">
    <div class="col-md-5">
     <h3>My Goals</h3>
-    <ul class="list-group">
-      <% if @goals %>
-      <% @goals.each do |goal| %>
+    <ul class="list-goals">
+      <%= render @goals %>
+ <!--      <%# if @goals %>
+      <%# @goals.each do |goal| %>
       <li class="list-group-item">
-        <span class="badge"><%= goal.activities.count %></span>
-        <%=link_to "#{goal.name}", goal_path(goal) %>
+        <span class="badge"><%#= goal.activities.count %></span>
+        <%#=link_to "#{goal.name}", goal_path(goal) %>
       </li>
-      <%end%>
-      <%end%>
+      <%#end%>
+      <%#end%> -->
     </ul>
     <%= link_to "Create New Goal", new_goal_path, class: "btn btn-default btn-lg btn-block" %>
   </div>

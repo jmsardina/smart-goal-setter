@@ -11,6 +11,14 @@ class Goal < ActiveRecord::Base
 
   accepts_nested_attributes_for :tags
 
+  def complete?
+    self.status == true
+  end
+
+  def incomplete?
+    self.status == false
+  end
+
   def days_left
     (self.due_date - Time.now.to_date).to_i
   end

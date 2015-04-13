@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150411190605) do
+ActiveRecord::Schema.define(version: 20150413172549) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20150411190605) do
     t.string   "potential_barrier"
     t.string   "coping_strategy"
     t.string   "support"
+    t.integer  "goal_points",       default: 0
   end
 
   create_table "groups", force: :cascade do |t|
