@@ -1,5 +1,8 @@
-<h3><%= @group.name %></h3>
+<h3><%= image_tag @group.avatar.url(:thumb) %><%= @group.name %></h3>
 <% if @group.members.include?(current_user) %>
+	<% @group.tags.each do |tag|%>
+		<%= tag.name %>
+	<% end %>
 	<h4>Members</h4>
 
 		<% if @group.members %>
@@ -26,4 +29,13 @@
 	<% if @search_results %>
 		<% render 'users/search_results' %>
 	<% end %>
+
+	<br>
+
+		<%= render 'boards/form' %><br>
+	<h2>Groups Boards</h2>
+		<%= render @boards %>
+	  <%#= render 'comments/form' %><br>
+	  <%#= render @comments %>
+
 <% end %>

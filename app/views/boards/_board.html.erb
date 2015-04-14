@@ -1,0 +1,20 @@
+<%= div_for_board(board) do %>
+  <div class="view">
+    <h3><%= board.name %></h3>
+  </div>
+
+  <% board.comments.each do |comment| %>
+    <%= image_tag comment.user.avatar.url(:thumb) %>
+    <%= comment.user.name %><br>
+    <%= comment.content %>
+
+    <% comment.comments.each do |reply| %>
+      <%= image_tag reply.user.avatar.url(:thumb) %>
+      <%= reply.user.name %><br>
+      <%= reply.content %>
+    <% end %>
+    <%= render 'comments/form', commentable: comment %>
+  <% end %>
+
+  <%= render 'comments/form', commentable: board %>
+<% end %>
