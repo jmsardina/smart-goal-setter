@@ -34,8 +34,9 @@
 
 		<%= render 'boards/form' %><br>
 	<h2>Groups Boards</h2>
-		<%= render @boards %>
-	  <%#= render 'comments/form' %><br>
-	  <%#= render @comments %>
-
+		<div id="group-boards">
+			<%= render @boards %>
+		  <%#= render 'comments/form' %><br>
+		  <%#= render @comments %>
+		 </div>
 <% end %>
