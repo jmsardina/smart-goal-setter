@@ -9,4 +9,6 @@ class Group < ActiveRecord::Base
   
   has_many :tags, as: :taggable
   accepts_nested_attributes_for :tags
+
+  validates :name, :creator_id, presence: true
 end
