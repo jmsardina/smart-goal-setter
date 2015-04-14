@@ -3,13 +3,13 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.save
-    # binding.pry
 
     commentable_id = comment_params[:commentable_id].to_i
     case comment_params[:commentable_type]
     when "Board"
       redirect_to group_path(Board.find(commentable_id).group)
     when "Comment"
+      Comment.find(commentable_id).increment!(:reply_counter)
       redirect_to group_path(Comment.find(commentable_id).commentable.group)
     # when "Goal"
     #   redirect_to goal_path(Goal.find(commentable_id))

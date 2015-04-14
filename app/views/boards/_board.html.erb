@@ -7,6 +7,7 @@
     <%= image_tag comment.user.avatar.url(:thumb) %>
     <%= comment.user.name %><br>
     <%= comment.content %>
+    <%= comment.reply_counter %>
 
     <% comment.comments.each do |reply| %>
       <%= image_tag reply.user.avatar.url(:thumb) %>
