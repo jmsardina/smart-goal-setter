@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'users/search' => 'users#search'
 
   resources :groups
+  post 'groups/:id' => 'comments#create'
 
   resources :user_groups
 

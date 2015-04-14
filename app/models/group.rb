@@ -9,6 +9,9 @@ class Group < ActiveRecord::Base
   
   has_many :tags, as: :taggable
   accepts_nested_attributes_for :tags
+  # has_many :boards
+  # has_many :comments, through: :boards
+  has_many :comments, as: :commentable
 
   validates :name, :creator_id, presence: true
 end

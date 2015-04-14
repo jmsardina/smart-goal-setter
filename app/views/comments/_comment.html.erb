@@ -1,0 +1,20 @@
+<%= li_for_comment(comment) do %>
+  <div class="view">
+    <%= comment.content %>
+     <%= image_tag comment.user.avatar.url(:thumb) %>
+    <%= comment.user.name %>
+    <button class="destroy"></button>
+  </div>
+      
+<% end %>
+    
+
+    <%#= form_for([@commentable, comment], :method => :delete) do |f| %>
+      <%# end %>
+
+    <%#= form_for([@commentable, comment], html: {class: "update"}) do |f| %>
+      <%#= f.text_field :description, class: "edit" %>
+    
+    <%##= f.submit %>
+    <%# end %>
+<%# end %>

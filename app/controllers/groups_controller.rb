@@ -33,23 +33,20 @@ class GroupsController < ApplicationController
 
 	def update
 		set_group.update(group_params)
-		# @user_group = UserGroup.new
 		if @group.save
 			redirect_to group_path(@group)
 		else
 			flash[:notice] = "Something went wrong... Try again."
 			render :new
 		end
-
-		# @group = Group.find(params[:group_id])
-  #     @user_to_add = User.find(params[:user_id])
-  #     @group.members << @user_to_add
-  #     redirect_to group_path
 	end
 
 
 	def show
 		set_group
+		@comment = Comment.new
+		@comments = Comment.where(commentable_type: "Group", commentable_id: set_group.id)
+		# binding.pry
 	end
 
 	def destroy

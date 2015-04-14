@@ -19,6 +19,9 @@
 			 </ul>
 	  <% end %>
 
+	  <%= render 'comments/form' %>
+	  <%= render @comments %>
+
 	<h5>Search for Friends and Add Them to this Group</h5>
 		<%= form_tag('/users/search', :method => "get", id: "search-form") do %>
 		<%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
