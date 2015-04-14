@@ -1,11 +1,16 @@
 <%= li_for_comment(comment) do %>
   <div class="view">
+    <%= image_tag comment.user.avatar.url(:thumb) %>
+    <%= comment.user.name %><br>
     <%= comment.content %>
-     <%= image_tag comment.user.avatar.url(:thumb) %>
-    <%= comment.user.name %>
-    <button class="destroy"></button>
+
+  <!--   <button class="destroy"></button> -->
+ <!--  </div>
+  <div class="reply">
+    <button class="comment-reply">Reply</button>
+    <%#= render "comments/form"%>
   </div>
-      
+       -->
 <% end %>
     
 

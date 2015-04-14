@@ -1,0 +1,12 @@
+<%= div_for_board(board) do %>
+  <div class="view">
+    <h3><%= board.name %></h3>
+  </div>
+
+  <% board.comments.each do |comment| %>
+    <%= image_tag current_user.avatar.url(:thumb) %>
+    <%= comment.user.name %><br>
+    <%= comment.content %>
+  <% end %>
+  <%= render 'comments/form', :commentable => board %>
+<% end %>

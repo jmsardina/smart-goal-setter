@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20150413230240) do
   end
 
   create_table "boards", force: :cascade do |t|
+    t.string   "name"
     t.integer  "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
