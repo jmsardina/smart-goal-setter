@@ -1,4 +1,5 @@
 <h3><%= image_tag @group.avatar.url(:thumb) %><%= @group.name %></h3>
+<h4><%= @group.description %></h4>
 <% if @group.members.include?(current_user) %>
 	<% @group.tags.each do |tag|%>
 		<%= tag.name %>
@@ -31,7 +32,8 @@
 
  <div class="search">
  <%= form_tag :controller => 'search', :action => 'create', :method => 'get' do %>
-      <%= text_field_tag :keyword, params[:keyword], :id => 'search_field' %><br>
+      <%= text_field_tag :keyword, params[:keyword], :id => 'search_field', placeholder: "Connect with others!" %>
+      <%= hidden_field_tag :group_id, @group.id %>
       <%= submit_tag "Search ", :content => nil %> 
   <% end %> 
 </div>

@@ -7,8 +7,8 @@ class SearchController < ApplicationController
     # elsif !Search.for(params[:keyword]).empty?
       @results = Search.for(params[:keyword])
     else
-      flash[:notice] = "I don't think I have that information..."
-      redirect_to root_path
+      flash[:notice] = "No results match your search..."
+      # redirect_to root_path
     end
   end
 
@@ -19,15 +19,14 @@ class SearchController < ApplicationController
   # end
 
   def create
-    # binding.pry
     @results = Search.for(params["keyword"])
-    if @results.empty?
-      flash[:notice] = "I don't think I know anything about that..."
-      redirect_to root_path
-    else
+    # if @results.empty?
+    #   flash[:notice] = "No results match your search..."
+    #   # redirect_to root_path
+    # else
       @user_group = UserGroup.new
       render :results
-    end
+    # end
   end
 
 end

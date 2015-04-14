@@ -3,6 +3,7 @@ class UserGroupsController < ApplicationController
 	def create
 		@user_group = UserGroup.new(user_group_params)
 		if @user_group.save
+			binding.pry
 			redirect_to group_path(params[:user_group][:group_id])
 		else
 			flash[:notice] = "Something went wrong... Try again."
