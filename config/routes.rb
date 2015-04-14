@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :feeds
-
+  resources :search
   devise_for :users, controllers: {sessions: 'users/sessions'}
 
   root 'goals#index'
