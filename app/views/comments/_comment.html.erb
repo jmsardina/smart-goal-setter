@@ -3,14 +3,13 @@
     <%= image_tag comment.user.avatar.url(:thumb) %>
     <%= comment.user.name %><br>
     <%= comment.content %>
-
+    <div class="reply">
+      <!-- <button class="comment-reply">Reply</button> -->
+      <%= render "comments/form"%>
+    </div>
   <!--   <button class="destroy"></button> -->
- <!--  </div>
-  <div class="reply">
-    <button class="comment-reply">Reply</button>
-    <%#= render "comments/form"%>
-  </div>
-       -->
+  </div><br>
+      
 <% end %><br>
     
 

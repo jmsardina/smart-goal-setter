@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :comments do 
+    resources :comments
+  end
+  
   get 'users/search' => 'users#search'
 
   resources :groups do

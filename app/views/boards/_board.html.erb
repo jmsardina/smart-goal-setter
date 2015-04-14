@@ -4,9 +4,17 @@
   </div>
 
   <% board.comments.each do |comment| %>
-    <%= image_tag current_user.avatar.url(:thumb) %>
+    <%= image_tag comment.user.avatar.url(:thumb) %>
     <%= comment.user.name %><br>
     <%= comment.content %>
+
+    <% comment.comments.each do |reply| %>
+      <%= image_tag reply.user.avatar.url(:thumb) %>
+      <%= reply.user.name %><br>
+      <%= reply.content %>
+    <% end %>
+    <%= render 'comments/form', commentable: comment %>
   <% end %>
-  <%= render 'comments/form', :commentable => board %>
+
+  <%= render 'comments/form', commentable: board %>
 <% end %>
