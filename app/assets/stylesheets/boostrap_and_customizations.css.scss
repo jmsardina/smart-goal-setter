@@ -1,6 +1,15 @@
-// This file is for any added custom style or if we need to overwrite some
-// of the bootstrap styles
+@font-face {
+  font-family:'material-icons';
+  src:url('Material-Design-Iconic-Font.eot') format ('embedded-opentype');
+  src:url('Material-Design-Iconic-Font.ttf') format ('truetype');
+  src:url('Material-Design-Iconic-Font.woff') format ('woff');
+  src:url('Material-Design-Iconic-Font.svg') format ('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
+  font-family: 'material-icons' !important;
   padding-top: 70px;
   padding-bottom: 30px;
 }
