@@ -25,6 +25,7 @@ class SearchController < ApplicationController
       flash[:notice] = "I don't think I know anything about that..."
       redirect_to root_path
     else
+      @user_group = UserGroup.new
       render :results
     end
   end
