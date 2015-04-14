@@ -58,16 +58,6 @@ ActiveRecord::Schema.define(version: 20150413230240) do
   add_index "feeds", ["trackable_id"], name: "index_feeds_on_trackable_id"
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id"
 
-  create_table "goal_tags", force: :cascade do |t|
-    t.integer  "goal_id"
-    t.integer  "tag_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "goal_tags", ["goal_id"], name: "index_goal_tags_on_goal_id"
-  add_index "goal_tags", ["tag_id"], name: "index_goal_tags_on_tag_id"
-
   create_table "goals", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -80,7 +70,6 @@ ActiveRecord::Schema.define(version: 20150413230240) do
     t.string   "potential_barrier"
     t.string   "coping_strategy"
     t.string   "support"
-    t.integer  "goal_points",       default: 0
   end
 
   create_table "groups", force: :cascade do |t|
@@ -97,8 +86,10 @@ ActiveRecord::Schema.define(version: 20150413230240) do
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "taggable_type"
+    t.integer  "taggable_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "user_groups", force: :cascade do |t|

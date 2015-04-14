@@ -1,5 +1,8 @@
 <h3><%= image_tag @group.avatar.url(:thumb) %><%= @group.name %></h3>
 <% if @group.members.include?(current_user) %>
+	<% @group.tags.each do |tag|%>
+		<%= tag.name %>
+	<% end %>
 	<h4>Members</h4>
 
 		<% if @group.members %>
