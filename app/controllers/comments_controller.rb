@@ -1,15 +1,21 @@
 class CommentsController < ApplicationController
 
   def create
-    # binding.pry
-    # @board = Board.find(params[:id])
     @comment = Comment.new(comment_params)
-    if @comment.save
-      redirect_to root_path
-    else
-      render nothing: true, status: :ok
+  
+    @comment.save
+
+    commentable_id = comment_params[:commentable_id].to_i
+    case comment_params[:commentable_type]
+    when "Board"
+      redirect_to group_path(Board.find(commentable_id).group)
+    # when "Goal"
+    #   redirect_to goal_path(Goal.find(commentable_id))
+    # when "Activity"
+    #   redirect_to goal_path(Activity.find(commentable_id).goal)
+    # when "Feed"
+    #   redirect_to feeds_path
     end
-   
   end
 
   private
