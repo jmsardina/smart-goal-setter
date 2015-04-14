@@ -6,5 +6,4 @@ class Comment < ActiveRecord::Base
   # has_many :replies, class_name: "Comment", as: :commentable
 
   validates :content, presence: true
-
 end

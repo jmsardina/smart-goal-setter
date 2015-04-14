@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     commentable_id = comment_params[:commentable_id].to_i
     case comment_params[:commentable_type]
     when "Board"
+      Board.find(commentable_id).increment!(:comment_counter)
       redirect_to group_path(Board.find(commentable_id).group)
     when "Comment"
       Comment.find(commentable_id).increment!(:reply_counter)
