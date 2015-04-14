@@ -1,0 +1,48 @@
+<% if @results.size >= 1 %>
+  <h1 class="results-page-title">Search Results</h1>
+
+  <ol>
+    <% @results.each do |result| %>
+      <li class="result-content">
+        <p class="search-result">
+        <%= image_tag result.avatar.url(:thumb)%>
+        <%= result.name %>
+        
+        <% if result.class == "User" %>
+          <% if !@group.members.include?(result)%>
+            <%= form_for(@user_group, controller: "user_groups", action: "create", html: { class: "form" }) do |f| %>
+              <%= f.hidden_field :group_id, value: params[:group_id] %>
+              <%= f.hidden_field :member_id, value: result.id %>
+              <%= f.submit "Add User" %>
+            <% end %>
+          <% else %>
+            <span class="member-already"><%= "Already a member of #{@group.name}!"%></span>
+          <% end %>
+        <% elsif result.class == "Group" %>
+          <% if !current_user.groups.include?(result) %>
+            <%= form_for(@user_group, controller: "user_groups", action: "create", html: { class: "form" }) do |f| %>
+              <%= f.hidden_field :group_id, value: result.id %>
+              <%= f.hidden_field :member_id, value: current_user.id %>
+              <%= f.submit "Join Group" %>
+            <% end %>
+          <% else %>
+            <span class="member-already"><%= "You're already a member of #{@group.name}!"%></span>
+          <% end %>
+        <% end %>
+      </p>
+      </li>
+    <% end %>
+
+  </ol>
+
+<% end %>
+
+  <ul>
+    <% @results.each do |result| %>
+      
+    <% end %>
+
+  </ul>
+
+
+
