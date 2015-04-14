@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150411190605) do
+ActiveRecord::Schema.define(version: 20150414190723) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -26,15 +26,27 @@ ActiveRecord::Schema.define(version: 20150411190605) do
     t.integer  "occurences",           default: 0
     t.integer  "activity_points",      default: 0
     t.integer  "remaining_for_period"
+    t.boolean  "removed",              default: false
   end
+
+  create_table "boards", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "group_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "comment_counter", default: 0
+  end
+
+  add_index "boards", ["group_id"], name: "index_boards_on_group_id"
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
     t.string   "commentable_type"
     t.integer  "commentable_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "reply_counter",    default: 0
   end
 
   create_table "feeds", force: :cascade do |t|
@@ -48,16 +60,6 @@ ActiveRecord::Schema.define(version: 20150411190605) do
 
   add_index "feeds", ["trackable_id"], name: "index_feeds_on_trackable_id"
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id"
-
-  create_table "goal_tags", force: :cascade do |t|
-    t.integer  "goal_id"
-    t.integer  "tag_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "goal_tags", ["goal_id"], name: "index_goal_tags_on_goal_id"
-  add_index "goal_tags", ["tag_id"], name: "index_goal_tags_on_tag_id"
 
   create_table "goals", force: :cascade do |t|
     t.string   "name"
@@ -76,15 +78,21 @@ ActiveRecord::Schema.define(version: 20150411190605) do
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.integer  "creator_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "description"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "taggable_type"
+    t.integer  "taggable_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "user_groups", force: :cascade do |t|

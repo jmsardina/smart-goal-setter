@@ -1,0 +1,24 @@
+<%= div_for_board(board) do %>
+  <div class="view">
+    <h3><%= board.name %></h3>
+    <%= board.comment_counter %>
+  </div>
+
+  <% board.comments.each do |comment| %>
+    <%= comment.user.name + " wrote" %>
+    <%= comment.reply_counter %><br>
+    <%= image_tag comment.user.avatar.url(:thumb) %><br>
+    <%= comment.content %><br>
+    <%= time_ago_in_words(comment.created_at) + " ago" %><br>
+
+    <% comment.comments.each do |reply| %>
+      <%= image_tag reply.user.avatar.url(:thumb) %><br>
+      <%= reply.user.name + " wrote" %>
+      <%= time_ago_in_words(reply.created_at) + " ago" %><br>
+      <%= reply.content %><br>
+    <% end %>
+    <%= render 'comments/form', commentable: comment %>
+  <% end %>
+
+  <%= render 'comments/form', commentable: board %>
+<% end %>

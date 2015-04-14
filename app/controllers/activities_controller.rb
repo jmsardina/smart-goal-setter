@@ -12,10 +12,12 @@ class ActivitiesController < ApplicationController
 		@goal = Goal.find(params[:goal_id])
 		@activity = Activity.new(activity_params)
 		@activity.goal = @goal
-		@activity.save ? (redirect_to goal_path(@goal)) : (render :new)
-		@activity.occurences = @activity.number_occurences
-		@activity.save
-		track_feed(@activity)
+		if @activity.save
+			track_feed(@activity)
+			@activity.occurences = @activity.number_occurences
+			@activity.save
+		end
+		redirect_to goal_path(@goal)
 	end
 
 	def edit
@@ -31,6 +33,7 @@ class ActivitiesController < ApplicationController
 		@activity.add_point_and_decrement_occurences
 		render nothing: true, status: :ok
 	end
+
 
 
 	def show
@@ -49,6 +52,7 @@ class ActivitiesController < ApplicationController
 		end
 
 		def activity_params
-			params.require(:activity).permit(:description, :period, :status, :barrier, :facilitator, :goal_id, :frequency)
+			params.require(:activity).permit(:description, :period, :status, :barrier, :facilitator, :goal_id, :trackable, :action, :frequency)
 		end
+
 end

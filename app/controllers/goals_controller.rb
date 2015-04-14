@@ -51,7 +51,6 @@ class GoalsController < ApplicationController
 
 	def destroy
 		set_goal.destroy
-		track_feed(@goal)
 	end
 
 	private

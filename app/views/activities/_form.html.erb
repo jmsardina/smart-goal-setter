@@ -1,4 +1,18 @@
-<%= form_for(@activity, url: goal_activities_path(@goal)) do |f| %>
+<%= form_for(@activity, url: goal_activities_path(@goal), id: "new-activity") do |f| %>
+
+  <% if @activity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+
+      <ul>
+        <% @activity.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_area :description %>
