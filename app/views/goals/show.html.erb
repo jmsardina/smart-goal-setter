@@ -1,30 +1,32 @@
-<header id="header">
-  <h1><%= @goal.name %></h1>
-  <strong>Tags:</strong>
-  <% @tags.each do |tag|%>
-    <%= tag.name %>
-  <% end %>
+<% if @goal.user == current_user %>
+  <header id="header">
+    <h1><%= @goal.name %></h1>
+    <strong>Tags:</strong>
+    <% @tags.each do |tag|%>
+      <%= tag.name %>
+    <% end %>
 
-  <h3><%= @goal.days_left%> DAYS LEFT TO COMPLETE THIS GOAL!</h3>
-  <h4><%= @goal.description %></h4>
-<!-- <div class="activities-form"> -->
-  <!-- <h4>What's the next step in your goal?</h4> -->
-  <%#= render 'activities/form' %>
-<!-- </div> -->
-  <button id="show-activity-form">Add Activity</button>
-  <%= render 'activities/form' %>
+    <h3><%= @goal.days_left%> DAYS LEFT TO COMPLETE THIS GOAL!</h3>
+    <h4><%= @goal.description %></h4>
+  <!-- <div class="activities-form"> -->
+    <!-- <h4>What's the next step in your goal?</h4> -->
+    <%#= render 'activities/form' %>
+  <!-- </div> -->
+    <button id="show-activity-form">Add Activity</button>
+    <%= render 'activities/form' %>
 
-</header>
-<h3>Things I have to do to achieve this goal:</h3>
-<section id="main">
-<button class="clear-completed">Clear Completed Activies</button>
-<button class="show-completed">Show Completed Activies</button>
-  <ul id="activities-list" data-actvity-id="<%= @goal.id %>" class="list">
-    <%= render @activities %>
-  </ul>
-</section>
-  
-</header>
+  </header>
+  <h3>Things I have to do to achieve this goal:</h3>
+  <section id="main">
+  <button class="clear-completed">Clear Completed Activies</button>
+  <button class="show-completed">Show Completed Activies</button>
+    <ul id="activities-list" data-actvity-id="<%= @goal.id %>" class="list">
+      <%= render @activities %>
+    </ul>
+  </section>
+    
+  </header>
 
-<%= link_to "Back", goals_path %>
-<%= link_to "Edit", edit_goal_path(@goal) %>
+  <%= link_to "Back", goals_path %>
+  <%= link_to "Edit", edit_goal_path(@goal) %>
+<% end %>

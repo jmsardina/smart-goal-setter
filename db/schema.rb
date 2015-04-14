@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150411190605) do
+ActiveRecord::Schema.define(version: 20150413152907) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -24,8 +24,10 @@ ActiveRecord::Schema.define(version: 20150411190605) do
     t.string   "facilitator"
     t.integer  "frequency"
     t.integer  "occurences",           default: 0
+    t.boolean  "rendering",            default: true
     t.integer  "activity_points",      default: 0
     t.integer  "remaining_for_period"
+    t.boolean  "removed",              default: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -36,6 +38,23 @@ ActiveRecord::Schema.define(version: 20150411190605) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.string   "key"
+    t.text     "parameters"
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["owner_id", "owner_type"], name: "index_events_on_owner_id_and_owner_type"
+  add_index "events", ["recipient_id", "recipient_type"], name: "index_events_on_recipient_id_and_recipient_type"
+  add_index "events", ["trackable_id", "trackable_type"], name: "index_events_on_trackable_id_and_trackable_type"
 
   create_table "feeds", force: :cascade do |t|
     t.integer  "user_id"
