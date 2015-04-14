@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150413230240) do
+ActiveRecord::Schema.define(version: 20150414190723) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -32,8 +32,9 @@ ActiveRecord::Schema.define(version: 20150413230240) do
   create_table "boards", force: :cascade do |t|
     t.string   "name"
     t.integer  "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "comment_counter", default: 0
   end
 
   add_index "boards", ["group_id"], name: "index_boards_on_group_id"
@@ -43,8 +44,9 @@ ActiveRecord::Schema.define(version: 20150413230240) do
     t.integer  "user_id"
     t.string   "commentable_type"
     t.integer  "commentable_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "reply_counter",    default: 0
   end
 
   create_table "feeds", force: :cascade do |t|
