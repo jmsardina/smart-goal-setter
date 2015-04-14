@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     resources :activities
   end
 
+  resources :boards do
+    resources :comments
+  end
+
   get 'users/search' => 'users#search'
 
   resources :groups do
