@@ -10717,11 +10717,11 @@ button.close {
 }
 /*!
  * Waves v0.6.0
- * http://fian.my.id/Waves 
- * 
- * Copyright 2014 Alfiana E. Sibuea and other contributors 
- * Released under the MIT license 
- * https://github.com/fians/Waves/blob/master/LICENSE 
+ * http://fian.my.id/Waves
+ *
+ * Copyright 2014 Alfiana E. Sibuea and other contributors
+ * Released under the MIT license
+ * https://github.com/fians/Waves/blob/master/LICENSE
  */
 .waves-effect {
   position: relative;
@@ -11071,7 +11071,7 @@ a.waves-effect .waves-ripple {
 .di-block {
   display: inline-block !important;
 }
-/* 
+/*
  * Material Background Colors
  */
 .bgm-white {
@@ -11740,7 +11740,7 @@ body #content {
     display: none;
   }
 }
-/* 
+/*
  * For Stupid IE9
  */
 .ie9 #header:not(.sidebar-toggled).header-up {
@@ -12143,6 +12143,7 @@ input:focus {
   transition: background-color;
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
+  text-decoration: none;
 }
 .listview .lv-item .lv-small {
   font-size: 12px;
@@ -15101,7 +15102,7 @@ a.thumbnail.active {
   box-shadow: 0 0 6px #EAEAEA;
 }
 /*
- * Lightbox  
+ * Lightbox
  */
 .lightbox .lightbox-item {
   border: 3px solid #fff;

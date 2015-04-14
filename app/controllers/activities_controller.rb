@@ -41,10 +41,7 @@ class ActivitiesController < ApplicationController
 	end
 
 	def destroy
-<<<<<<< HEAD
-=======
 		track_feed(@activity)
->>>>>>> 6fa4d5366f77fed3a00dd56c2621afc0c70ffbc4
 		set_activity.destroy
 		render nothing: :true, status: :ok
 	end

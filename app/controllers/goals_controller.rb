@@ -4,6 +4,7 @@ class GoalsController < ApplicationController
 		if current_user
 			@goals = current_user.goals
 			@groups = current_user.groups
+				@feeds = Feed.order("created_at DESC").limit(8)
 		else
 			@goals = Goal.all
 			render 'welcome_page'
