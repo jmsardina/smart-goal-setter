@@ -9,7 +9,7 @@
 
       </a>
       <div class="media-body">
-        <h4 class="media-heading"><%= current_user.name %><small> France</small></h4>
+        <h4 class="media-heading"><%= current_user.name %></h4>
         <h5>Working Goals : <%= @goals.count %> || <span class="label label-default"><%= current_user.points %> Points</span>
           <hr style="margin:8px auto">
         </div>
@@ -17,6 +17,12 @@
     </div>
   </div>
 
+  <h3>Pending requests</h3>
+  <%#= unless @pending_requests.nil? %>
+    <% @pending_requests.each do |request| %>
+      <%= "Accept|Decline request from #{User.find(request.sender_id).name} to join #{Group.find(request.invitable_id).name}"%>
+    <% end %>
+  <%# end %>
 
   <div class="row">
    <div class="col-md-5">

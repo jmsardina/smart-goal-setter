@@ -4,6 +4,7 @@ class GoalsController < ApplicationController
 		if current_user
 			@goals = current_user.goals
 			@groups = current_user.groups
+			@pending_requests = current_user.requests_received.where(status: "pending")
 		else
 			@goals = Goal.all
 			render 'welcome_page'
