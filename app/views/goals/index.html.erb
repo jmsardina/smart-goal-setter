@@ -1,41 +1,11 @@
-<!-- Goals post-->
-<section class="goal-section">
 <div class="row">
-    <% if @goals %>
-        <% @goals.each do |goal| %>
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="card-header bgm-green">
-                  <h2> <%= goal.name %></h2>
-
-                  <ul class="actions">
-                      <li class="dropdown">
-                          <a href="<%= goal_path(goal) %>">
-                              <i class="md md-more-vert"></i>
-                          </a>
-                      </li>
-                  </ul>
-              </div>
-              <div class="card-body card-padding">
-                 blandit, tempus ex gravida, accumsan dui. Sed sed aliquam augue. Nullam vel suscipit purus, eu facilisis ante. Mauris nec commodo felis.
-              </div>
-            </div>
-          </div>
-        <%end%>
-      <%end%>
-</div>
-</section>
-
-
-  <div class="row">
-    <div class="col-sm-6">
-      <%= render 'shared_partials/feed_container' %>
-    </div>
-    <div class="col-sm-6">
-      <%= render 'shared_partials/activity_list' %>
-    </div>
+  <div class="col-sm-6">
+    <%= render 'shared_partials/goal_container' %>
   </div>
-
+  <div class="col-sm-6">
+     <%= render 'shared_partials/feed_container' %>
+  </div>
+</div>
 
   <div class="row">
     <div class="col-lg-5">
@@ -84,4 +54,5 @@
   </ul>
 
   <%= link_to "Create New Group", new_group_path %>
+
 
