@@ -53,13 +53,13 @@ class Activity < ActiveRecord::Base
     self.cycle_start_date..self.upcoming_due_dates.first
   end
 
-  def needs_counter_reset? #returns true if activity has not been completed this cycle. 
+  def needs_counter_reset? #returns true if activity has not been completed this cycle.
     self.updated_at < cycle_start_date
   end
 
   def restart_activity_counter #reset remaining_for_period to frequency at start of new period
     if self.needs_counter_reset?
-      self.remaining_for_period = self.frequency 
+      self.remaining_for_period = self.frequency
       self.save
     end
   end
@@ -96,4 +96,5 @@ class Activity < ActiveRecord::Base
       self.save
     end
   end
+
 end

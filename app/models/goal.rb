@@ -1,14 +1,15 @@
 class Goal < ActiveRecord::Base
 
 	has_many :activities, dependent: :destroy
-	has_many :goal_tags
-	has_many :tags, through: :goal_tags
-	has_many :comments, as: :commentable, dependent: :destroy
-	belongs_to :user
+  # has_many :goal_tags
+  # has_many :tags, through: :goal_tags
+  has_many :comments, as: :commentable, dependent: :destroy
+  belongs_to :user
 
   validates :name, :description, presence: true
   validates :due_date, presence: true
 
+  has_many :tags, as: :taggable
   accepts_nested_attributes_for :tags
 
   def complete?

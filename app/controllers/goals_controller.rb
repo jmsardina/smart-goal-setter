@@ -29,7 +29,7 @@ class GoalsController < ApplicationController
 	def update
 		set_goal.update(goal_params)
 		if @goal.save
-			# track_feed(@goal)
+			track_feed(@goal)
 			redirect_to goal_path(@goal)
 		else
 			flash[:notice] = "Something went wrong...Try again."
