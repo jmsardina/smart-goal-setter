@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :comments do 
     resources :comments
+    resources :cheers
   end
   
   get 'users/search' => 'users#search'

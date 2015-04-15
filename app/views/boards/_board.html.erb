@@ -6,15 +6,19 @@
 
   <% board.comments.each do |comment| %>
     <%= comment.user.name + " wrote" %>
-    <%= comment.reply_counter %><br>
-    <%= image_tag comment.user.avatar.url(:thumb) %><br>
-    <%= comment.content %><br>
     <%= time_ago_in_words(comment.created_at) + " ago" %><br>
+    <%= comment.reply_counter %> comments
+    <%= comment.cheer_count %> cheers<br>
+    <%= image_tag comment.user.avatar.url(:thumb) %><br>
+    <%= render 'cheers/form', cheerable: comment %>
+    <%= comment.content %><br>
 
     <% comment.comments.each do |reply| %>
       <%= image_tag reply.user.avatar.url(:thumb) %><br>
       <%= reply.user.name + " wrote" %>
       <%= time_ago_in_words(reply.created_at) + " ago" %><br>
+      <%= comment.cheer_count %> cheers<br>
+      <%= render 'cheers/form', cheerable: reply %>
       <%= reply.content %><br>
     <% end %>
     <%= render 'comments/form', commentable: comment %>
