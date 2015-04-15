@@ -15,7 +15,8 @@
 			  <% @group.members.each do |member| %>
 			    <li>
 				    <!-- <a href="/users/<%#=member.id%>" class="group-members"%><%#=image_tag member.avatar(:thumb)%><%#=member.name%></a> -->
-				    <%=image_tag member.avatar(:thumb)%><%=member.name%>
+				    <%=image_tag member.avatar(:thumb) if !current_user.uid%><%=member.name if !current_user.uid %>
+				    <%=image_tag member.image_url if current_user.uid %><%=member.name if current_user.uid%>
 				    <% if (current_user == @group.creator) && (member != @group.creator) %>
 				    	<button class="destroy">Remove</button>
 				    <% end %>
@@ -42,7 +43,9 @@
   <% end %> 
 </div>
 
-<%= render 'search/results' if @results %>
+<% if @results %>
+	<%= render 'search/results' %>
+<% end %>
 
 	<%# if @search_results %>
 		<%# render 'users/search_results' %>

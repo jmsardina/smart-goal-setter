@@ -12,6 +12,7 @@ class Group < ActiveRecord::Base
   has_many :boards
   has_many :comments, through: :boards
   has_many :comments, as: :commentable
+  has_many :invitations, as: :invitable
 
   validates :name, :creator_id, presence: true
 end

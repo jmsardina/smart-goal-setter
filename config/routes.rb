@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # end
 
   root 'goals#index'
+  resources :invitations
 
   resources :goals do
     # resources :comments

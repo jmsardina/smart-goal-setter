@@ -1,0 +1,5 @@
+<%= form_for(@user_group, controller: "user_groups", action: "create", html: { class: "form" }) do |f| %>
+  <%= f.hidden_field :group_id, value: result.id %>
+  <%= f.hidden_field :member_id, value: current_user.id %>
+  <%= f.submit "Join Group" %>
+<% end %>

@@ -1,30 +1,29 @@
 <% if @results.size >= 1 %>
   <h1 class="results-page-title">Search Results</h1>
-
   <ol>
     <% @results.each do |result| %>
       <li class="result-content">
         <p class="search-result">
-          <%= image_tag result.avatar.url(:thumb)%>
-          <%= result.name %>
+          <% if result.class.name == "User" %>
+            <% if result.uid %>
+              <%= image_tag result.image_url %>
+            <% else %>
+              <%= image_tag result.avatar.url(:thumb)%>
+            <% end %>
+          <% else %>
+            <%= image_tag result.avatar.url(:thumb) %>
+          <% end %>
+            <%= result.name %>
 
           <% if result.class.name == "User" %>
             <% if !result.groups.include?(Group.find(params[:group_id]))%>
-              <%= form_for(@user_group, controller: "user_groups", action: "create", html: { class: "form" }) do |f| %>
-                <%= f.hidden_field :group_id, value: params[:group_id] %>
-                <%= f.hidden_field :member_id, value: result.id %>
-                <%= f.submit "Add User" %>
-              <% end %>
+              <%= render 'invitations/form', invitable: @group, recipient: result, invitation: @invitation %>
             <% else %>
               <span class="member-already"><%= "Already a member of #{Group.find(params[:group_id]).name}!"%></span>
             <% end %>
           <% elsif result.class.name == "Group" %>
             <% if !result.members.include?(current_user) %>
-              <%= form_for(@user_group, controller: "user_groups", action: "create", html: { class: "form" }) do |f| %>
-                <%= f.hidden_field :group_id, value: result.id %>
-                <%= f.hidden_field :member_id, value: current_user.id %>
-                <%= f.submit "Join Group" %>
-              <% end %>
+              <%= render 'invitations/form', invitable: result, recipient: result.creator, invitation: @invitation %>
             <% else %>
               <span class="member-already"><%= "You're already a member of #{result.name}!"%></span>
             <% end %>
@@ -36,6 +35,3 @@
 <% else %>
   <h1>No results match your search.</h1>
 <% end %>
-
-
-
