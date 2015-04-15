@@ -5,7 +5,7 @@ Devise.setup do |config|
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # config.secret_key = 'f6347d89f2f1910960038ecb60f0892c2e01dd1442950ccaea726f7589e548185e6269326591fe3fbd6feee9e1f7991c7e91c4e3e8514b9896949ff67a058af8'
-
+  
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
@@ -257,4 +257,5 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
   config.scoped_views = true
+  config.omniauth :facebook, ENV['facebook_key'], ENV['facebook_secret']#, scope: 'user,public_repo'
 end
