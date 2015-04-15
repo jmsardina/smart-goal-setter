@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150413230240) do
+ActiveRecord::Schema.define(version: 20150415001100) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -32,19 +32,32 @@ ActiveRecord::Schema.define(version: 20150413230240) do
   create_table "boards", force: :cascade do |t|
     t.string   "name"
     t.integer  "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "comment_counter", default: 0
   end
 
   add_index "boards", ["group_id"], name: "index_boards_on_group_id"
+
+  create_table "cheers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "cheerable_type"
+    t.integer  "cheerable_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "cheers", ["user_id"], name: "index_cheers_on_user_id"
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
     t.integer  "user_id"
     t.string   "commentable_type"
     t.integer  "commentable_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "reply_counter",    default: 0
+    t.integer  "cheers",           default: 0
   end
 
   create_table "feeds", force: :cascade do |t|
@@ -84,6 +97,16 @@ ActiveRecord::Schema.define(version: 20150413230240) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
   end
+
+  create_table "identities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id"
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"

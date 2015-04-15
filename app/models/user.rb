@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :goals
   has_many :activities, through: :goals
   has_many :comments
+  has_many :cheers
   # has_many :groups, through: :user_groups
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "../assets   /missing.png"
