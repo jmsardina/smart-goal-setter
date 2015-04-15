@@ -15,6 +15,9 @@ class CheersController < ApplicationController
       when "Comment"
         Comment.find(cheerable_id).increment!(:cheer_count)
         redirect_to group_path(Board.find(Comment.find(cheerable_id).commentable_id).group)
+      when "Group"
+        Group.find(cheerable_id).increment!(:cheer_count)
+        redirect_to group_path(Group.find(cheerable_id))
       end
     else
       redirect_to root_path
