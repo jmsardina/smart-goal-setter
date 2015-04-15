@@ -52,6 +52,7 @@ class GoalsController < ApplicationController
 
 	def destroy
 		set_goal.destroy
+		render nothing: :true, status: :ok
 	end
 
 	private

@@ -48,6 +48,7 @@ class GroupsController < ApplicationController
 		# binding.pry
 		@board = Board.new
 		@boards = Board.where(group_id: set_group.id)
+		@cheer = Cheer.new
 	end
 
 	def destroy

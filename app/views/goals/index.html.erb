@@ -1,79 +1,82 @@
 <!-- Goals post-->
 <section class="goal-section">
-<div class="row">
+  <div class="row">
     <% if @goals %>
-        <% @goals.each do |goal| %>
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="card-header bgm-green">
-                  <h2> <%= goal.name %></h2>
+    <% @goals.each do |goal| %>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-header bgm-green">
+          <h2> <%= goal.name %></h2>
 
-                  <ul class="actions">
-                      <li class="dropdown">
-                          <a href="<%= goal_path(goal) %>">
-                              <i class="md md-more-vert"></i>
-                          </a>
-                      </li>
-                  </ul>
-              </div>
-              <div class="card-body card-padding">
-                 blandit, tempus ex gravida, accumsan dui. Sed sed aliquam augue. Nullam vel suscipit purus, eu facilisis ante. Mauris nec commodo felis.
-              </div>
-            </div>
-          </div>
-        <%end%>
-      <%end%>
-</div>
+          <ul class="actions">
+            <li class="dropdown">
+              <a href="<%= goal_path(goal) %>">
+                <i class="md md-more-vert"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body card-padding">
+         blandit, tempus ex gravida, accumsan dui. Sed sed aliquam augue. Nullam vel suscipit purus, eu facilisis ante. Mauris nec commodo felis.
+       </div>
+     </div>
+   </div>
+   <%end%>
+   <%end%>
+ </div>
 </section>
 
 
-  <div class="row">
-    <div class="col-sm-6">
-      <%= render 'shared_partials/feed_container' %>
-    </div>
-    <div class="col-sm-6">
-      <%= render 'shared_partials/activity_list' %>
-    </div>
+<div class="row">
+  <div class="col-sm-6">
+    <%= render 'shared_partials/feed_container' %>
   </div>
+  <div class="col-sm-6">
+    <%= render 'shared_partials/activity_list' %>
+  </div>
+</div>
 
 
-  <div class="row">
-    <div class="col-lg-5">
-      <div class="media">
-        <a class="pull-left" href="#">
-          <!--   <img class="media-object dp img-circle" src="http://www.huffmancode.com/img/hardik.jpg" style="width: 100px;height:100px;"> -->
-          <%= image_tag current_user.avatar.url(:thumb), class: "media-object dp img-circle" %>
+<div class="row">
+  <div class="col-lg-5">
+    <div class="media">
+      <a class="pull-left" href="#">
+        <!--   <img class="media-object dp img-circle" src="http://www.huffmancode.com/img/hardik.jpg" style="width: 100px;height:100px;"> -->
+        <%= image_tag current_user.avatar.url(:thumb), class: "media-object dp img-circle" %>
 
-        </a>
-        <div class="media-body">
-          <h4 class="media-heading"><%= current_user.name %><small> France</small></h4>
-          <h5>Working Goals : <%= @goals.count %> || <span class="label label-default"><%= current_user.points %> Points</span>
-            <hr style="margin:8px auto">
-          </div>
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading"><%= current_user.name %><small> France</small></h4>
+        <h5>Working Goals : <%= @goals.count %> || <span class="label label-default"><%= current_user.points %> Points</span>
+          <hr style="margin:8px auto">
         </div>
       </div>
     </div>
-
-
-    <div class="row">
-     <div class="col-md-5">
-      <h3>My Goals</h3>
-      <ul class="list-group">
-        <% if @goals %>
-        <% @goals.each do |goal| %>
-        <li class="list-group-item">
-          <span class="badge"><%= goal.activities.count %></span>
-          <%=link_to "#{goal.name}", goal_path(goal) %>
-        </li>
-        <%end%>
-        <%end%>
-      </ul>
-      <%= link_to "Create New Goal", new_goal_path, class: "btn btn-default btn-lg btn-block" %>
-    </div>
   </div>
 
 
-
+  <div class="row">
+   <div class="col-md-5">
+    <h3>My Goals</h3>
+    <ul class="list-group">
+      <% if @goals %>
+      <% @goals.each do |goal| %>
+      <li class="list-group-item">
+        <span class="badge"><%= goal.activities.count %></span>
+        <%=link_to "#{goal.name}", goal_path(goal) %>
+      </li>
+      <%end%>
+      <%end%>
+    </ul>
+    <%= link_to "Create New Goal", new_goal_path, class: "btn btn-default btn-lg btn-block" %>
+  </div>
+  <div class="col-md-5">
+    <h3>My Goals</h3>
+    <ul class="list-goals">
+      <%= render @goals %>
+    </ul>
+    <%= link_to "Create New Goal", new_goal_path, class: "btn btn-default btn-lg btn-block" %>
+  </div>
 
   <h3>My Groups</h3>
   <ul>
