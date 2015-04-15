@@ -23,7 +23,7 @@
             <% if @goals %>
               <% @goals.each do |goal| %>
                 <tr>
-                    <td class="f-500 c-cyan"><%= goal.activities.count %></td>
+                    <td class="f-500 c-cyan"><span class='badge badge-activity'><%= goal.activities.count %></span></td>
                     <td><%= link_to "#{goal.name}", goal_path(goal) %></td>
                     <td class="f-500 c-cyan"><small><%= goal.due_date %></small></td>
                 </tr>
