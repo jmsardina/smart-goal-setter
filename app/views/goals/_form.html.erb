@@ -1,55 +1,73 @@
-<%= form_for(@goal) do |f| %>
+<section id="main">
+  <section id="content">
+    <div class="container">
+      <%= form_for(@goal) do |f| %>
 
-  <% if @goal.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@goal.errors.count, "error") %> prohibited this goal from being saved:</h2>
+      <div class="card" id="error_explanation">
+        <% if @goal.errors.any? %>
+        <div class="alert alert-warning" role="alert">
+          <h2>This goal couldn't be saved - see below for a description of the problem and try again.</h2>
+        </div>
+        <p>
+          <ul><% @goal.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </p>
+      </div>
+      <% end %>
 
-      <ul>
-        <% @goal.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+      <div class="card">
+        <div class="card-header">
+          <h2>Describe Your Goal <small>Some extra instructions?</small></h2>
+        </div>
+
+        <div class="card-body card-padding">
+          <p class="c-black f-500 m-b-20">
+            <%= f.label :name %>
+            <%= f.text_field :name, placeholder: "Name of the goal...",autofocus: true %>
+          </p>
+
+          <p class="c-black f-500 m-b-20">
+            <%= f.label :description %><br>
+            <%= f.text_area :description, placeholder: "Example: I will lose 7lbs by my birthday." %>
+          </p> 
+
+          <p class="c-black f-500 m-b-20">
+            <%= f.label :tags %><br>
+            <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |b| %>
+            <%= b.label(:class => "checkbox checkbox-inline m-r-20") {b.check_box} %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :motivation%><br>
+        <%= f.text_area :motivation, placeholder: "Example: I want to feel healthy." %>
+      </div>
+
+      <div class="field">
+        <%= f.label :due_date, "Date to be completed by"%>
+        <%= f.date_field :due_date, value: 1.day.from_now, min: 1.day.from_now%>
+      </div>
+
+      <div class="field">
+        <%= f.label :potential_barrier, "Potential Barriers"%><br>
+        <%= f.text_area :potential_barrier, placeholder: "Think about what will make this difficult." %>
+      </div><br>
+
+      <div class="field">
+        <%= f.label :coping_strategy, "Coping Strategies"%><br>
+        <%= f.text_area :coping_strategy, placeholder: "How will you overcome those barriers you mentioned?" %>
+      </div><br>
+
+      <div class="field">
+        <%= f.label :support, "Support"%><br>
+        <%= f.text_area :support, placeholder: "Think of one person who will support you in this decision." %>
+      </div><br>
+      <%= f.submit %>
+      <% end %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name, placeholder: "Name of the goal...",autofocus: true %>
-  </div><br>
-
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description, placeholder: "Example: I will lose 7lbs by my birthday." %>
-  </div>
-
-  <div class="field">
-    <%= f.label :tags %><br>
-    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :motivation %><br>
-    <%= f.text_area :motivation, placeholder: "Example: I want to feel healthy." %>
-  </div>
-
-  <div class="field">
-    <%= f.label :due_date, "Date to be completed by"%>
-    <%= f.date_field :due_date, value: 30.days.from_now, min: 30.days.from_now%>
-  </div>
-
-  <div class="field">
-    <%= f.label :potential_barrier, "Potential Barriers"%><br>
-    <%= f.text_area :potential_barrier, placeholder: "Think about what will make this difficult." %>
-  </div><br>
-
-  <div class="field">
-    <%= f.label :coping_strategy, "Coping Strategies"%><br>
-    <%= f.text_area :coping_strategy, placeholder: "How will you overcome those barriers you mentioned?" %>
-  </div><br>
-
-  <div class="field">
-    <%= f.label :support, "Support"%><br>
-    <%= f.text_area :support, placeholder: "Think of one person who will support you in this decision." %>
-  </div><br>
-  <%= f.submit %>
-<% end %>
+  </section>
+</section>
