@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414190723) do
+ActiveRecord::Schema.define(version: 20150415130524) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -35,9 +35,20 @@ ActiveRecord::Schema.define(version: 20150414190723) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "comment_counter", default: 0
+    t.integer  "cheer_count",     default: 0
   end
 
   add_index "boards", ["group_id"], name: "index_boards_on_group_id"
+
+  create_table "cheers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "cheerable_type"
+    t.integer  "cheerable_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "cheers", ["user_id"], name: "index_cheers_on_user_id"
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -47,6 +58,7 @@ ActiveRecord::Schema.define(version: 20150414190723) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.integer  "reply_counter",    default: 0
+    t.integer  "cheer_count",      default: 0
   end
 
   create_table "feeds", force: :cascade do |t|
@@ -78,13 +90,14 @@ ActiveRecord::Schema.define(version: 20150414190723) do
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.integer  "creator_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "description"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "cheer_count",         default: 0
   end
 
   create_table "tags", force: :cascade do |t|
