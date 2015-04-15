@@ -89,6 +89,7 @@ class Activity < ActiveRecord::Base
         self.decrement!(:occurences)
         self.increment!(:activity_points)
         self.decrement!(:remaining_for_period)
+        self.goal.increment!(:goal_points)
         @user.increment!(:points)
       end
       self.status = false

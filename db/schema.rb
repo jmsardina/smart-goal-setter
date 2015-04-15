@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414190723) do
+ActiveRecord::Schema.define(version: 20150415130524) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -35,9 +35,20 @@ ActiveRecord::Schema.define(version: 20150414190723) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "comment_counter", default: 0
+    t.integer  "cheer_count",     default: 0
   end
 
   add_index "boards", ["group_id"], name: "index_boards_on_group_id"
+
+  create_table "cheers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "cheerable_type"
+    t.integer  "cheerable_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "cheers", ["user_id"], name: "index_cheers_on_user_id"
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -47,6 +58,7 @@ ActiveRecord::Schema.define(version: 20150414190723) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.integer  "reply_counter",    default: 0
+    t.integer  "cheer_count",      default: 0
   end
 
   create_table "feeds", force: :cascade do |t|
@@ -61,6 +73,16 @@ ActiveRecord::Schema.define(version: 20150414190723) do
   add_index "feeds", ["trackable_id"], name: "index_feeds_on_trackable_id"
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id"
 
+  create_table "goal_tags", force: :cascade do |t|
+    t.integer  "goal_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "goal_tags", ["goal_id"], name: "index_goal_tags_on_goal_id"
+  add_index "goal_tags", ["tag_id"], name: "index_goal_tags_on_tag_id"
+
   create_table "goals", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -73,37 +95,40 @@ ActiveRecord::Schema.define(version: 20150414190723) do
     t.string   "potential_barrier"
     t.string   "coping_strategy"
     t.string   "support"
+    t.integer  "goal_points",       default: 0
   end
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
-    t.integer  "creator_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "description"
+    t.integer  "creator_id"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "cheer_count",         default: 0
   end
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
-    t.string   "taggable_type"
-    t.integer  "taggable_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  create_table "user_groups", force: :cascade do |t|
-    t.integer  "group_id"
-    t.integer  "member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_groups", force: :cascade do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_groups", ["group_id"], name: "index_user_groups_on_group_id"
+  add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id"
+
   create_table "users", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",                                null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

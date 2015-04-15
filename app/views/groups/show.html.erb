@@ -4,6 +4,10 @@
 	<% @group.tags.each do |tag|%>
 		<%= tag.name %>
 	<% end %>
+
+	  <%= @group.cheer_count %> cheers
+    <%= render 'cheers/form', cheerable: @group%>
+    <%= @group.members.count %> members in this group
 	<h4>Members</h4>
 
 		<% if @group.members %>
