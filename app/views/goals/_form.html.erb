@@ -1,8 +1,8 @@
 <section id="main">
   <section id="content">
     <div class="container">
-      <%= form_for(@goal) do |f| %>
 
+      <%= form_for(@goal) do |f| %> <!-- Form Helper Begin -->
       <div class="card" id="error_explanation">
         <% if @goal.errors.any? %>
         <div class="alert alert-warning" role="alert">
@@ -14,60 +14,87 @@
             <% end %>
           </ul>
         </p>
-      </div>
+      </div> <!-- Error Card End -->
       <% end %>
 
-      <div class="card">
+      <div class="card"> <!-- Describe Goal Card Begin -->
         <div class="card-header">
           <h2>Describe Your Goal <small>Some extra instructions?</small></h2>
         </div>
-
         <div class="card-body card-padding">
-          <p class="c-black f-500 m-b-20">
-            <%= f.label :name %>
-            <%= f.text_field :name, placeholder: "Name of the goal...",autofocus: true %>
-          </p>
+          <div class="form-group">
+            <div class="fg-line">
+              <p class="c-black f-500 m-b-20">
+                <%= f.label :name %>
+                <%= f.text_field :name, class: "form-control input-lg", placeholder: "Name of the goal...", autofocus: true %>
+              </p>
+            </div>
+          </div>
 
-          <p class="c-black f-500 m-b-20">
-            <%= f.label :description %><br>
-            <%= f.text_area :description, placeholder: "Example: I will lose 7lbs by my birthday." %>
-          </p> 
+          <div class="row">
+            <div class="col-sm-2">
+              <p class="c-black f-500 m-b-20"><%= f.label :due_date, "Completion Date"%></p>
+              <div class="input-group form-group">
+                <span class="input-group-addon"><i class="md md-event"></i></span>
+                <div class="dtp-container dropdown fg-line">
+                  <%= f.text_area :due_date, class: "form-control date-picker", :"data-toggle" => "dropdown", placeholder: "Click here...", value: 30.days.from_now %>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <%= f.label :description %>
+              <%= f.text_area :description, placeholder: "Example: I will lose 7lbs by my birthday." %>
+            </div>
+          </div>
 
-          <p class="c-black f-500 m-b-20">
-            <%= f.label :tags %><br>
-            <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |b| %>
-            <%= b.label(:class => "checkbox checkbox-inline m-r-20") {b.check_box} %>
+          <%= f.label :tags %>
+          <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |box| %>
+            <%= box.label :class => "checkbox checkbox-inline m-r-20" do %>
+              <%= f.content_tag(:i, "", class: "input-helper") %>
             <% end %>
-          </p>
+            <%= box.check_box :class => "checkbox" %>
+          <% end %>
+
         </div>
-      </div>
+      </div> <!-- Describe Goal Card End -->
 
-      <div class="field">
-        <%= f.label :motivation%><br>
-        <%= f.text_area :motivation, placeholder: "Example: I want to feel healthy." %>
-      </div>
+      <div class="card"> <!-- Describe Goal Barriers Begin -->
+        <div class="card-header">
+          <h2>Describe Your Goal <small>Some extra instructions?</small></h2>
+        </div>
+        <div class="input-group">
+          <div class="card-body card-padding">
+            <p class="c-black f-500 m-b-20">
+              <%= f.label :motivation%><br>
+              <%= f.text_area :motivation, placeholder: "Example: I want to feel healthy." %>
+            </p>
+          </div>
+        </div>
+      </div><!-- Describe Goal Barriers End -->
 
-      <div class="field">
-        <%= f.label :due_date, "Date to be completed by"%>
-        <%= f.date_field :due_date, value: 1.day.from_now, min: 1.day.from_now%>
-      </div>
+      <div class="card"> <!-- Describe Goal Supports Begin -->
+        <div class="card-header">
+          <h2>Describe Your Goal <small>Some extra instructions?</small></h2>
+        </div>
+        <p class="c-black f-500 m-b-20">
+          <%= f.label :potential_barrier, "Potential Barriers"%><br>
+          <%= f.text_area :potential_barrier, placeholder: "Think about what will make this difficult." %>
+        </p><br>
 
-      <div class="field">
-        <%= f.label :potential_barrier, "Potential Barriers"%><br>
-        <%= f.text_area :potential_barrier, placeholder: "Think about what will make this difficult." %>
-      </div><br>
+        <p class="c-black f-500 m-b-20">
+          <%= f.label :coping_strategy, "Coping Strategies"%><br>
+          <%= f.text_area :coping_strategy, placeholder: "How will you overcome those barriers you mentioned?" %>
+        </p><br>
 
-      <div class="field">
-        <%= f.label :coping_strategy, "Coping Strategies"%><br>
-        <%= f.text_area :coping_strategy, placeholder: "How will you overcome those barriers you mentioned?" %>
-      </div><br>
+        <p class="c-black f-500 m-b-20">
+          <%= f.label :support, "Support"%><br>
+          <%= f.text_area :support, placeholder: "Think of one person who will support you in this decision." %>
+        </p><br>
+        <%= f.submit %>
+        <% end %> <!-- Form Helper End -->
+      </div> <!-- Describe Goal Supports End -->
 
-      <div class="field">
-        <%= f.label :support, "Support"%><br>
-        <%= f.text_area :support, placeholder: "Think of one person who will support you in this decision." %>
-      </div><br>
-      <%= f.submit %>
-      <% end %>
-    </div>
-  </section>
-</section>
+    </div><!-- Form Group End -->
+  </div> <!-- Container End -->
+</section> <!-- Content End -->
+</section> <!-- Main End -->
