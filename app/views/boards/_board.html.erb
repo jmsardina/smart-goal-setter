@@ -17,7 +17,7 @@
       <%= image_tag reply.user.avatar.url(:thumb) %><br>
       <%= reply.user.name + " wrote" %>
       <%= time_ago_in_words(reply.created_at) + " ago" %><br>
-      <%= comment.cheer_count %> cheers<br>
+      <%= reply.cheer_count %> cheers<br>
       <%= render 'cheers/form', cheerable: reply %>
       <%= reply.content %><br>
     <% end %>
