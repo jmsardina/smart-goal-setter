@@ -11,3 +11,6 @@
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 facebook_key: "827475133985838"
 facebook_secret: "4a5d30501200be998fed729f58fa5abf"
+
+email_user_name: 'team.goaly@gmail.com'
+email_password: 'flatIronGoalies123'
