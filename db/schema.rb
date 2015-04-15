@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20150415130524) do
     t.string   "potential_barrier"
     t.string   "coping_strategy"
     t.string   "support"
+    t.integer  "goal_points",       default: 0
   end
 
   create_table "groups", force: :cascade do |t|

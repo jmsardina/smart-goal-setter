@@ -84,10 +84,14 @@ input[type="checkbox"] {
   color: #af5b5e;
 }
 
-#activities-list li .destroy:after {
+li .destroy:after {
   content: '×';
 }
 
+li.completed {
+  color: #d9d9d9;
+  text-decoration: line-through;
+}
 /*#activities-list li:hover .destroy {
   display: block;
 }*/
