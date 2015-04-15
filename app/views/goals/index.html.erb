@@ -7,45 +7,8 @@
   </div>
 </div>
 
+<%= tag("i", class: "input-helper" ) %>
 <!-- Goals post-->
-<section class="goal-section">
-  <div class="row">
-    <% if @goals %>
-    <% @goals.each do |goal| %>
-    <div class="col-sm-4">
-      <div class="card">
-        <div class="card-header bgm-green">
-          <h2> <%= goal.name %></h2>
-
-          <ul class="actions">
-            <li class="dropdown">
-              <a href="<%= goal_path(goal) %>">
-                <i class="md md-more-vert"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="card-body card-padding">
-         blandit, tempus ex gravida, accumsan dui. Sed sed aliquam augue. Nullam vel suscipit purus, eu facilisis ante. Mauris nec commodo felis.
-       </div>
-     </div>
-   </div>
-   <%end%>
-   <%end%>
- </div>
-</section>
-
-
-<div class="row">
-  <div class="col-sm-6">
-    <%= render 'shared_partials/feed_container' %>
-  </div>
-  <div class="col-sm-6">
-    <%= render 'shared_partials/activity_list' %>
-  </div>
-</div>
-
->>>>>>> b202df060b90ae97dffa58d99942deceb544d2f5
 
 <div class="row">
   <div class="col-lg-5">
@@ -57,12 +20,6 @@
         <%= image_tag current_user.image_url, class: "media-object dp img-circle" if current_user.uid%>
 
       </a>
-      <div class="media-body">
-        <h4 class="media-heading"><%= current_user.name %><small> France</small></h4>
-        <h5>Working Goals : <%= @goals.count %> || <span class="label label-default"><%= current_user.points %> Points</span>
-          <hr style="margin:8px auto">
-        </div>
-      </div>
     </div>
   </div>
 
