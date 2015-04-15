@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :boards do
     resources :comments
+    resources :cheers
   end
 
   resources :comments do 
