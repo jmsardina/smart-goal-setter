@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415130524) do
+ActiveRecord::Schema.define(version: 20150415152954) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -73,6 +73,16 @@ ActiveRecord::Schema.define(version: 20150415130524) do
   add_index "feeds", ["trackable_id"], name: "index_feeds_on_trackable_id"
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id"
 
+  create_table "goal_tags", force: :cascade do |t|
+    t.integer  "goal_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "goal_tags", ["goal_id"], name: "index_goal_tags_on_goal_id"
+  add_index "goal_tags", ["tag_id"], name: "index_goal_tags_on_tag_id"
+
   create_table "goals", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -100,6 +110,16 @@ ActiveRecord::Schema.define(version: 20150415130524) do
     t.datetime "avatar_updated_at"
     t.integer  "cheer_count",         default: 0
   end
+
+  create_table "identities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id"
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
@@ -135,6 +155,9 @@ ActiveRecord::Schema.define(version: 20150415130524) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.integer  "points",                 default: 0
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "image_url"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
