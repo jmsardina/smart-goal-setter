@@ -3,12 +3,13 @@ class UserGroupsController < ApplicationController
 	def create
 		@user_group = UserGroup.new(user_group_params)
 		if @user_group.save
+			binding.pry
 			redirect_to group_path(params[:user_group][:group_id])
 		else
 			flash[:notice] = "Something went wrong... Try again."
 			render 'users/search_results'
 		end
-	end	
+	end
 	# 	if params[:search]
  #   # binding.pry
 	#     @results = User.search(params[:search]).order("created_at DESC")

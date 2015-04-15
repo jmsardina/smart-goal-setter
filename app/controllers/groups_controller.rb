@@ -18,8 +18,7 @@ class GroupsController < ApplicationController
 		@group.creator_id = current_user.id
 		if @group.save
 			UserGroup.create(group_id: @group.id, member_id: current_user.id)
-			# @user_group = UserGroup.create(group_id: @group.id, user_id: current_user.id)
-			# redirect_to goals_path
+			track_feed(@group)
 			redirect_to group_path(@group)
 		else
 			flash[:notice] = "Something went wrong...Try again."
