@@ -1,3 +1,54 @@
+<div class="mini-charts chart-margin">
+    <div class="row">
+        <div class="col-sm-6 col-md-3">
+            <div class="mini-charts-item bgm-cyan">
+                <div class="clearfix">
+                 <!--    <div class="chart stats-bar"></div> -->
+                    <div class="count">
+                        <small>Total Activities</small>
+                        <h2><%= current_user.activities.count %></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="mini-charts-item bgm-lightgreen">
+                <div class="clearfix">
+                 <!--    <div class="chart stats-bar-2"></div> -->
+                    <div class="count">
+                        <small>Total Goals</small>
+                        <h2><%= current_user.goals.count %></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="mini-charts-item bgm-orange">
+                <div class="clearfix">
+                   <!--  <div class="chart stats-line"></div> -->
+                    <div class="count">
+                        <small>Total Points</small>
+                        <h2><%= current_user.points %></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="mini-charts-item bgm-bluegray">
+                <div class="clearfix"><!--
+                    <div class="chart stats-line-2"></div> -->
+                    <div class="count">
+                        <small>Cheers!</small>
+                        <h2><%= current_user.cheers.count %></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
   <div class="col-sm-6">
     <%= render 'shared_partials/goal_container' %>
@@ -7,45 +58,6 @@
   </div>
 </div>
 
-<%= tag("i", class: "input-helper" ) %>
-<!-- Goals post-->
-
-<div class="row">
-  <div class="col-lg-5">
-    <div class="media">
-      <a class="pull-left" href="#">
-        <!--   <img class="media-object dp img-circle" src="http://www.huffmancode.com/img/hardik.jpg" style="width: 100px;height:100px;"> -->
-
-        <%= image_tag current_user.avatar.url(:thumb), class: "media-object dp img-circle" if !current_user.uid%>
-        <%= image_tag current_user.image_url, class: "media-object dp img-circle" if current_user.uid%>
-
-      </a>
-    </div>
-  </div>
-
-
-  <div class="row">
-   <div class="col-md-5">
-    <h3>My Goals</h3>
-    <ul class="list-group">
-      <% if @goals %>
-      <% @goals.each do |goal| %>
-      <li class="list-group-item">
-        <span class="badge"><%= goal.activities.count %></span>
-        <%=link_to "#{goal.name}", goal_path(goal) %>
-      </li>
-      <%end%>
-      <%end%>
-    </ul>
-    <%= link_to "Create New Goal", new_goal_path, class: "btn btn-default btn-lg btn-block" %>
-  </div>
-  <div class="col-md-5">
-    <h3>My Goals</h3>
-    <ul class="list-goals">
-      <%= render @goals %>
-    </ul>
-    <%= link_to "Create New Goal", new_goal_path, class: "btn btn-default btn-lg btn-block" %>
-  </div>
 
   <h3>My Groups</h3>
   <ul>
