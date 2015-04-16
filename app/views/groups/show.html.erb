@@ -1,60 +1,25 @@
-<h3><%= image_tag @group.avatar.url(:thumb) %><%= @group.name %></h3>
-<h4><%= @group.description %></h4>
-<% if @group.members.include?(current_user) %>
-	<% @group.tags.each do |tag|%>
-		<%= tag.name %>
-	<% end %>
-
-	  <%= @group.cheer_count %> cheers
-    <%= render 'cheers/form', cheerable: @group%>
-    <%= @group.members.count %> members in this group
-	<h4>Members</h4>
-
-		<% if @group.members %>
-			<ul>
-			  <% @group.members.each do |member| %>
-			    <li>
-				    <!-- <a href="/users/<%#=member.id%>" class="group-members"%><%#=image_tag member.avatar(:thumb)%><%#=member.name%></a> -->
-				    <%=image_tag member.avatar(:thumb)%><%=member.name%>
-				    <% if (current_user == @group.creator) && (member != @group.creator) %>
-				    	<button class="destroy">Remove</button>
-				    <% end %>
-			    </li>
-			  <% end %>
-			 </ul>
-	  <% end %>
-
-<!-- 	<h5>Search for Friends and Add Them to this Group</h5>
-		<%#= form_tag('/users/search', :method => "get", id: "search-form") do %>
-		<%#= text_field_tag :search, params[:search], placeholder: "Search Users" %>
-		<%#= hidden_field_tag :group_id, params[:id] %>
-		<%#= submit_tag "Search", :name => nil %>
-		<%# end %> -->
 <% if flash[:notice] %>
   <div class="notice"><%= flash[:notice] %></div>
 <% end %> 
 
- <div class="search">
- <%= form_tag :controller => 'search', :action => 'create', :method => 'get' do %>
-      <%= text_field_tag :keyword, params[:keyword], :id => 'search_field', placeholder: "Connect with others!" %>
-      <%= hidden_field_tag :group_id, @group.id %>
-      <%= submit_tag "Search ", :content => nil %> 
-  <% end %> 
+<div>About the Group
+	<%= render 'groups/groupinfo', group: @group, tags: @tags %>
 </div>
 
-<%= render 'search/results' if @results %>
+<div>Members
+	<ul><%= render @members %></ul>
+</div>
 
-	<%# if @search_results %>
-		<%# render 'users/search_results' %>
-	<%# end %>
-
-	<br>
-
-	<h2>Groups Boards</h2>
-		<%= render 'boards/form' %><br>
-		<div id="group-boards">
-			<%= render @boards %>
-		  <%#= render 'comments/form' %><br>
-		  <%#= render @comments %>
-		 </div>
-<% end %>
+<div>Search
+	<%= render 'search/form' %>
+	<% if @results %>
+		<%= render 'search/results' %>
+	<% end %>
+</div>
+ 
+<div>Groups Boards
+	<%= render 'boards/form' %><br>
+	<div id="group-boards">
+		<%= render @boards %>
+	 </div>
+</div>

@@ -19,8 +19,6 @@
   </div>
 
   <div class="field">
-    <%#= f.label :period, "Time Period"%>
-    <%#= f.text_field :period %>
     <label>How often will you do this activity?</label>
     <%= f.select :frequency, options_for_select((1..12)) %>
     <%= f.label :frequency, "times"%>,
