@@ -6,11 +6,13 @@ class UserGroupsController < ApplicationController
 			@invitation = Invitation.find(user_group_params[:invitation_id])
 			@invitation.status = "accepted"
 			@invitation.save
-			redirect_to group_path(params[:user_group][:group_id])
+			# redirect_to group_path(params[:user_group][:group_id])
 		else
-			flash[:notice] = "Something went wrong... Try again."
-			render 'users/search_results'
+			@invitation.destroy 
+			# flash[:notice] = "Something went wrong... Try again."
+			# render 'users/search_results'
 		end
+		redirect_to root_path
 	end	
 	# 	if params[:search]
  #   # binding.pry
