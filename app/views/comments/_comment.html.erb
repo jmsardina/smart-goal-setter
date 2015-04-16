@@ -4,21 +4,7 @@
     <%= comment.user.name %><br>
     <%= comment.content %>
     <div class="reply">
-      <!-- <button class="comment-reply">Reply</button> -->
       <%= render "comments/form"%>
     </div>
-  <!--   <button class="destroy"></button> -->
   </div><br>
-      
 <% end %><br>
-    
-
-    <%#= form_for([@commentable, comment], :method => :delete) do |f| %>
-      <%# end %>
-
-    <%#= form_for([@commentable, comment], html: {class: "update"}) do |f| %>
-      <%#= f.text_field :description, class: "edit" %>
-    
-    <%##= f.submit %>
-    <%# end %>
-<%# end %>

@@ -13,6 +13,12 @@ class User < ActiveRecord::Base
 
   #as member
   has_many :user_groups, foreign_key: :member_id
+  has_many :groups, through: :user_groups
+
+  #as invitation sender:
+  has_many :requests_sent, class_name: "Invitation", foreign_key: :sender_id
+  #as invitation recipient
+  has_many :requests_received, class_name: "Invitation", foreign_key: :recipient_id
 
   has_many :goals
   has_many :activities, through: :goals

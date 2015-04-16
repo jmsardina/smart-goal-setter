@@ -152,6 +152,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -164,7 +165,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-sm-4 col-md-offset-0.5">
+  <div class="col-sm-4">
     <div class="card">
       <div class="listview scrollable">
           <div class="lv-header">
@@ -187,7 +188,10 @@
           </div>
       </div>
   </div>
-  </div>
+</div>
+
+  <h3>Pending requests</h3>
+  <%= render 'invitations/request', requests: @pending_requests %>
 
   <div class="col-md-3 col-sm-6">
         <div id="site-visits" class="dash-widget-item bgm-teal">
@@ -225,8 +229,6 @@
             </div>
         </div>
 
-
-
         <div class="mini-charts-item bgm-red">
             <div class="clearfix">
                 <div class="chart stats-line"></div>
@@ -236,8 +238,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <div class="mini-charts-item bgm-blue">
             <div class="clearfix">
@@ -251,14 +251,11 @@
     </div>
 </div>
 
-  <h3>My Groups</h3>
-  <ul>
-    <% @groups.each do |group| %>
-    <li> <%=link_to "#{group.name}", group_path(group) %>
-    </li>
-    <% end %>
-  </ul>
+<h3>My Groups</h3>
+<ul>
+    <%= render @groups %>
+</ul>
 
-  <%= link_to "Create New Group", new_group_path %>
+<%= link_to "Create New Group", new_group_path %>
 
 

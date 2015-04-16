@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :group do
-    # user
+    creator
     name "The Book Club"
     description "Curious people who read together."
   end
