@@ -1,13 +1,23 @@
-<%= image_tag group.avatar(:thumb) %>
-<h1><%= group.name %></h1>
-<strong><%= group.description %></strong>
+<div class="ms-menu">
+  <div class="ms-block">
+    <div class="ms-user">
+      <h3><%= group.name %></h3>
+    </div>
+    <%= image_tag group.avatar(:thumb) %>
+  </div>
 
-<% tags.each do |tag|%>
-  <%= tag.name %>
-<% end %>
+  <div class="listview lv-user m-t-20">
+    <div class="lv-item media active">
+      <p><%= group.description %></p>
 
-<%= @group.cheer_count %> cheers
-<%= @group.members.count %> members in this group
-<% if @members.include?(current_user) %>
-  <%= render 'cheers/form', cheerable: group%>
-<% end %>
+      <% tags.each do |tag|%>
+        <%= tag.name %>
+      <% end %>
+    </div>
+
+    <%= @group.cheer_count %> cheers
+    <%= @group.members.count %> members in this group
+    <% if @members.include?(current_user) %>
+      <%= render 'cheers/form', cheerable: group%>
+    <% end %>
+</div>
