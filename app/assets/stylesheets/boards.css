@@ -1,12 +1,31 @@
-div.scroll {
-    /*width: 100px;*/
-    height: 250px;
-    overflow: scroll;
+div.message-scroll {
+  /*width: 100px;*/
+  height: 250px;
+  overflow: scroll;
+}
+
+div.member-scroll {
+  width: 100%;
+  height: 100px;
+  overflow-x: scroll;
+  /*overflow-y: hidden;*/
+  margin:0px;
+  padding-top: 20px;
+  float: left;
+  text-align: center;
 }
 
 div.hidden {
-    background-color: #00FF00;
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
+  background-color: #00FF00;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+
+div.member-block {
+  display: inline-block;
+}
+
+div.member-picture {
+  text-align: center;
 }

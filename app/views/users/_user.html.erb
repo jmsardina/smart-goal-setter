@@ -1,11 +1,18 @@
-<%= li_for_user(user) do %>
-  <% if !current_user.uid %>
-    <%=image_tag user.avatar(:thumb) %><%=user.name %>
-  <% else %>
-    <%=image_tag user.image_url %><%=user.name %>
-  <% end %>
-    
-  <% if (current_user == @group.creator) && (user != @group.creator) %>
-    <button class="destroy">Remove</button>
-  <% end %>
-<% end %>
+<div class="member-block">
+  <div class="member-scroll">
+      <%= div_for_user(user) do %>
+        <div class="member-picture">
+          <% if !current_user.uid %>
+            <%=image_tag user.avatar(:thumb) %><br>
+          <% else %>
+            <%=image_tag user.image_url %><br>
+          <% end %>
+        </div>
+            <%=user.name %>
+        <% if (current_user == @group.creator) && (user != @group.creator) %>
+          <button class="destroy">Remove</button>
+        <% end %>
+      <!-- </div> -->
+    <% end %>
+  </div>
+</div>
