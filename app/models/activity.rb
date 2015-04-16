@@ -39,11 +39,15 @@ class Activity < ActiveRecord::Base
   end
 
   def periods_in_timeline #returns the number of periods within the activity timeline
-  	activity_timeline / days_in_period
+  	if days_in_period
+      activity_timeline / days_in_period
+    end
   end
 
   def number_occurences #returns the total number of times an activity will occur
-  	self.frequency * periods_in_timeline
+  	if periods_in_timeline
+      self.frequency * periods_in_timeline
+    end
   end
 
   def cycle_start_date #returns the first date of the cycle
