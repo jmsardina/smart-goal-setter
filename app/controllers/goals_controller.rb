@@ -4,7 +4,7 @@ class GoalsController < ApplicationController
 		if current_user
 			@goals = current_user.goals
 			@groups = current_user.groups
-			@feeds = Feed.order("created_at DESC").limit(8)
+			@feeds = Feed.order("created_at DESC").limit(9)
 			@pending_requests = current_user.requests_received.where(status: "pending")
 			@user_group = UserGroup.new
 		else

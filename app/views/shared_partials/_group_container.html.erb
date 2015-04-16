@@ -10,10 +10,10 @@
             </li>
         </ul>
       </div>
-      <div class="card-body">
+      <div class="card-body card-height scrollable">
         <div class="listview">
         <% @groups.each do |group| %>
-          <a class="lv-item">
+          <a class="lv-item" href="<%= group_path(group)%>">
             <div class="media">
               <div class="pull-left">
               <%= image_tag group.avatar, class: "lv-img-sm" %>
@@ -22,6 +22,7 @@
                 <div class="lv-title"><%= group.creator.name %></div>
                 <small class="lv-small"><%=group.name %></small>
               </div>
+              </a>
             </div>
           </a>
         <%end%>
