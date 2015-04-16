@@ -1,5 +1,5 @@
 <%= li_for_group(group) do %>
-  <%= image_tag group.avatar(:thumb) %>
-  <%= group.name %>
-  <%= group.description %>
+  <a href="/groups/<%=group.id%>"><%= image_tag group.avatar(:thumb) %>
+  <%= group.name %></a>
+  <%#= group.description %>
 <% end %>

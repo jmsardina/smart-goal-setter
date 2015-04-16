@@ -2,12 +2,10 @@
   <div class="col-lg-5">
     <div class="media">
       <a class="pull-left" href="#">
-        <!--   <img class="media-object dp img-circle" src="http://www.huffmancode.com/img/hardik.jpg" style="width: 100px;height:100px;"> -->
-
         <%= image_tag current_user.avatar.url(:thumb), class: "media-object dp img-circle" if !current_user.uid%>
         <%= image_tag current_user.image_url, class: "media-object dp img-circle" if current_user.uid%>
-
       </a>
+
       <div class="media-body">
         <h4 class="media-heading"><%= current_user.name %></h4>
         <h5>Working Goals : <%= @goals.count %> || <span class="label label-default"><%= current_user.points %> Points</span>
@@ -18,15 +16,7 @@
   </div>
 
   <h3>Pending requests</h3>
-    <% @pending_requests.each do |request| %>
-      <% group = Group.find(request.invitable_id)%>
-      <% sender = User.find(request.sender_id) %>
-      <% recipient = User.find(request.recipient_id) %>
-
-      <% group.members.include?(recipient) ? member = sender : member = recipient %>
-
-      <%= "Request from #{sender.name} to join #{group.name}"%><%= render "user_groups/form", group: group, member: member, invitation: request %>
-    <% end %>
+  <%= render 'invitations/request', requests: @pending_requests %>
 
   <div class="row">
    <div class="col-md-5">
@@ -40,10 +30,7 @@
 
 <h3>My Groups</h3>
 <ul>
-  <% @groups.each do |group| %>
-  <li> <%=link_to "#{group.name}", group_path(group) %>
-  </li>
-  <% end %>
+  <%= render @groups %>
 </ul>
 
 <%= link_to "Create New Group", new_group_path %>
