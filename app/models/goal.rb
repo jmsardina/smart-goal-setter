@@ -5,7 +5,6 @@ class Goal < ActiveRecord::Base
   # has_many :tags, through: :goal_tags
   has_many :comments, as: :commentable, dependent: :destroy
   belongs_to :user
-
   validates :name, :description, presence: true
   validates :due_date, presence: true
 
