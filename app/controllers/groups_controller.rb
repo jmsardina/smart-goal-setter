@@ -44,7 +44,7 @@ class GroupsController < ApplicationController
 	def show
 		set_group
 		@comment = Comment.new
-		# @comments = Comment.where(commentable_type: "Group", commentable_id: set_group.id)
+		@comments = Comment.where(commentable_type: "Group", commentable_id: set_group.id)
 		# binding.pry
 		@board = Board.new
 		@boards = Board.where(group_id: set_group.id)

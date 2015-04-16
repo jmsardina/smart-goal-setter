@@ -8,29 +8,17 @@
       <%= render 'cheers/form', cheerable: board %>
     </div>
 
-    <div card="card-body card-padding">
-      <% board.comments.each do |comment| %>
-        <%= comment.user.name + " wrote" %>
-        <%= time_ago_in_words(comment.created_at) + " ago" %><br>
-        <%= comment.reply_counter %> comments
-        <%= comment.cheer_count %> cheers<br>
-        <%= image_tag comment.user.avatar.url(:thumb) %><br>
-        <%= render 'cheers/form', cheerable: comment %>
-        <%= comment.content %><br>
-
-        <% comment.comments.each do |reply| %>
-          <%= image_tag reply.user.avatar.url(:thumb) %><br>
-          <%= reply.user.name + " wrote" %>
-          <%= time_ago_in_words(reply.created_at) + " ago" %><br>
-          <%= reply.cheer_count %> cheers<br>
-          <%= render 'cheers/form', cheerable: reply %>
-          <%= reply.content %><br>
-        <% end %>
-        <%= render 'comments/form', commentable: comment %>
-      <% end %>
-
-      <%= render 'comments/form', commentable: board %>
-    </div>
+    <!-- <div class="card-body card-padding"> -->
+      <div class="listview lv-message">
+        <% @comments = board.comments %>
+        <div class="lv-body">
+          <%= render @comments %>
+          <div class="lv-footer ms-reply">
+            <%= render 'comments/form', commentable: board %>
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
     <% end %>
   </div>
 </div>
