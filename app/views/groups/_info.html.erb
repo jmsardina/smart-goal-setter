@@ -1,0 +1,14 @@
+<%= image_tag group.avatar(:thumb) %>
+<h1><%= group.name %></h1>
+<strong><%= group.description %></strong>
+
+<% tags.each do |tag|%>
+  <%= tag.name %>
+<% end %>
+
+<%= @group.cheer_count %> cheers
+<%= @group.members.count %> members in this group
+
+<% if @members.include?(current_user) %>
+  <%= render 'cheers/form', cheerable: group%>
+<% end %>
