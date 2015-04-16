@@ -1,3 +1,4 @@
+<!-- RESULT == USER -->
 <% if result.class.name == "User" %>
   <% if !!result.uid %>
     <%= image_tag result.image_url %>
@@ -11,10 +12,9 @@
   <% else %>
     <span class="member-already"><%= "Already a member of #{Group.find(params[:group_id]).name}!"%></span>
   <% end %>
+<!-- END RESULT == USER -->
 
-<!-- END IF RESULT IS A USER -->
-
-<!-- IF RESULT IS A GROUP -->
+<!-- RESULT == GROUP -->
 <% elsif result.class.name == "Group" %>
 <a href="/groups/<%=result.id%>"><%= image_tag result.avatar.url(:thumb)%>
   <%= result.name %></a>
@@ -25,3 +25,4 @@
     <%= "You're a member already!"%>
   <% end %>
 <% end %>
+<!-- END RESULT == GROUP -->
