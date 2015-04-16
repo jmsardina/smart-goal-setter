@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415152954) do
+ActiveRecord::Schema.define(version: 20150416000054) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -121,6 +121,16 @@ ActiveRecord::Schema.define(version: 20150415152954) do
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id"
 
+  create_table "invitations", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.string   "invitable_type"
+    t.integer  "invitable_id"
+    t.string   "status",         default: "pending"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string   "name"
     t.string   "taggable_type"
@@ -132,8 +142,9 @@ ActiveRecord::Schema.define(version: 20150415152954) do
   create_table "user_groups", force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "member_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "invitation_id"
   end
 
   create_table "users", force: :cascade do |t|

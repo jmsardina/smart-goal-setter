@@ -5,7 +5,6 @@ class Goal < ActiveRecord::Base
   # has_many :tags, through: :goal_tags
   has_many :comments, as: :commentable, dependent: :destroy
   belongs_to :user
-
   validates :name, :description, presence: true
   validates :due_date, presence: true
 
@@ -28,7 +27,9 @@ class Goal < ActiveRecord::Base
   def total_activity_occurence
     occurence = 0
     self.activities.each do |activity|
-      occurence += activity.number_occurences
+      if activity.number_occurences
+        occurence += activity.number_occurences
+      end
     end
     occurence
   end

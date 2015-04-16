@@ -117,7 +117,7 @@
                                     <a href="<%=  edit_user_registration_path %>"><i class="md md-person"></i> View Profile</a>
                                 </li>
                                 <li>
-                                    <a href="<%= destroy_user_session_path method: :delete if current_user %>"><i class="md md-history"></i> Logout</a>
+                                    <%= link_to "Logout", destroy_user_session_path, method: :delete if current_user %>––
                                 </li>
                             </ul>
                         </div>

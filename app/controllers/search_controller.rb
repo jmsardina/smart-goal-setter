@@ -19,13 +19,16 @@ class SearchController < ApplicationController
   # end
 
   def create
+    # binding.pry
     @results = Search.for(params["keyword"])
     # if @results.empty?
     #   flash[:notice] = "No results match your search..."
     #   # redirect_to root_path
     # else
-      @user_group = UserGroup.new
-      render :results
+    @group = Group.find(params[:group_id].to_i)
+    @invitation = Invitation.new
+      # @user_group = UserGroup.new
+    render :results
     # end
   end
 
