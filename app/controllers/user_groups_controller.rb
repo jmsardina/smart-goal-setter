@@ -3,7 +3,9 @@ class UserGroupsController < ApplicationController
 	def create
 		@user_group = UserGroup.new(user_group_params)
 		if @user_group.save
-   # binding.pry
+			@invitation = Invitation.find(user_group_params[:invitation_id])
+			@invitation.status = "accepted"
+			@invitation.save
 			redirect_to group_path(params[:user_group][:group_id])
 		else
 			flash[:notice] = "Something went wrong... Try again."
@@ -25,6 +27,6 @@ class UserGroupsController < ApplicationController
 
 	private
 		def user_group_params
-			params.require(:user_group).permit(:member_id, :group_id)
+			params.require(:user_group).permit(:member_id, :group_id, :invitation_id)
 		end
 end

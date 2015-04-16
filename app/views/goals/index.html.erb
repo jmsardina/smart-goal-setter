@@ -18,11 +18,15 @@
   </div>
 
   <h3>Pending requests</h3>
-  <%#= unless @pending_requests.nil? %>
     <% @pending_requests.each do |request| %>
-      <%= "Accept|Decline request from #{User.find(request.sender_id).name} to join #{Group.find(request.invitable_id).name}"%>
+      <% group = Group.find(request.invitable_id)%>
+      <% sender = User.find(request.sender_id) %>
+      <% recipient = User.find(request.recipient_id) %>
+
+      <% group.members.include?(recipient) ? member = sender : member = recipient %>
+
+      <%= "Request from #{sender.name} to join #{group.name}"%><%= render "user_groups/form", group: group, member: member, invitation: request %>
     <% end %>
-  <%# end %>
 
   <div class="row">
    <div class="col-md-5">

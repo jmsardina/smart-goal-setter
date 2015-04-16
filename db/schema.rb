@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415202836) do
+ActiveRecord::Schema.define(version: 20150416000054) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -73,16 +73,6 @@ ActiveRecord::Schema.define(version: 20150415202836) do
   add_index "feeds", ["trackable_id"], name: "index_feeds_on_trackable_id"
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id"
 
-  create_table "goal_tags", force: :cascade do |t|
-    t.integer  "goal_id"
-    t.integer  "tag_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "goal_tags", ["goal_id"], name: "index_goal_tags_on_goal_id"
-  add_index "goal_tags", ["tag_id"], name: "index_goal_tags_on_tag_id"
-
   create_table "goals", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -117,7 +107,6 @@ ActiveRecord::Schema.define(version: 20150415202836) do
     t.string   "uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "image_url"
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id"
@@ -143,8 +132,9 @@ ActiveRecord::Schema.define(version: 20150415202836) do
   create_table "user_groups", force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "member_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "invitation_id"
   end
 
   create_table "users", force: :cascade do |t|
