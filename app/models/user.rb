@@ -55,6 +55,14 @@ class User < ActiveRecord::Base
     end
     @user
   end
+
+  def user_board_count
+    sum = 0
+    self.groups.each do |group|
+      sum += group.boards.count
+    end
+    sum
+  end
   # def upcoming_activities
   #   activities_hash = {}
 

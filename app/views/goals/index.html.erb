@@ -164,7 +164,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col-sm-4 col-md-offset-0.5">
     <div class="card">
       <div class="listview scrollable">
           <div class="lv-header">
@@ -211,6 +211,41 @@
 
                 <small>Last Signed in</small>
                 <h3 class="m-0 f-400"><small><%= time_ago_in_words(current_user.last_sign_in_at) %></small></h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="mini-charts-item bgm-pink">
+            <div class="clearfix">
+                <div class="chart chart-pie stats-pie"></div>
+                <div class="count">
+                    <small>Groups</small>
+                    <h2><%= current_user.groups.count %></h2>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="mini-charts-item bgm-red">
+            <div class="clearfix">
+                <div class="chart stats-line"></div>
+                <div class="count">
+                    <small>Boards</small>
+                    <h2><%= current_user.user_board_count %></h2>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="mini-charts-item bgm-blue">
+            <div class="clearfix">
+                <div class="chart chart-pie stats-pie"></div>
+                <div class="count">
+                    <small>Comments</small>
+                    <h2><%= current_user.comments.count %></h2>
+                </div>
             </div>
         </div>
     </div>
