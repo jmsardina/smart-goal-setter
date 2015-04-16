@@ -5,4 +5,7 @@
   <%= f.submit "Accept" %>
 <% end %>
 
-<button id="decline" class="destroy">Decline</button>
+<%= form_for(invitation, controller: "invitations", action: "destroy", method: :delete, html: { class: "form" }) do |f| %>
+  <%= f.hidden_field :id, value: invitation.id %>
+  <%= f.submit "Decline" %>
+<% end %>
