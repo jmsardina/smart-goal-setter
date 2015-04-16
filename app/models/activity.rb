@@ -23,6 +23,7 @@ class Activity < ActiveRecord::Base
   	(self.goal.due_date - self.created_at.to_date).to_i
   end
 
+
   def days_in_period
   	case self.period
   	when "day"
