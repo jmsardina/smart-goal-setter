@@ -49,9 +49,8 @@
 
           <%= f.label :tags %>
           <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |box| %>
-            <%= box.label :class => "checkbox checkbox-inline m-r-20" do %>
-              <%= f.content_tag(:i, "", class: "input-helper") %>
-            <% end %>
+            <%= box.label :class => "checkbox checkbox-inline m-r-20" %>
+            <%= content_tag(:i, "", class: "input-helper") %>
             <%= box.check_box :class => "checkbox" %>
           <% end %>
 
