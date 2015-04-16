@@ -42,6 +42,7 @@ class Goal < ActiveRecord::Base
     remaining
   end
 
+
   def percentage_activity_occurence_complete
     ((1 - (self.total_remaining_occurence / self.total_activity_occurence.to_f)) * 100).round(1)
   end
