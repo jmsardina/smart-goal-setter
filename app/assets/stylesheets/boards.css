@@ -1,18 +1,20 @@
 div.message-scroll {
-  /*width: 100px;*/
-  height: 250px;
+  height: 190px;
   overflow: scroll;
 }
 
 div.member-scroll {
-  width: 100%;
+  width: auto;
   height: 100px;
   overflow-x: scroll;
-  /*overflow-y: hidden;*/
+  overflow-y: hidden;
   margin:0px;
   padding-top: 20px;
   float: left;
   text-align: center;
+  position: relative;
+  white-space: nowrap;
+  background-color: yellow;
 }
 
 div.hidden {
@@ -24,8 +26,18 @@ div.hidden {
 
 div.member-block {
   display: inline-block;
+  width: auto;
+  white-space: nowrap;
+}
+
+p.about-group {
+  height: 147px;
 }
 
 div.member-picture {
   text-align: center;
+}
+
+div.form-inline {
+  display: inline-block;
 }

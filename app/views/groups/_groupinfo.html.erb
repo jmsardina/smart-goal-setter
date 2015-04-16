@@ -4,21 +4,30 @@
       <h3><%= group.name %></h3>
     </div>
     <%= image_tag group.avatar(:thumb) %>
+    <small>
+      <%= @group.cheer_count %>
+      <div class="form-inline">
+        <%= render 'cheers/form', cheerable: group %>
+      </div><br>
+      <%= "#{@group.members.count}" + " members"%>
+    </small>
   </div>
 
   <div class="listview lv-user m-t-20">
     <div class="lv-item media active">
-      <p><%= group.description %></p>
+      <p class="about-group">
+        <strong>About The Group</strong><br>
+        <%= group.description %>
+      </p>
 
       <% tags.each do |tag|%>
-        <%= tag.name %>
+        <button class="btn btn-primary btn-xs waves-effect">
+          <%= tag.name %>
+        </button>
       <% end %>
     </div>
 
-    <%= @group.cheer_count %> cheers
-    <%= @group.members.count %> members in this group
-    <% if @members.include?(current_user) %>
-      <%= render 'cheers/form', cheerable: group %>
+    <% if !@members.include?(current_user) %>
       <%= render 'invitations/form', invitable: @group, recipient: @group.creator, invitation: @invitation %>
     <% end %>
 </div>
