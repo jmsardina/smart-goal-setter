@@ -5,19 +5,24 @@ module GoalsHelper
     end
   end
 
-  def total_activity_occurence
-    occurence = 0
-    self.activities.each do |activity|
-      occurence += activity.number_occurences
-    end
-    occurence
+  def activities_array
+     Goal.all.collect { |goal| goal.activities.count}
   end
 
-  def total_remaining_occurence
-    remaining = 0
-    self.activities.each do |activity|
-      remaining += activity.occurences
+  def total_goal_activity_occurence
+  	sum = 0
+  	Goal.all.each do |goal|
+  	 sum +=	goal.total_remaining_occurence
     end
-    remaining
+    sum
   end
+
+  def total_remaining_goal_activity_occurence
+    sum = 0
+    Goal.all.each do |goal|
+      sum += goal.total_activity_occurence
+    end
+    sum
+  end
+
 end
