@@ -13,7 +13,6 @@
   <div class="col-sm-4">
     <%= render 'shared_partials/goal_progress' %>
   </div>
-
   <div class="col-md-3 col-sm-6">
         <%= render 'shared_partials/activity_aggregate'%>
         <div class="epc-item bgm-pink">
@@ -34,8 +33,6 @@
             </div>
         </div>
 
-
-
         <div class="mini-charts-item bgm-red">
             <div class="clearfix">
                 <div class="chart stats-line"></div>
@@ -45,8 +42,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <div class="mini-charts-item bgm-blue">
             <div class="clearfix">
@@ -63,7 +58,7 @@
         <%= render 'shared_partials/group_container'%>
     </div>
 </div>
-
-
+<h3>Pending requests</h3>
+  <%= render 'invitations/request', requests: @pending_requests %>
 
 

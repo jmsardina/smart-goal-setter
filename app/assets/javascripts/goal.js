@@ -33,7 +33,16 @@ function deleteGoal(e){
   })
 }
 
+function Invitation(){
+
+}
+
+Invitation.declineRequest = function(){
+  var $this = $(this)
+}
+
 $(function(){
   $("ul.list-goals").on("change", "input:checkbox", Goal.updateStatus);
   $("ul.list-goals").on("click", "button.destroy", deleteGoal);
+  $("div.container").on("click", "button.destroy", Invitation.declineRequest)
 });

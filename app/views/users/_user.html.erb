@@ -1,0 +1,11 @@
+<%= li_for_user(user) do %>
+  <% if !current_user.uid %>
+    <%=image_tag user.avatar(:thumb) %><%=user.name %>
+  <% else %>
+    <%=image_tag user.image_url %><%=user.name %>
+  <% end %>
+    
+  <% if (current_user == @group.creator) && (user != @group.creator) %>
+    <button class="destroy">Remove</button>
+  <% end %>
+<% end %>

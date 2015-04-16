@@ -49,6 +49,8 @@ class GroupsController < ApplicationController
 		@board = Board.new
 		@boards = Board.where(group_id: set_group.id)
 		@cheer = Cheer.new
+		@members = @group.members
+		@tags = @group.tags
 	end
 
 	def destroy

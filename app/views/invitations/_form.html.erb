@@ -1,0 +1,7 @@
+<%= form_for(invitation) do |f| %>
+  <%= f.hidden_field :sender_id, value: current_user.id %>
+  <%= f.hidden_field :recipient_id, value: recipient.id %>
+  <%= f.hidden_field :invitable_type, value: invitable.class.name %>
+  <%= f.hidden_field :invitable_id, value: invitable.id %>
+  <%= f.submit "Send Request" %>
+<% end %>
