@@ -1,0 +1,12 @@
+div.scroll {
+    /*width: 100px;*/
+    height: 250px;
+    overflow: scroll;
+}
+
+div.hidden {
+    background-color: #00FF00;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}

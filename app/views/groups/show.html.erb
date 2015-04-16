@@ -2,12 +2,13 @@
   <div class="notice"><%= flash[:notice] %></div>
 <% end %> 
 
-	<div>Search
-		<%= render 'search/form' %>
-		<% if @results %>
-			<%= render 'search/results' %>
-		<% end %>
-	</div>
+<div>
+	<%= render 'search/form' %>
+	<%= render 'boards/form' %>
+	<% if @results %>
+		<%= render 'search/results' %>
+	<% end %>
+</div>
 
 <div class="card m-b-0" id="messages-main">
 	<%= render 'groups/groupinfo', group: @group, tags: @tags %>
@@ -15,13 +16,12 @@
 
 <div class="ms-body">
 	<div>
-		<%= render 'boards/form' %><br>
 		<div class="row">
 			<%= render @boards %>
 		 </div>
 	</div>
 </div>
 
-	<div>Members
-		<ul><%= render @members %></ul>
-	</div>
+<div>Members
+	<ul><%= render @members %></ul>
+</div>

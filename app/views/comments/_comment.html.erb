@@ -1,13 +1,16 @@
 <%= li_for_comment(comment) do %>
   <div class="lv-item media">
     <div class="lv-avatar pull-left">
-      <%= image_tag comment.user.avatar.url(:thumb) %>
+      <% if comment.user.uid %>
+        <%= image_tag comment.user.image_url %>
+      <% else %>
+        <%= image_tag comment.user.avatar.url(:thumb) %>
+      <% end %>
     </div>
     
     <div class="media-body">
       <div class="ms-item">
         <p><%= comment.content %></p>
-        <%= render 'cheers/form', cheerable: comment %>
       </div>
 
       <small class="ms-date">
@@ -15,17 +18,29 @@
         <%= time_ago_in_words(comment.created_at) + " ago" %><br>
         <%= comment.reply_counter %> comments
         <%= comment.cheer_count %> cheers
+        <%= render 'cheers/form', cheerable: comment %>
       </small>
     </div>
+  </div>
+
+  <div class="reply-to-comment">
+    <div class="reply-form hidden">
+      <%= render "comments/form", commentable: comment%>
+    </div>
+    <button class="reply">Reply</button>
   </div>
 
     <% comment.replies.each do |reply| %>
       <div class="lv-item media right">
         <div class="lv-avatar pull-right">
-          <%= image_tag reply.user.avatar.url(:thumb) %>
+          <% if comment.user.uid %>
+            <%= image_tag comment.user.image_url %>
+          <% else %>
+            <%= image_tag comment.user.avatar.url(:thumb) %>
+          <% end %>
         </div>
 
-        <div class="media-body", style="padding:-30px;">
+        <div class="media-body">
           <div class="ms-item">
             <p><%= reply.content %></p>
             <%= render 'cheers/form', cheerable: reply %>
@@ -38,7 +53,4 @@
         </div>
     <% end %>
 
-    <div class="reply">
-      <%= render "comments/form", commentable: comment%>
-    </div>
 <% end %>

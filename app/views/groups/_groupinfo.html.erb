@@ -18,6 +18,7 @@
     <%= @group.cheer_count %> cheers
     <%= @group.members.count %> members in this group
     <% if @members.include?(current_user) %>
-      <%= render 'cheers/form', cheerable: group%>
+      <%= render 'cheers/form', cheerable: group %>
+      <%= render 'invitations/form', invitable: @group, recipient: @group.creator, invitation: @invitation %>
     <% end %>
 </div>

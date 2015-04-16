@@ -51,6 +51,7 @@ class GroupsController < ApplicationController
 		@cheer = Cheer.new
 		@members = @group.members
 		@tags = @group.tags
+		@invitation = Invitation.new
 	end
 
 	def destroy
