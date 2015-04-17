@@ -14,6 +14,7 @@ class GroupsController < ApplicationController
 	end
 
 	def create
+		binding.pry
 		@group = Group.new(group_params)
 		@group.creator_id = current_user.id
 		if @group.save
@@ -44,13 +45,14 @@ class GroupsController < ApplicationController
 	def show
 		set_group
 		@comment = Comment.new
-		# @comments = Comment.where(commentable_type: "Group", commentable_id: set_group.id)
+		@comments = Comment.where(commentable_type: "Group", commentable_id: set_group.id)
 		# binding.pry
 		@board = Board.new
 		@boards = Board.where(group_id: set_group.id)
 		@cheer = Cheer.new
 		@members = @group.members
 		@tags = @group.tags
+		@invitation = Invitation.new
 	end
 
 	def destroy

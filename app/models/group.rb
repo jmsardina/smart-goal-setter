@@ -15,4 +15,6 @@ class Group < ActiveRecord::Base
   has_many :invitations, as: :invitable
 
   validates :name, :creator_id, presence: true
+  # validates :name, length: {maximum: 14}
+  # validates :description, length: {maximum: 140}
 end
