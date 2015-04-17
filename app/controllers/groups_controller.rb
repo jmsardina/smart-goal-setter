@@ -14,6 +14,7 @@ class GroupsController < ApplicationController
 	end
 
 	def create
+		binding.pry
 		@group = Group.new(group_params)
 		@group.creator_id = current_user.id
 		if @group.save

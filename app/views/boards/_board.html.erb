@@ -3,9 +3,13 @@
     <%= div_for_board(board) do %>
     <div class="lv-body">
       <div class="card-header">
-        <h3><%= board.name %></h3>
-        <%= board.comment_counter %> comments
-        <%= board.cheer_count %> cheers
+        <h3><%= board.name %>
+          <small> 
+            <%= board.comment_counter%> comments
+            <% board.cheer_count %> cheers
+          </small>
+        </h3>
+        
         <%= render 'cheers/form', cheerable: board %>
       </div>
 
