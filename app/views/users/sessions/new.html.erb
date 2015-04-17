@@ -6,7 +6,6 @@
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
   <div class="card-body card-padding">
-    <form role="form">
       <div class="form-group fg-line">
 
         <% f.label :email %>
@@ -23,7 +22,6 @@
 
       <%= f.submit "Log in", class: "btn btn-primary btn-sm m-t-1" %>
 
-    </form>
   </div>
 </div>
 
