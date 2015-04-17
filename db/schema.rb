@@ -73,16 +73,6 @@ ActiveRecord::Schema.define(version: 20150416000054) do
   add_index "feeds", ["trackable_id"], name: "index_feeds_on_trackable_id"
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id"
 
-  create_table "goal_tags", force: :cascade do |t|
-    t.integer  "goal_id"
-    t.integer  "tag_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "goal_tags", ["goal_id"], name: "index_goal_tags_on_goal_id"
-  add_index "goal_tags", ["tag_id"], name: "index_goal_tags_on_tag_id"
-
   create_table "goals", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
