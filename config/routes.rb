@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   #   get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
   # end
 
-  root 'goals#index'
+  root to: 'goals#index'
   resources :invitations
 
   resources :goals do

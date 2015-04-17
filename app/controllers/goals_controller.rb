@@ -9,7 +9,6 @@ class GoalsController < ApplicationController
 			@user_group = UserGroup.new
 		else
 			@goals = Goal.all
-			render 'welcome_page'
 		end
 	end
 
