@@ -1,39 +1,33 @@
-<% content_for :body_class, "login-content" %>
-<h2>Log in</h2>
+<div class="card">
+  <div class="card-header">
+    <h2>Log In to Goaly</h2>
+  </div>
 
-<div class="lc-block toggled" id="l-login">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="card-body card-padding">
+    <form role="form">
+      <div class="form-group fg-line">
 
-    <div class="input-group m-b-20">
-      <span class="input-group-addon"><i class="md md-person"></i></span>
-      <div class="fg-line">
-        <%= f.email_field :email, autofocus: true, placeholder: "E-mail" %>
+        <% f.label :email %>
+        <%= f.email_field :email, autofocus: true, placeholder: "E-mail", class: "form-control" %>
       </div>
-    </div>
 
-    <div class="input-group m-b-20">
-      <span class="input-group-addon"><i class="md md-accessibility"></i></span>
-      <div class="fg-line">
-        <%= f.password_field :password, autocomplete: "off", placeholder: "Password" %>
+      <div class="form-group fg-line">
+        <% f.label :password %>
+        <%= f.password_field :password, autocomplete: "off", placeholder: "Password", class: "form-control" %>
       </div>
-    </div>
 
-    <div class="clearfix"></div>
+      <div class="clearfix"></div>
 
-    <% if devise_mapping.rememberable? -%>
-      <div class="checkbox">
-        <i class="input-helper"></i>
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
-      </div>
-    <% end -%>
 
-    <div class="btn btn-login btn-danger btn-float">
-      <%= f.submit "Log in" %>
-    </div>
-  <% end %>
+      <%= f.submit "Log in", class: "btn btn-primary btn-sm m-t-1" %>
+
+    </form>
+  </div>
 </div>
 
-<!-- The theme has some fancy styling available for the sign up and forgot password buttons if we want to add it -->
+<% end %>
+
 <%= render "users/shared/links" %>
+

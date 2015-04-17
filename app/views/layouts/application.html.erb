@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <!--[if IE 9 ]><html class="ie9"><![endif]-->
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Goaly</title>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Goaly</title>
 
-	<!-- Javascript Libraries -->
+		<!-- Javascript Libraries -->
 
-	<%= javascript_include_tag "application" %>
+		<%= javascript_include_tag "application" %>
 
-	<!-- Vendor CSS -->
-	<%= stylesheet_link_tag "application" %>
+		<!-- Vendor CSS -->
+		<%= stylesheet_link_tag "application" %>
 
 
-	<!-- CSS -->
-	<%= csrf_meta_tags %>
-	<%= analytics_init if Rails.env.production? %>
+		<!-- CSS -->
+		<%= csrf_meta_tags %>
+		<%= analytics_init if Rails.env.production? %>
 
-</head>
+	</head>
+	<body class="<%= yield (:body_class) %>">
+		
+		<% if current_user %>
+			<%= render 'layouts/themeheader' %>
+		<%end%>
 
-<body class="<%= yield (:body_class) %>">
+		<div class="container">
+			<%= yield %>
+		</div>
 
-	<% if current_user %>
-		<%= render 'layouts/themeheader' %>
-	<%else%>
-		<%= render 'layouts/header' %>
-	<%end%>
-	<div class="container">
-		<%= yield %>
-	</div>
-</body>
+	</body>
 </html>
