@@ -1,13 +1,33 @@
-<%= image_tag group.avatar(:thumb) %>
-<h1><%= group.name %></h1>
-<strong><%= group.description %></strong>
+<div class="ms-menu">
+  <div class="ms-block">
+    <div class="ms-user">
+      <h3><%= group.name %></h3>
+    </div>
+    <%= image_tag group.avatar(:thumb) %>
+    <small>
+      <%= @group.cheer_count %>
+      <div class="form-inline">
+        <%= render 'cheers/form', cheerable: group %>
+      </div><br>
+      <%= "#{@group.members.count}" + " members"%>
+    </small>
+  </div>
 
-<% tags.each do |tag|%>
-  <%= tag.name %>
-<% end %>
+  <div class="listview lv-user m-t-20">
+    <div class="lv-item media active">
+      <p class="about-group">
+        <strong>About The Group</strong><br>
+        <%= group.description %>
+      </p>
 
-<%= @group.cheer_count %> cheers
-<%= @group.members.count %> members in this group
-<% if @members.include?(current_user) %>
-  <%= render 'cheers/form', cheerable: group%>
-<% end %>
+      <% tags.each do |tag|%>
+        <button class="btn btn-primary btn-xs waves-effect">
+          <%= tag.name %>
+        </button>
+      <% end %>
+    </div>
+
+    <% if !@members.include?(current_user) %>
+      <%= render 'invitations/form', invitable: @group, recipient: @group.creator, invitation: @invitation %>
+    <% end %>
+</div>
