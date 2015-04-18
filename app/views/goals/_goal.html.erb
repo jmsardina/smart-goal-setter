@@ -1,7 +1,9 @@
 <%= li_for_goal(goal) do %>
+  <tr>
     <%= form_for([current_user, goal], url: goals_path) do |f| %>
-    <%= f.check_box :status, class: "toggle", "data-id": "#{goal.id}" %>
-      <label><%=link_to "#{goal.name}", goal_path(goal) %></label>
-      <button class="destroy" data-id="<%=goal.id%>"></button>
+    <td><%= f.check_box :status, class: "toggle", "data-id": "#{goal.id}" %></td>
+    <td><%=link_to "#{goal.name}", goal_path(goal) %></td>
+    <td><button class="destroy" data-id="<%=goal.id%>"></button></td>
     <% end %>
+  </tr>
 <% end %>

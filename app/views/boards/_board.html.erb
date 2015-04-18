@@ -1,31 +1,20 @@
-<div class="col-sm-6 m-b-20">
-  <div class="card">
-      <%= div_for_board(board) do %>
-        <div class="lv-body">
-          <div class="card-header">
-            <h3><%= board.name %>
-              <small> 
-                <%= board.comment_counter %> comments
-                <% board.cheer_count %> cheers
-              </small>
-            </h3>
-            
-            <%= render 'cheers/form', cheerable: board %>
+<div class="card">
+  <%= div_for_board(board) do %>
+    <div class="card-body card-padding">
+      <div class="message-scroll">
+        <div class="listview lv-message">
+          <% @comments = board.comments %>
+          <div class="media-demo">
+            <ul style="list-type-style:none;">
+              <%= render @comments %>
+            </ul>
           </div>
-
-          <div class="message-scroll">
-            <div class="listview lv-message">
-              <% @comments = board.comments %>
-              <div class="lv-body">
-                <%= render @comments %>
-              </div>
-            </div>
-          </div>
-          
-        <div class="lv-footer ms-reply">
-          <%= render 'comments/form', commentable: board %>
         </div>
-      <% end %>
+      </div>
+      
+      <div class="lv-footer ms-reply">
+        <%= render 'comments/form', commentable: board %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
