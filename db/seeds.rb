@@ -1,3 +1,5 @@
+require 'open-uri'
+require 'nokogiri'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -8,13 +10,13 @@
 
 # NAMES = ["Chris", "Skylar", "Jennifer", "Cyrus", "John"]
 # GROUP_NAMES = ["Group 1", "Group 2", "Group 3", "Group 4"]
-TAGS = ["health", "spirit", "finance", "education", "personal", "relationship", "work", "intelectual", "political", "weight-loss", "smoking", "alcohol", "children", "family"].sort!
+# TAGS = ["health", "spirit", "finance", "education", "personal", "relationship", "work", "intelectual", "political", "weight-loss", "smoking", "alcohol", "children", "family"].sort!
 
-def create_tags
-  TAGS.each{|tag| Tag.create(name: tag)}
-end
+# def create_tags
+#   TAGS.each{|tag| Tag.create(name: tag)}
+# end
 
-create_tags
+# create_tags
 
 # def emails
 #   emails = []
@@ -44,5 +46,15 @@ create_tags
 
 
 # create_users(lang_goal, exercise_goal)
+
+def scrape_quotes(link, css_selector, language)
+  html = open(link)
+  doc = Nokogiri::HTML(html)
+
+  doc.css(css_selector).each{|quote| MotivationalQuote.create(content: quote.text, language: language)}
+end
+
+# ITERATING THROUGH MULTIPLE PAGES
+(1..9).map{|num| scrape_quotes(("http://www.brainyquote.com/quotes/topics/topic_motivational" + "#{num}"), 'span a', "English")}
 
 

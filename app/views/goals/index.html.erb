@@ -1,64 +1,97 @@
-<%= render 'shared_partials/js_charts' %>
-<%= render 'shared_partials/mini_dashboard_charts' %>
-
-<div class="row">
-  <div class="col-sm-6">
-    <%= render 'shared_partials/goal_container' %>
-  </div>
-  <div class="col-sm-6">
-     <%= render 'shared_partials/feed_container' %>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-4">
-    <%= render 'shared_partials/goal_progress' %>
-  </div>
-  <div class="col-md-3 col-sm-6">
-        <%= render 'shared_partials/activity_aggregate'%>
-        <div class="epc-item bgm-pink">
-            <div class="easy-pie main-pie" data-percent="<%=overall_percentage_complete %>">
-                <div class="percent"><%= overall_percentage_complete %></div>
-                <div class="pie-title">Overall Completed</div>
-            </div>
-        </div>
-    </div>`
-    <div class="col-sm-4">
-        <div class="mini-charts-item bgm-pink">
-            <div class="clearfix">
-                <div class="chart chart-pie stats-pie"></div>
-                <div class="count">
-                    <small>Groups</small>
-                    <h2><%= current_user.groups.count %></h2>
-                </div>
-            </div>
-        </div>
-
-        <div class="mini-charts-item bgm-red">
-            <div class="clearfix">
-                <div class="chart stats-line"></div>
-                <div class="count">
-                    <small>Boards</small>
-                    <h2><%= current_user.user_board_count %></h2>
-                </div>
-            </div>
-        </div>
-
-        <div class="mini-charts-item bgm-blue">
-            <div class="clearfix">
-                <div class="chart chart-pie stats-pie"></div>
-                <div class="count">
-                    <small>Comments</small>
-                    <h2><%= current_user.comments.count %></h2>
-                </div>
-            </div>
-        </div>
+<section id="content">
+  <div class="container">
+    <div class="block-header">
+      <h2 style="font-family:comic sans ms;"><strong><%= MotivationalQuote.find(rand(1..MotivationalQuote.count)).content %></strong></h2>
     </div>
 
-    <div class="col-sm-4">
-        <%= render 'shared_partials/group_container'%>
+    <!-- BEGIN GOALS CARD -->
+    <div class="card m-v-0" id="messages-main">
+      <div class="ms-menu">
+        <div class="card m-v-0" id="messages-main" style="padding:0px;">
+          <h5 style="background-color:yellow;padding:5px;">My Goals</h5>
+          <div class="ms-user" style="height:160px;list-style-type:none;overflow:scroll;">
+              <%= render @goals %>
+          </div>
+          <%= link_to "Create New Goal", new_goal_path %>
+        </div>
+    <!-- END OF GOALS CARD -->
+
+    <!-- BEGIN GROUPS CARD -->
+        <div class="card m-v-0" id="messages-main">
+          <h5 style="background-color:yellow;padding:5px;">My Groups</h5>
+          <div class="ms-user" style="height:160px;list-style-type:none;overflow:scroll;">
+            <%= render @groups %>
+          </div>
+          <%= link_to "Create New Group", new_group_path %>
+        </div>
+      </div>
+    <!-- END OF GROUPS CARD -->
+
+      <div class="ms-body">
+        <div class="card">
+          <div class="card-header" style="padding:0px;background-color:orange;">
+            <h4>
+              Things To Do <small>one step-at-a-time</small>
+            </h4>  
+          </div>
+
+          <div class="card-body table-responsive" tabindex="0" style="overflow;outline:none;">
+            <div class="message-scroll">
+              <div class="listview lv-message">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Status</th>
+                      <th>Description</th>
+                      <th>Times</th>
+                      <th>By</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>                  
+                  <% @activities.each do |activity| %>
+                    <tbody>
+                      <tr>
+                        <td><button></button></td>
+                        <td><%=activity.description%></td>
+                        <td><%=activity.remaining_for_period%></td>
+                        <td><%=activity.upcoming_due_dates.first.strftime("%B %d, %Y") %></td>
+                        <td><button>X</button></td>
+                      </tr>
+                    </tbody>
+                  <% end %>
+                </table>           
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="padding-left:15px;padding-top:0px;">
+          <div class="col-md-6">
+            <h5 style="background-color:blue;height:20px;">Card One</h5>
+            <div class="card">
+                <div class="message-scroll">
+                  <div class="listview lv-message">
+                    <%= render @feeds %>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+        <!-- BEGIN FEED CARD -->
+          <div class="col-md-6">
+            <h5 style="background-color:blue;padding-top:5px;">Feed</h5>
+            <div class="card">
+              <div class="message-scroll">
+                <div class="listview lv-message">
+                  <%= render @feeds %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END FEED CARD -->
+      </div>
+    <!-- END ACTIVITIES CARD -->
     </div>
-</div>
-<h3>Pending requests</h3>
-  <%= render 'invitations/request', requests: @pending_requests %>
-
-
+  </div>
+</section>

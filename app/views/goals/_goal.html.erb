@@ -1,11 +1,7 @@
 <%= li_for_goal(goal) do %>
-  <li class="list-group-item">
-    <span class="badge"><%= goal.goal_points %></span>
     <%= form_for([current_user, goal], url: goals_path) do |f| %>
     <%= f.check_box :status, class: "toggle", "data-id": "#{goal.id}" %>
-        <label><%=link_to "#{goal.name}", goal_path(goal) %></label>
-        <strong>Days left:</strong><%= goal.days_left %>
-        <button class="destroy" data-id="<%=goal.id%>"></button>
+      <label><%=link_to "#{goal.name}", goal_path(goal) %></label>
+      <button class="destroy" data-id="<%=goal.id%>"></button>
     <% end %>
-  </li>
 <% end %>
