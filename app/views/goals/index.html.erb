@@ -10,7 +10,19 @@
         <div class="card m-v-0" id="messages-main" style="padding:0px;">
           <h5 style="background-color:yellow;padding:5px;">My Goals</h5>
           <div class="ms-user" style="height:160px;list-style-type:none;overflow:scroll;">
-              <%= render @goals %>
+            <ul class="list" style="list-style-type:none;">
+              <div class="card-body table-responsive" tabindex="0" style="overflow;outline:none;">
+                <div class="message-scroll">
+                  <div class="listview lv-message">
+                    <table class="table">
+                      <tbody>
+                        <%= render @goals %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </ul>
           </div>
           <%= link_to "Create New Goal", new_goal_path %>
         </div>
