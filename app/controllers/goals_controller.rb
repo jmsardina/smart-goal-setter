@@ -3,7 +3,8 @@ class GoalsController < ApplicationController
 
 	def index
 		if current_user
-			@goals = current_user.goals
+			@goals = current_user.goals.order("due_date ASC")
+			@activities = current_user.activities.order("activity_due_date ASC")
 			@groups = current_user.groups
 			@feeds = Feed.order("created_at DESC").limit(10)
 			@pending_requests = current_user.requests_received.where(status: "pending")
