@@ -9,78 +9,102 @@
     <!-- BEGIN GOALS CARD -->
     <div class="card m-v-0" id="messages-main">
       <div class="ms-menu">
-        <div class="card m-v-0" id="messages-main">
-        
-          <div class="ms-block" style="background-color:yellow;height:20px;style=overflow:scroll";>
-            <div class="ms-user">
-              <h5>My Goals</h5>
-            </div>
+        <div class="card m-v-0" id="messages-main" style="padding:0px;">
+          <h5 style="background-color:yellow;padding:5px;">My Goals</h5>
+          <div class="ms-user" style="height:160px;list-style-type:none;overflow:scroll;">
+              <%= render @goals %>
           </div>
-          <div class="ms-block">
-            <div class="ms-user" style="height:160px">
-              <ol>
-                <%= render @goals %>
-              </ol>
-            </div>
-          </div>
+          <%= link_to "Create New Goal", new_goal_path %>
         </div>
-<%= link_to "Create New Goal", new_goal_path %>
     <!-- END OF GOALS CARD -->
 
     <!-- BEGIN GROUPS CARD -->
         <div class="card m-v-0" id="messages-main">
-          <div class="ms-block" style="background-color:yellow;height:20px;">
-            <div class="ms-user">
-              <h5>My Groups</h5>
-            </div>
-          </div>
-          <div class="ms-block" style="overflow:scroll;">
-            <div class="ms-user" style="height:160px;list-style-type:none;">
+            <h5 style="background-color:yellow;padding:5px;">My Groups</h5>
+          <!-- <div class="ms-block" style="overflow:scroll;"> -->
+            <div class="ms-user" style="height:160px;list-style-type:none;overflow:scroll;">
               <%= render @groups %>
             </div>
-          </div>
-        </div>
+          <!-- </div> -->
           <%= link_to "Create New Group", new_group_path %>
-    </div>
+        </div>
+      </div>
     <!-- END OF GROUPS CARD -->
 
-    <div class="row" style="padding-left:15px;">
       <div class="ms-body">
       <!-- BEGIN ACTIVITIES CARD -->
-          <div class="col-sm-6 m-b-20">
+          <!-- <div class="col-sm-6 m-b-20"> -->
             <div class="card">
-              <div class="lv-body">
-                <div class="card-header">
-                  <h3>
-                    Things To Do
-                    <small>
-                      one step-at-a-time
-                    </small>
-                  </h3>  
+              <!-- <div class="lv-body"> -->
+                <div class="card-header" style="padding:0px;background-color:orange;">
+                  <h4>
+                    Things To Do <small>one step-at-a-time</small>
+                  </h4>  
                 </div>
+
+                <div class="card-body table-responsive" tabindex="0" style="overflow;outline:none;">
+                  <div class="message-scroll">
+                    <div class="listview lv-message">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Status</th>
+                            <th>Description</th>
+                            <th>Times</th>
+                            <th>By</th>
+                            <th>Delete</th>
+                          </tr>
+                        </thead>                  
+                        <% @activities.each do |activity| %>
+                          <tbody>
+                            <tr>
+                              <td><button></button></td>
+                              <td><%=activity.description%></td>
+                              <td><%=activity.remaining_for_period%></td>
+                              <td><%=activity.upcoming_due_dates.first.strftime("%B %d, %Y") %></td>
+                              <td><button>X</button></td>
+                            </tr>
+                          </tbody>
+                        <% end %>
+                      </table>           
+                    </div>
+                  </div>
+                </div>
+              <!-- </div> -->
+            </div>
+          <!-- </div> -->
+        <div class="row" style="padding-left:15px;padding-top:0px;">
+
+          <div class="col-md-6">
+            <!-- <div class="card m-v-0" id="messages-main"> -->
+                      <h5 style="background-color:blue;height:20px;">Card One</h5>
+            <div class="card">
+              <!-- <div class="lv-body"> -->
+             <!--    <div class="card-header">
+                  <div class="ms-block" >
+                    <div class="ms-user">
+                    </div>
+                  </div>
+                </div> -->
 
                 <div class="message-scroll">
                   <div class="listview lv-message">
-                    This is where the upcoming activities will go.                 
+                    <%= render @feeds %>
                   </div>
                 </div>
-              </div>
+              <!-- </div> -->
             </div>
           </div>
-        </div>
-    <!-- END ACTIVITIES CARD -->
 
-    <!-- BEGIN FEED CARD -->
-        <div class="col-md-4">
-          <div class="card">
-            <div class="lv-body">
-              <div class="card-header">
-                <div class="ms-block" style="background-color:blue;height:20px;">
-                  <div class="ms-user">
-                    <h5>Feed</h5>
+        <!-- BEGIN FEED CARD -->
+          <div class="col-md-6">
+            <h5 style="background-color:blue;padding-top:5px;">Feed</h5>
+            <div class="card">
+              <!-- <div class="lv-body"> -->
+                <!-- <div class="card-header"> -->
+                  <!-- <div class="ms-user"> -->
                   </div>
-                </div>
-              </div>
+              <!-- </div> -->
 
               <div class="message-scroll">
                 <div class="listview lv-message">
@@ -90,11 +114,9 @@
             </div>
           </div>
         </div>
-    <!-- END FEED CARD -->
-
-    <!-- BEGINS CALENDAR -->
-
-    <!-- ENDS CALENDAR -->
+        <!-- END FEED CARD -->
+      </div>
+    <!-- END ACTIVITIES CARD -->
     </div>
   </div>
 </section>
