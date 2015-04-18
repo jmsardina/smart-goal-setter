@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416000054) do
+ActiveRecord::Schema.define(version: 20150418193834) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -119,6 +119,13 @@ ActiveRecord::Schema.define(version: 20150416000054) do
     t.string   "status",         default: "pending"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+  end
+
+  create_table "motivational_quotes", force: :cascade do |t|
+    t.string   "content"
+    t.string   "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade do |t|

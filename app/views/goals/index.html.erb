@@ -1,7 +1,7 @@
 <section id="content">
   <div class="container">
     <div class="block-header">
-      <h2>Random motivational quote/question here</h2>
+      <h2 style="font-family:comic sans ms;"><strong><%= MotivationalQuote.find(rand(1..MotivationalQuote.count)).content %></strong></h2>
     </div>
 
     <!-- BEGIN GOALS CARD -->
@@ -79,7 +79,7 @@
 
         <!-- BEGIN FEED CARD -->
           <div class="col-md-6">
-            <h5 style="background-color:blue;padding-top:7px;">Feed</h5>
+            <h5 style="background-color:blue;padding-top:5px;">Feed</h5>
             <div class="card">
               <div class="message-scroll">
                 <div class="listview lv-message">
