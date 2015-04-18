@@ -1,64 +1,149 @@
-<%= render 'shared_partials/js_charts' %>
-<%= render 'shared_partials/mini_dashboard_charts' %>
-
-<div class="row">
-  <div class="col-sm-6">
-    <%= render 'shared_partials/goal_container' %>
-  </div>
-  <div class="col-sm-6">
-     <%= render 'shared_partials/feed_container' %>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-4">
-    <%= render 'shared_partials/goal_progress' %>
-  </div>
-  <div class="col-md-3 col-sm-6">
-        <%= render 'shared_partials/activity_aggregate'%>
-        <div class="epc-item bgm-pink">
-            <div class="easy-pie main-pie" data-percent="<%=overall_percentage_complete %>">
-                <div class="percent"><%= overall_percentage_complete %></div>
-                <div class="pie-title">Overall Completed</div>
-            </div>
-        </div>
-    </div>`
-    <div class="col-sm-4">
-        <div class="mini-charts-item bgm-pink">
-            <div class="clearfix">
-                <div class="chart chart-pie stats-pie"></div>
-                <div class="count">
-                    <small>Groups</small>
-                    <h2><%= current_user.groups.count %></h2>
-                </div>
-            </div>
-        </div>
-
-        <div class="mini-charts-item bgm-red">
-            <div class="clearfix">
-                <div class="chart stats-line"></div>
-                <div class="count">
-                    <small>Boards</small>
-                    <h2><%= current_user.user_board_count %></h2>
-                </div>
-            </div>
-        </div>
-
-        <div class="mini-charts-item bgm-blue">
-            <div class="clearfix">
-                <div class="chart chart-pie stats-pie"></div>
-                <div class="count">
-                    <small>Comments</small>
-                    <h2><%= current_user.comments.count %></h2>
-                </div>
-            </div>
-        </div>
+<%#= render 'shared_partials/js_charts' %>
+<%#= render 'shared_partials/mini_dashboard_charts' %>
+<section id="content">
+  <div class="container">
+    <div class="block-header">
+      <h2>Random motivational quote/question here</h2>
     </div>
 
-    <div class="col-sm-4">
-        <%= render 'shared_partials/group_container'%>
-    </div>
-</div>
-<h3>Pending requests</h3>
-  <%= render 'invitations/request', requests: @pending_requests %>
+    <!-- BEGIN GOALS CARD -->
+    <div class="card m-v-0" id="messages-main">
+      <div class="ms-menu">
+        <div class="card m-v-0" id="messages-main">
+        
+          <div class="ms-block" style="background-color:yellow;height:20px;">
+            <div class="ms-user">
+              <h5>My Goals</h5>
+            </div>
+          </div>
+          <div class="ms-block">
+            <div class="ms-user" style="height:160px">
+              <ul>
+                <%= render @goals %>
+              </ul>
+            </div>
+          </div>
+        </div>
+<%= link_to "Create New Goal", new_goal_path %>
+    <!-- END OF GOALS CARD -->
 
+    <!-- BEGIN GROUPS CARD -->
+        <div class="card m-v-0" id="messages-main">
+          <div class="ms-block" style="background-color:yellow;height:20px;">
+            <div class="ms-user">
+              <h5>My Groups</h5>
+            </div>
+          </div>
+          <div class="ms-block">
+            <div class="ms-user" style="height:160px">
+              <ul>
+                <%= render @groups %>
+              </ul>
+            </div>
+          </div>
+        </div>
+          <%= link_to "Create New Group", new_group_path %>
+    </div>
+    <!-- END OF GROUPS CARD -->
+
+    <div class="row" style="padding-left:15px;">
+      <div class="ms-body">
+      <!-- BEGIN ACTIVITIES CARD -->
+          <div class="col-sm-6 m-b-20">
+            <div class="card">
+              <div class="lv-body">
+                <div class="card-header">
+                  <h3>
+                    Things To Do
+                    <small>
+                      one step-at-a-time
+                    </small>
+                  </h3>  
+                  las;djfklajsdlkfjasldkjf                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <!-- END ACTIVITIES CARD -->
+
+    <!-- BEGIN FEED CARD -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="lv-body">
+              <div class="card-header">
+                <div class="ms-block" style="background-color:blue;height:20px;">
+                  <div class="ms-user">
+                    <h5>Feed</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <!-- END FEED CARD -->
+    </div>
+  </div>
+</section>
+
+
+     <!--  <div class="row">
+        <div class="col-sm-6">
+          <%#= render 'shared_partials/goal_container' %>
+        </div>
+        <div class="col-sm-6">
+         <%#= render 'shared_partials/feed_container' %>
+       </div>
+     </div>
+     <div class="row">
+      <div class="col-sm-4">
+        <%#= render 'shared_partials/goal_progress' %>
+      </div> -->
+        <!--   <div class="col-md-3 col-sm-6">
+                <%#= render 'shared_partials/activity_aggregate'%>
+                <div class="epc-item bgm-pink">
+                    <div class="easy-pie main-pie" data-percent="<%#=overall_percentage_complete %>">
+                        <div class="percent"><%#= overall_percentage_complete %></div>
+                        <!-- <div class="pie-title">Overall Completed</div> -->
+                   <!--  </div>
+                </div>
+              </div> -->
+        <!--     <div class="col-sm-4">
+                <div class="mini-charts-item bgm-pink">
+                    <div class="clearfix">
+                        <div class="chart chart-pie stats-pie"></div>
+                        <div class="count">
+                            <small>Groups</small>
+                            <h2><%#= current_user.groups.count %></h2>
+                        </div>
+                    </div>
+                  </div> -->
+
+        <!--         <div class="mini-charts-item bgm-red">
+                    <div class="clearfix">
+                        <div class="chart stats-line"></div>
+                        <div class="count">
+                            <small>Boards</small>
+                            <h2><%#= current_user.user_board_count %></h2>
+                        </div>
+                    </div>
+                  </div> -->
+
+        <!--         <div class="mini-charts-item bgm-blue">
+                    <div class="clearfix">
+                        <div class="chart chart-pie stats-pie"></div>
+                        <div class="count">
+                            <small>Comments</small>
+                            <h2><%#= current_user.comments.count %></h2>
+                        </div>
+                    </div>
+                </div>
+              </div> -->
+
+<!--               <div class="col-sm-4">
+                <%#= render 'shared_partials/group_container'%>
+              </div>
+            </div>
+            <h3>Pending requests</h3>
+            <%#= render 'invitations/request', requests: @pending_requests %> -->
 
