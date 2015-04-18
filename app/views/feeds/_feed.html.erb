@@ -5,6 +5,6 @@
     <%= image_tag feed.user.avatar(:thumb)%>
   <% end %>
 
-  <%= feed.user.name %> will <%= feed.trackable.description.downcase %><small><%=time_ago_in_words(feed.trackable.created_at) %> ago </small><br>
+  <%= feed.user.name %>  <%= "will " + feed.trackable.description.downcase %> <small><%=time_ago_in_words(feed.trackable.created_at) %> ago </small><br>
 </div>
 
