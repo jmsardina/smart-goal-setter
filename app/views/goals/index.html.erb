@@ -11,16 +11,16 @@
       <div class="ms-menu">
         <div class="card m-v-0" id="messages-main">
         
-          <div class="ms-block" style="background-color:yellow;height:20px;">
+          <div class="ms-block" style="background-color:yellow;height:20px;style=overflow:scroll";>
             <div class="ms-user">
               <h5>My Goals</h5>
             </div>
           </div>
           <div class="ms-block">
             <div class="ms-user" style="height:160px">
-              <ul>
+              <ol>
                 <%= render @goals %>
-              </ul>
+              </ol>
             </div>
           </div>
         </div>
@@ -34,11 +34,9 @@
               <h5>My Groups</h5>
             </div>
           </div>
-          <div class="ms-block">
-            <div class="ms-user" style="height:160px">
-              <ul>
-                <%= render @groups %>
-              </ul>
+          <div class="ms-block" style="overflow:scroll;">
+            <div class="ms-user" style="height:160px;list-style-type:none;">
+              <%= render @groups %>
             </div>
           </div>
         </div>
