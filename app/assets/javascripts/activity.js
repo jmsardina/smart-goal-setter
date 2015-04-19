@@ -1,6 +1,35 @@
 function Activity(){
 }
 
+Activity.updateStatus = function(e){
+  var $checkbox = $(this);
+  var $form = $(this).parents("tr").children("form");
+  var href = $form.attr("action");
+
+  $.ajax(href, {
+    "method": "PATCH",
+    "data": $form.serialize(),
+    "success": function(response){
+    $checkbox.parents("tr").toggleClass("completed");
+    }
+  })
+}
+
+function deleteActivity(e){
+  e.preventDefault();
+  var $tr = $(this).parents("tr");
+  var href = $("form", $tr).attr("action");
+
+  $.ajax(href, {
+    "method": "DELETE",
+    "success": function(){
+      $tr.slideUp(function(){
+        $(this).remove();
+      });
+    }
+  })
+}
+
 Activity.updateContent = function(e){
   e.preventDefault();
 
@@ -19,21 +48,6 @@ Activity.updateContent = function(e){
   })
 }
 
-Activity.updateStatus = function(e){
-  // debugger
-  var $checkbox = $(this);
-  var $form = $(this).parents("tr").children("form");
-  var href = $form.attr("action");
-// debugger
-  $.ajax(href, {
-    "method": "PATCH",
-    "data": $form.serialize(),
-    "success": function(response){
-    $checkbox.parents("tr").toggleClass("completed");
-// debugger
-    }
-  })
-}
 
 Activity.edit = function(e){
   e.preventDefault();
@@ -69,21 +83,6 @@ function addActivityListener(){
     });
 }
 
-function deleteActivity(e){
-  e.preventDefault();
-  var $li = $(this).parents("li");
-  var href = $("form", $li).attr("action");
-
-  $.ajax(href, {
-    "method": "DELETE",
-    "success": function(){
-      $li.slideUp(function(){
-
-        $(this).remove();
-      });
-    }
-  })
-}
 
 function showActivityForm(){
   // $(this).parents().find($("form#edit-activity.hidden").removeClass("hidden"));
@@ -92,6 +91,8 @@ function showActivityForm(){
 
 $(function(){
   $("table.table").on("change", "input:checkbox", Activity.updateStatus);
+  $("table.table").on("click", "button.destroy", deleteActivity);
+  
   $("ul.list").on("submit", "form.update", Activity.updateContent);
   $("ul.list").on("dblclick", "li form label", showActivityForm);
   // $("ul.list").on("dblclick", "li label", Activity.edit);
@@ -100,7 +101,6 @@ $(function(){
   // $("ul.list").on("blur", "li input.edit", Activity.stopEdit);
   $("button.clear-completed").on("click", Activity.clear);
   $("button.show-completed").on("click", Activity.show);
-  $("ul.list").on("click", "button.destroy", deleteActivity);
   addActivityListener();
   $("form#new_activity").hide()
   $("button#show-activity-form").on("click", $("form#new-activity").toggle())
