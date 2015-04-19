@@ -11561,9 +11561,7 @@ body #content {
     background-size: 24px 24px;
   }
 }
-.top-menu > li > a.tm-search {
-  background-image: url("../img/icons/search.png");
-}
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   .top-menu > li > a.tm-search {
     background-image: url("../img/icons/search@2x.png");
@@ -11686,7 +11684,6 @@ body #content {
   border-radius: 2px;
   color: rgba(51, 51, 51, 0.69);
   background-color: rgba(255, 255, 255, 0.26);
-  background-image: url("../img/icons/search.png");
   background-repeat: no-repeat;
   background-position: 10px center;
 }

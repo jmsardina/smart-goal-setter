@@ -20,15 +20,17 @@ Activity.updateContent = function(e){
 }
 
 Activity.updateStatus = function(e){
+  // debugger
   var $checkbox = $(this);
-  var $form = $(this).parents("form:first");
+  var $form = $(this).parents("tr").children("form");
   var href = $form.attr("action");
-
+// debugger
   $.ajax(href, {
     "method": "PATCH",
     "data": $form.serialize(),
     "success": function(response){
-      $checkbox.parents("li:first").toggleClass("completed");
+    $checkbox.parents("tr").toggleClass("completed");
+// debugger
     }
   })
 }
@@ -89,7 +91,7 @@ function showActivityForm(){
 }
 
 $(function(){
-  $("ul.list").on("change", "input:checkbox", Activity.updateStatus);
+  $("table.table").on("change", "input:checkbox", Activity.updateStatus);
   $("ul.list").on("submit", "form.update", Activity.updateContent);
   $("ul.list").on("dblclick", "li form label", showActivityForm);
   // $("ul.list").on("dblclick", "li label", Activity.edit);
@@ -100,8 +102,6 @@ $(function(){
   $("button.show-completed").on("click", Activity.show);
   $("ul.list").on("click", "button.destroy", deleteActivity);
   addActivityListener();
-  $("form#new_activity").hide();
-  $("button#show-activity-form").on("click", function() {
-    $("form#new-activity").toggle()
-  });
+  $("form#new_activity").hide()
+  $("button#show-activity-form").on("click", $("form#new-activity").toggle())
 });
