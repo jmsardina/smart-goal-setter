@@ -1,12 +1,6 @@
 class GroupsController < ApplicationController
 
 	def index
-		# if current_user
-		# 	@groups = current_user.groups
-		# else
-		# 	@groups = Group.all
-		# 	render 'welcome_page'
-		# end
 	end
 
 	def new
@@ -19,7 +13,6 @@ class GroupsController < ApplicationController
 		@group.creator_id = current_user.id
 		if @group.save
 			UserGroup.create(group_id: @group.id, member_id: current_user.id)
-			track_feed(@group)
 			redirect_to group_path(@group)
 		else
 			flash[:notice] = "Something went wrong...Try again."
@@ -46,13 +39,13 @@ class GroupsController < ApplicationController
 		set_group
 		@comment = Comment.new
 		@comments = Comment.where(commentable_type: "Group", commentable_id: set_group.id)
-		# binding.pry
-		@board = Board.new
-		@boards = Board.where(group_id: set_group.id)
+		# @board = Board.new
+		# @boards = Board.where(group_id: set_group.id)
 		@cheer = Cheer.new
 		@members = @group.members
 		@tags = @group.tags
 		@invitation = Invitation.new
+		@board = Board.where(group_id: set_group.id).first
 	end
 
 	def destroy

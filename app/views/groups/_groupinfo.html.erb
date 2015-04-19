@@ -27,7 +27,12 @@
       <% end %>
     </div>
 
-    <% if !@members.include?(current_user) %>
-      <%= render 'invitations/form', invitable: @group, recipient: @group.creator, invitation: @invitation %>
-    <% end %>
+    <div class="lv-item media active">
+      <p class="about-group" style="overflow:scroll;">
+        <strong>Food For Thought</strong><br>
+        <%= MotivationalQuote.find(rand(1..MotivationalQuote.count)).content %>
+      </p>
+    </div>
+
+
 </div>
