@@ -13,10 +13,6 @@
 
 //= require jquery
 //= require jquery_ujs
-//= require charts
-//= require moment
-//= require bootstrap-growl
-//= require bootstrap-select
 //= require bootstrap
 //= require goal
 //= require activity

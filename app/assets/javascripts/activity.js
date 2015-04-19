@@ -100,6 +100,8 @@ $(function(){
   $("button.show-completed").on("click", Activity.show);
   $("ul.list").on("click", "button.destroy", deleteActivity);
   addActivityListener();
-  $("form#new_activity").hide()
-  $("button#show-activity-form").on("click", $("form#new-activity").toggle())
+  $("form#new_activity").hide();
+  $("button#show-activity-form").on("click", function() {
+    $("form#new-activity").toggle()
+  });
 });
