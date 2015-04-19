@@ -2,26 +2,30 @@
   <div class="notice"><%= flash[:notice] %></div>
 <% end %> 
 
-<div>
-	<%= render 'search/form' %>
-	<%= render 'boards/form' %>
-	<% if @results %>
-		<%= render 'search/results' %>
-	<% end %>
-</div>
-
 <div class="card m-b-0" id="messages-main">
 	<%= render 'groups/groupinfo', group: @group, tags: @tags %>
-
 </div>
 
 <div class="ms-body">
-	<%= render @boards %>
+  <div class="card-body card-padding">
+    <div class="message-scroll">
+      <div class="listview lv-message">
+        <% @comments = @board.comments %>
+        <div class="mgroedia-demo">
+          <ul style="list-type-style:none;">
+            <%= render @comments %>
+          </ul>
+        </div>
+      </div>
+		</div>
+    <div class="lv-footer ms-reply">
+    <%= render 'comments/form', commentable: @board %>
+  </div>
+ </div>
 
-</div>
-<div class="row", style="padding-left:15px;">
-	<div class="member-scroll">
-		<div class="card", style="width:940px;">
+<div class="row">
+	<div class="member-scroll" style="padding-left:15px;">
+		<div class="card" style="background-color:#c3e0fb">
 			<%= render @members %>
 		</div>
 	</div>

@@ -1,5 +1,4 @@
 <%= li_for_comment(comment) do %>
-
   <div class="media">
     <div class="pull-left">
       <% if comment.user.uid %>
@@ -41,12 +40,13 @@
                <%= reply.content %>
                <%= render 'cheers/form', cheerable: reply %>
             </div>
+
             <small class="ms-date">
-              <%= reply.user.name + " wrote" %>
               <%= time_ago_in_words(reply.created_at) + " ago" %><br>
               <%= reply.cheer_count %> cheers<br>
             </small>
           </div>
+        </div>
       <% end %>
     </div>
   </div>

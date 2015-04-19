@@ -39,6 +39,7 @@
       </div>
     <!-- END OF GROUPS CARD -->
 
+    <!-- BEING ACTIVITIES CARD -->
       <div class="ms-body">
         <div class="card">
           <div class="card-header" style="padding:0px;background-color:orange;">
@@ -48,7 +49,7 @@
           </div>
 
           <div class="card-body table-responsive" tabindex="0" style="overflow;outline:none;">
-            <div class="message-scroll">
+            <div class="activities-scroll">
               <div class="listview lv-message">
                 <table class="table">
                   <thead>
@@ -76,12 +77,13 @@
             </div>
           </div>
         </div>
+    <!-- END ACTIVITIES CARD -->
 
         <div class="row" style="padding-left:15px;padding-top:0px;">
           <div class="col-md-6">
             <h5 style="background-color:blue;height:20px;">Card One</h5>
             <div class="card">
-                <div class="message-scroll">
+                <div class="activities-scroll">
                   <div class="listview lv-message">
                     <%= render @feeds %>
                   </div>
@@ -93,17 +95,16 @@
           <div class="col-md-6">
             <h5 style="background-color:blue;padding-top:5px;">Feed</h5>
             <div class="card">
-              <div class="message-scroll">
+              <div class="activities-scroll">
                 <div class="listview lv-message">
                   <%= render @feeds %>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         <!-- END FEED CARD -->
+        </div>
       </div>
-    <!-- END ACTIVITIES CARD -->
     </div>
   </div>
 </section>
