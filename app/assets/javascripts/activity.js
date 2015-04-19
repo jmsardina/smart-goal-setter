@@ -30,6 +30,31 @@ function deleteActivity(e){
   })
 }
 
+// function createActivity(e){
+//   e.preventDefault();
+//   var $form = $(this).parents("form");
+//   var href = $form.attr("action");
+
+//   $.ajax(href, {
+//     "method": "POST",
+//     "success": function(){
+//       $(this).create();
+//     }
+//   })
+// }
+
+function createActivity(e){
+  e.preventDefault();
+  var $form = $(this).parents("form");
+  var href = $form.attr("action");
+
+  $.post(href, $form.serialize() , function(tr){
+    $("#new_activity", $form).val("");
+
+    $("table").append(tr);
+  });
+};
+
 Activity.updateContent = function(e){
   e.preventDefault();
 
@@ -92,6 +117,7 @@ function showActivityForm(){
 $(function(){
   $("table.table").on("change", "input:checkbox", Activity.updateStatus);
   $("table.table").on("click", "button.destroy", deleteActivity);
+  $("form.new_activity").on("submit", createActivity);  
   
   $("ul.list").on("submit", "form.update", Activity.updateContent);
   $("ul.list").on("dblclick", "li form label", showActivityForm);

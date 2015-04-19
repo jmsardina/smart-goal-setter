@@ -2,9 +2,8 @@ function Goal(){
 }
 
 Goal.updateStatus = function(e){
-  debugger
   var $checkbox = $(this);
-  var $form = $(this).parents("form:first");
+  var $form = $(this).parents("tr").children("form");
   var href = $form.attr("action");
   var id = $(this).data("id")
 
