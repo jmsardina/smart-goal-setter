@@ -44,14 +44,14 @@ function deleteActivity(e){
 // }
 
 function createActivity(e){
-  e.preventDefault();
-  var $form = $(this).parents("form");
-  var href = $form.attr("action");
+  // e.preventDefault();
+  // var $form = $(this).parents("form");
+  // var href = $form.attr("action");
 
-  $.post(href, $form.serialize() , function(tr){
-    $("#new_activity", $form).val("");
+  // $.post(href, $form.serialize() , function(tr){
+  //   $("#new_activity", $form).val("");
 
-    $("table").append(tr);
+  //   $("table").append(tr);
   });
 };
 
