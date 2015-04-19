@@ -3,6 +3,9 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
+require 'capybara/rails'
+require 'capybara/rspec'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -24,6 +27,10 @@ require 'rspec/rails'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+Capybara.configure do |config|
+  config.javascript_driver = :webkit
+end
+
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
@@ -36,7 +43,7 @@ RSpec.configure do |config|
     DatabaseCleaner.start
   end
 
-  config.before(:each, :js => true) do
+  config.before(:each, js: true) do
     DatabaseCleaner.strategy = :truncation
   end
 
