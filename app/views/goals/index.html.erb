@@ -67,7 +67,7 @@
                         <% goal = activity.goal %>
                         <%= form_for([goal, activity]) do |f| %>
                         <td><%= f.check_box :status, class: "toggle" %></td>
-                        <td><%=activity.description%></td>
+                        <td><%=link_to activity.description, goal_path(activity.goal) %></td>
                         <td><%=activity.remaining_for_period%></td>
                         <td><%=activity.upcoming_due_dates.first.strftime("%B %d, %Y") %></td>
                         <td><button class="destroy">X</button></td>

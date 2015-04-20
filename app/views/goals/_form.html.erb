@@ -32,9 +32,8 @@
           <div class="col-sm-4">
             <p class="c-black f-500 m-b-20"><%= f.label :due_date, "Completion Date"%></p>
             <div class="input-group form-group">
-              <span class="input-group-addon"><i class="md md-event"></i></span>
               <div class="dtp-container dropdown fg-line">
-                <%= f.text_field :due_date, class: "form-control date-picker", :"data-toggle" => "dropdown", value: 30.days.from_now %>
+                <%= f.date_field :due_date, value: 30.days.from_now %>
               </div>
             </div>
           </div>
@@ -42,19 +41,15 @@
             <p class="c-black f-500 m-t-20 m-b-20">
               <div class="fg-line">
                 <%= f.label :description %></p>
-                <%= f.text_area :description, placeholder: "How is your goal Specific, Measurable, Attainable, Relevant (important), Time-based??", class: "form-control auto-size", style: "overflow: hidden; word-wrap: break-word; height:32px;" %>
+                <%= f.text_area :description, placeholder: "How is your goal Specific, Measurable, Attainable, Relevant (important), Time-based??", class: "form-control auto-size", style: "overflow: hidden; word-wrap: break-word;" %>
               </div>
-            </div>
+            </div><br>
 
-            <p class="c-black f-500 m-b-20 m-t-20">
-              <%= f.label :tags %>
-              <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |box| %>
-              <%= box.label :class => "checkbox checkbox-inline m-r-20" %>
-              <%= box.check_box :class => "checkbox" %>
-              <%= content_tag(:i, "", class: "input-helper") %>
-              <% end %>
-            </p>
           </div>
+            <p class="c-black f-500 m-b-20 m-t-20">
+              <%= f.label :tags %><br>
+              <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name)%>
+            </p>
         </div>
       </div> <!-- Describe Goal Card End -->
 
@@ -67,7 +62,7 @@
             <div class="fg-line">
               <p class="c-black f-500 m-b-20">                 
 
-                <%= f.text_area :potential_barrier, placeholder: "List some things that will make it difficult to achieve your goal.", class: "form-control auto-size", style: "overflow: hidden; word-wrap: break-word; height:32px;" %>
+                <%= f.text_area :potential_barrier, placeholder: "List some things that will make it difficult to achieve your goal.", class: "form-control auto-size", style: "overflow: hidden; word-wrap: break-word; height:60px;" %>
               </p>
             </div>
           </div>

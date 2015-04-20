@@ -2,31 +2,34 @@
   <div class="notice"><%= flash[:notice] %></div>
 <% end %> 
 
-<div class="card m-b-0" id="messages-main">
-	<%= render 'groups/groupinfo', group: @group, tags: @tags %>
-</div>
-
-<div class="ms-body">
-  <div class="card-body card-padding">
-    <div class="message-scroll">
-      <div class="listview lv-message">
-        <% @comments = @board.comments %>
-        <div class="mgroedia-demo">
-          <ul style="list-type-style:none;">
-            <%= render @comments %>
-          </ul>
-        </div>
-      </div>
+<section id="content">
+	<div class="container">
+		<div class="card m-b-0" id="messages-main" style="padding-top:20px">
+			<%= render 'groups/groupinfo', group: @group, tags: @tags %>
 		</div>
-    <div class="lv-footer ms-reply">
-    <%= render 'comments/form', commentable: @board %>
-  </div>
- </div>
 
-<div class="row">
-	<div class="member-scroll" style="padding-left:15px;">
-		<div class="card" style="background-color:#c3e0fb">
-			<%= render @members %>
+		<div class="ms-body">
+		  <div class="card-body card-padding">
+		    <div class="message-scroll">
+		      <div class="listview lv-message">
+		        <div class="mgroedia-demo">
+		          <ul style="list-type-style:none;">
+		            <%= render @comments %>
+		          </ul>
+		        </div>
+		      </div>
+				</div>
+		    <div class="lv-footer ms-reply">
+		    <%= render 'comments/form', commentable: @board %>
+		  </div>
+		 </div>
+
+		<div class="row">
+			<div class="member-scroll" style="padding-left:15px;">
+				<div class="card" style="background-color:#c3e0fb">
+					<%= render @members %>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

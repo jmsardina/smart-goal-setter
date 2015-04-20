@@ -78,7 +78,5 @@ $(function(){
   $("table.table").on("change", "input#goal_status", Goal.updateStatus);
   $("table.table").on("click", "button.destroy", deleteGoal)
 
-
-  // $("ul.list-goals").on("change", "input:checkbox", Goal.updateStatus);
   $("div.container").on("click", "button.destroy", Invitation.declineRequest)
 });

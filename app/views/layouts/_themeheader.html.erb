@@ -1,24 +1,16 @@
-<header id="header" style="background-color:#c3e0fb"">
+<header id="header" style="background-color:#c3e0fb">
   <ul class="header-inner">
-    <li class="logo hidden-xs">
-      <a href="/">Goal-Setter</a>
-    </li>
+    <li class="pull-right" id="top-search"><a class="tm-search"><%= render 'search/form' %></a></li>
 
+    <a href="/"><strong style="font-size: 40px;font-family:comic sans ms;">Goal-Setter</strong></a>
+    
     <li class="pull-right">
-      <ul class="top-menu" >
-        <li id="top-search">
-          <a class="tm-search"><%= render 'search/form' %></a>
-        </li>
-        <!-- <li class="dropdown">
-          <a data-toggle="dropdown" class="tm-notification href">
-            <i class="tmn-counts">6</i>
-          </a>
-        </li> -->
-        <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-        <li><%= current_user.points%></li>
-        <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+      <ul class="top-menu" style="font-family:comic sans ms;" >
+        <img src="<%=current_user.avatar.url%>" style="height:auto;width:auto;max-width:40px;max-height:40px;">
+        <%= "Hello #{current_user.name}!" %> |
+        <a href="/users/edit"><span style="color:blue">  Edit Profile </span></a>|
+        <a href="users/sign_out"><span style="color:blue;">  Sign Out </span> </a>
       </ul>
     </li>
   </ul>
-
 </header>

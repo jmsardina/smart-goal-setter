@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
 
   has_many :tags, as: :taggable
   accepts_nested_attributes_for :tags
-  has_many :boards
+  has_many :boards, dependent: :destroy
   has_many :comments, through: :boards
   has_many :comments, as: :commentable
   has_many :invitations, as: :invitable
