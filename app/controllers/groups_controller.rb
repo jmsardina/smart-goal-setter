@@ -8,9 +8,9 @@ class GroupsController < ApplicationController
 	end
 
 	def create
-  # binding.pry
 		@group = Group.new(group_params)
 		@group.creator_id = current_user.id
+		@group.boards << Board.create(name: "Main")
 		if @group.save
 			UserGroup.create(group_id: @group.id, member_id: current_user.id)
 			redirect_to group_path(@group)
@@ -38,9 +38,9 @@ class GroupsController < ApplicationController
 	def show
 		set_group
 		@comment = Comment.new
-		@comments = Comment.where(commentable_type: "Group", commentable_id: set_group.id)
+		@board = Board.where(group_id: set_group.id).first
+		@comments = Comment.where(commentable_type: "Board", commentable_id: @board.id).order(:created_at).reverse_order
 		# @board = Board.new
-		# @boards = Board.where(group_id: set_group.id)
 		@cheer = Cheer.new
 		@members = @group.members
 		@tags = @group.tags

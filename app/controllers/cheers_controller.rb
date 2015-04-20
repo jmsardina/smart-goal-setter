@@ -5,6 +5,10 @@ class CheersController < ApplicationController
 
     if !Cheer.find_by(user_id: current_user.id, cheerable_type: cheer_params[:cheerable_type], cheerable_id: cheer_params[:cheerable_id])
       @cheer.save
+
+      respond_to do |format|
+        format.js
+     end
   
       cheerable_id = cheer_params[:cheerable_id].to_i
 
