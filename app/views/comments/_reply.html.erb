@@ -16,12 +16,6 @@
         <%= comment.reply_counter %> comments
         <%#= comment.cheer_count %> <!-- cheers -->
         <%#= render 'cheers/form', cheerable: comment %>
-        <div class="reply-to-comment">
-          <div class="reply-form hidden">
-            <%= render "comments/form", commentable: comment%>
-          </div>
-          <button class="reply">Reply</button>
-        </div>
       </small>
     </div>
   </div>
