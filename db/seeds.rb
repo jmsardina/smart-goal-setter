@@ -9,16 +9,10 @@ def emails
   (1..20).collect{|number| base_string.gsub("0", number.to_s)}   
 end
 
-# PICTURES = ['./app/assets/img/profile-pics/1.jpg',
-#             './app/assets/img/profile-pics/2.jpg',
-#             './app/assets/img/profile-pics/3.jpg',
-#             './app/assets/img/profile-pics/4.jpg',
-#             './app/assets/img/profile-pics/5.jpg',
-#             './app/assets/img/profile-pics/6.jpg',
-#             './app/assets/img/profile-pics/7.jpg',
-#             './app/assets/img/profile-pics/8.jpg',
-#             './app/assets/img/profile-pics/9.jpg'
-# ]
+# # PICTURES = ["http://i.istockimg.com/cms/resources/images/HomePage/Tiles/US%20April/baby-70218269.jpg",
+# "http://i.istockimg.com/file_thumbview_approve/18070301/2/stock-photo-18070301-mother-and-daughter.jpg",
+
+# # ]
 EMAILS = emails
 
 def create_users
@@ -32,25 +26,42 @@ end
 
 TAGS = ["health", "spirit", "finance", "education",
 "personal", "relationship", "work", "intelectual", "political", "weight-loss",
-"smoking", "alcohol", "children", "family"].sort!
+"smoking", "alcohol", "children", "family", "professional", "fitness", "adventurous", "leisure"].sort!
 
 def create_tags   
   TAGS.each{|tag| Tag.create(name: tag)} 
 end
 
 GROUP_NAMES = [
-  {"Weight-aThon" => ["Getting Healthier, one pound-at-a-time", [Tag.take(2)]]}, 
-  {"The Flatiron Students" => ["Becoming Junior Programmers in 12 weeks!", [Tag.take(2)]]},
-  {"The Locals" => ["Let's visit every street in New York City by the end of 2016!",[Tag.take(2)]]},
-  {"Cleaners of Tomorrow" => ["Fellow humans trying to keep a tidier home", [Tag.take(2)]]},
-  {"Family Matters" => ["Let's treat our loved ones with respect they deserve", [Tag.take(2)]]}]
+  {"Weight-aThon" => ["Getting Healthier, one pound-at-a-time", 
+    [Tag.find_by(name: "fitness"), Tag.find_by(name: "weight-loss"), Tag.find_by(name: "health")]
+    ]
+  }, 
+  {"The Flatiron Students" => ["Becoming Junior Programmers in 12 weeks!", 
+    [Tag.find_by(name: "intelectual"), Tag.find_by(name: "professional")]
+    ]
+  },
+  {"The Locals" => ["Let's visit every street in New York City by the end of 2016!",
+    [Tag.find_by(name: "adventurous"), Tag.find_by(name: "leisure")]
+    ]
+  },
+  {"Cleaners of Tomorrow" => ["Fellow humans trying to keep a tidier home", 
+    [Tag.find_by(name: "personal")]
+    ]
+  },
+  {"Family Matters" => ["Let's treat our loved ones with respect they deserve", 
+  [Tag.find_by(name: "family"), Tag.find_by(name: "relationship")]
+    ]
+  }]
 
 def create_groups
   GROUP_NAMES.each do |group_hash|
     group_hash.each do |name, info| 
       group = Group.create(name: name, description: info[0], creator_id: User.all.sample.id, image_url: "http://i.istockimg.com/file_thumbview_approve/38298846/2/stock-photo-38298846-mother-with-her-daughter-on-the-beach.jpg")
       group.boards << Board.create(name: "Main")
-      group.tags << info[1]
+      info.last.each do |tag|
+        group.tags << tag
+      end
       group.members << User.take(7)
       group.save
     end
@@ -65,8 +76,9 @@ end
 # end
 
 # # BEGIN GOALS
+# LANGUAGE GOAL
 8.times do 
-  lang_goal = Goal.create(
+  Goal.create(
     name: "French", 
     description: "Become conversationally proficient in French in 6 months", 
     due_date: 6.months.from_now,
@@ -108,8 +120,9 @@ end
     )
 end
 
+#FITNESS GOAL
 8.times do 
-exercise_goal = Goal.create(
+Goal.create(
   name: "Exercise", 
   description: "Exercise 3x/week for the next 3 months", 
   due_date: "2015-07-15T".to_date, 

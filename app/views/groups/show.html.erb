@@ -14,9 +14,8 @@
 		      <div class="listview lv-message">
 		        <div class="mgroedia-demo">
 		          <ul class="comments-list" style="list-type-style:none;">
-		            <%#= render @comments %>
 		            <%= @comments.each do |comment| %>
-		            	<%= render "comments/comment", :comment => comment %>
+		            <%= render "comments/comment", comment: comment %>
 		            <% end %>
 		          </ul>
 		        </div>
