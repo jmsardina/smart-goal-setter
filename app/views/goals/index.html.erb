@@ -61,32 +61,35 @@
         </div>
         <div class="card">
             <%= render 'goal_progress', goals: @goals %>
-    
         </div>
       </div>
-    <div class="col-md-6">
-      <h5 style="background-color:#c3e0fb;padding:5px;">My Groups</h5>
-      <div class="ms-user" style="height:160px;list-style-type:none;overflow:scroll;">
-        <%= render @groups %>
-      </div>
-      <%= link_to "Create New Group", new_group_path %>
-    </div>
     </div>
     <!-- END OF GOALS CARD -->
 
+
     <!-- BEGIN GROUPS CARD -->
-    <!-- <div class="card m-v-0" id="messages-main"> -->
-    <!-- END OF GROUPS CARD -->
-    <div class="row" style="padding-left:15px;padding-top:0px;">
-        <!-- BEGIN FEED CARD -->
-      <div class=".col-xs-6">
-      NewsFeed
-        <div class="activities-scroll">
-          <div class="listview lv-message">
-            <%= render @feeds %>
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="card">
+          <h5 style="background-color:#c3e0fb;padding:5px;">My Groups</h5>
+          <div class="ms-user" style="height:160px;list-style-type:none;overflow:scroll;">
+            <%= render @groups %>
           </div>
+          <%= link_to "Create New Group", new_group_path %>
         </div>
       </div>
+    <!-- END OF GROUPS CARD -->
+      
+        <!-- BEGIN FEED CARD -->
+      <div class="col-xs-6">
+        <div class="card" style="height:210px">
+          <h5 style="background-color:#c3e0fb;padding:5px;">NewsFeed</h5>
+          <div class="activities-scroll">
+            <div class="listview lv-message">
+              <%= render @feeds %>
+            </div>
+          </div>
+        </div>
     <!-- END FEED CARD -->
     </div>
   </div>
