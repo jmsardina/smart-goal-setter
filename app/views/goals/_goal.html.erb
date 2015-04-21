@@ -21,17 +21,17 @@
     </tr> -->
     <!-- </thead> -->
     <!--     <tbody> -->
-    <% if @goals %>
-    <% @goals.each do |goal| %>
-    <%= form_for([current_user, goal], url: goals_path) do |f| %>
-    <tr>
-      <td><%= f.check_box :status, class: "toggle", "data-id": "#{goal.id}" %></td>
-      <td><%=link_to "#{goal.name}", goal_path(goal) %></td>
-      <td><%= goal.due_date%></button></td>
-    </tr>
-    <% end %>
-    <%end%>
-    <%end%>
+    <%# if !@goals.empty? %>
+      <% @goals.each do |goal| %>
+        <%= form_for([current_user, goal], url: goals_path) do |f| %>
+          <tr>
+            <td><%= f.check_box :status, class: "toggle", "data-id": "#{goal.id}" %></td>
+            <td><%=link_to "#{goal.name}", goal_path(goal) %></td>
+            <td><%= goal.due_date%></button></td>
+          </tr>
+        <% end %>
+      <%end%>
+    <%#end%>
             </<!-- tbody>
           </table> -->
           <!-- </div> -->

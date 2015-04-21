@@ -19,7 +19,7 @@ def create_users
   index = 0   
   
   while index < EMAILS.length     
-    User.create(name: NAMES.sample, email: EMAILS[index], password: "password123", image_url: "http://i.istockimg.com/file_thumbview_approve/18070301/2/stock-photo-18070301-mother-and-daughter.jpg")     
+    User.create(name: NAMES.sample, email: EMAILS[index], password: "password123", image_url: "http://lorempixel.com/400/400/people/")     
     index += 1
   end 
 end
@@ -57,7 +57,7 @@ GROUP_NAMES = [
 def create_groups
   GROUP_NAMES.each do |group_hash|
     group_hash.each do |name, info| 
-      group = Group.create(name: name, description: info[0], creator_id: User.all.sample.id, image_url: "http://i.istockimg.com/file_thumbview_approve/38298846/2/stock-photo-38298846-mother-with-her-daughter-on-the-beach.jpg")
+      group = Group.create(name: name, description: info[0], creator_id: User.all.sample.id, image_url: "http://lorempixel.com/400/400/abstract/")
       group.boards << Board.create(name: "Main")
       info.last.each do |tag|
         group.tags << tag
