@@ -31,9 +31,9 @@ class User < ActiveRecord::Base
   # validates :avatar, presence: true
   validates :name, presence: true
 
-  def self.search(query)
-    where("email like ?", "%#{query}%")
-  end
+  # def self.search(query)
+  #   where("email like ?", "%#{query}%")
+  # end
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -62,12 +62,17 @@ class User < ActiveRecord::Base
     @user
   end
 
-  def user_board_count
-    sum = 0
-    self.groups.each do |group|
-      sum += group.boards.count
-    end
-    sum
+  # def user_board_count
+  #   sum = 0
+  #   self.groups.each do |group|
+  #     sum += group.boards.count
+  #   end
+  #   sum
+  # end
+
+  def completed_activity_occurences
+    ( total_remaining_occurences- total_occurences)
+    ( total_occurences - total_remaining_occurences)
   end
   # def upcoming_activities
   #   activities_hash = {}

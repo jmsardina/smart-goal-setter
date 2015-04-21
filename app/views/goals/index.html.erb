@@ -45,7 +45,23 @@
     <!-- END ACTIVITIES CARD -->
     <div class="row">
       <div class="col-xs-6">
-        <div class-"card">
+        <div class="card" style="height:300px">
+          <div class="card-header">
+ <!--          <div class="col-xs-6">
+  <div class="card" style="height:300px;width:550px"> -->
+    <div class="listview">
+      <div class="lv-header">
+          My Goals
+      </div>
+            <!-- <h2>Goals<small>A collection of your goals</small></h2> -->
+            <ul class="actions">
+              <li class="dropdown">
+                <a href="<%= new_goal_path %>">
+                  <i class="md  md-add"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
           <table class="table">
             <thead>
               <tr>
@@ -54,13 +70,16 @@
                 <th>Due Date</th>
               </tr>
             </thead>
-            <tbody>
-              <tr><%= render 'goal', goal: @goal %></tr>
-            </tbody>
-          </table>
-        </div>
+          <tbody>
+              <%= render 'goal', goal: @goal %>
+          </tbody>
+        </table>
+      </div>
+    </div>  
+      <div class="col-xs-6">
         <div class="card">
-            <%= render 'goal_progress', goals: @goals %>
+              <%= render 'goal_progress', goals: @goals %>
+          </div>
         </div>
       </div>
     </div>
