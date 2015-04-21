@@ -17,7 +17,7 @@
 <!-- RESULT == GROUP -->
 <% elsif result.class.name == "Group" %>
 <a href="/groups/<%=result.id%>"><%= image_tag result.avatar.url(:thumb)%>
-  <%= result.name %></a>
+  <%= result.name %></a><br>
   
   <% if !result.members.include?(current_user) %>
     <%= render 'invitations/form', invitable: result, recipient: result.creator, invitation: @invitation %>

@@ -1,7 +1,7 @@
 <%= div_for_comment(comment) do %>
   <div class="media">
     <div class="pull-left">
-      <% if comment.user.uid %>
+      <% if comment.user.image_url %>
         <img src="<%=current_user.image_url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
       <% else %>
         <img src="<%=current_user.avatar.url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
@@ -27,10 +27,10 @@
       <% comment.replies.each do |reply| %>
         <div class="media">
           <div class="pull-left" style="size:50x50;">
-            <% if comment.user.uid %>
-              <%= image_tag comment.user.image_url %>
+            <% if reply.user.image_url %>
+              <img src="<%=reply.user.image_url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
             <% else %>
-              <%= image_tag comment.user.avatar.url(:thumb) %>
+              <img src="<%=reply.user.avatar.url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
             <% end %>
           </div>
 
