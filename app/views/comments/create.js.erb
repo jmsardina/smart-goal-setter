@@ -1,2 +1,9 @@
-$("ul.comments-list").prepend("<%= j render partial: 'comments/comment', locals: {comment: @comment, commentable: @commentable} %>");
-$("textarea").val("");
+<% if @commentable.class.name == "Board" %>
+  $("ul.comments-list").prepend("<%= j render partial: 'comments/comment', locals: {comment: @comment, commentable: @commentable} %>");
+  $("textarea").val("");
+<% elsif @commentable.class.name == "Comment" %>
+  $("div.media-body").append("<%= j render partial: 'comments/reply', locals: {comment: @comment, commentable: @commentable} %>")
+  $("div.reply-form").addClass("hidden")
+  $("button.destroy").show()
+<% end %>
+

@@ -23,31 +23,6 @@
           <button class="reply">Reply</button>
         </div>
       </small>
-    
-      <% comment.replies.each do |reply| %>
-        <div class="media">
-          <div class="pull-left" style="size:50x50;">
-            <% if reply.user.image_url %>
-              <img src="<%=reply.user.image_url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
-            <% else %>
-              <img src="<%=reply.user.avatar.url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
-            <% end %>
-          </div>
-
-          <div class="media-body">
-            <div class="media-heading">
-              <h4><%= reply.user.name %></h4>
-               <%= reply.content %>
-               <%#= render 'cheers/form', cheerable: reply %>
-            </div>
-
-            <small class="ms-date">
-              <%= time_ago_in_words(reply.created_at) + " ago" %><br>
-              <!-- <%#= reply.cheer_count %> cheers<br> -->
-            </small>
-          </div>
-        </div>
-      <% end %>
     </div>
   </div>
 <% end %>
