@@ -1,9 +1,45 @@
-<%= li_for_goal(goal) do %>
+<!-- <%#= li_for_goal(goal) do %>
   <tr>
-    <%= form_for([current_user, goal], url: goals_path) do |f| %>
-    <td><%= f.check_box :status, class: "toggle", "data-id": "#{goal.id}" %></td>
-    <td><%=link_to "#{goal.name}", goal_path(goal) %></td>
-    <td><button class="destroy" data-id="<%=goal.id%>"></button></td>
-    <% end %>
+    <%#= form_for([current_user, goal], url: goals_path) do |f| %>
+    <td><%#= f.check_box :status, class: "toggle", "data-id": "#{goal.id}" %></td>
+    <td><%#=link_to "#{goal.name}", goal_path(goal) %></td>
+    <td><button class="destroy" data-id="<%#=goal.id%>"></button></td>
+    <%# end %>
   </tr>
-<% end %>
+<%# end %> -->
+
+<div class="card">
+    <div class="card-header">
+        <h2>Goals<small>A collection of your goals</small></h2>
+        <ul class="actions">
+            <li class="dropdown">
+                <a href="<%= new_goal_path %>">
+                    <i class="md  md-add"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- <div class="card-body m-t-0"> -->
+        <table class="table table-inner table-vmiddle">
+            <thead>
+                <tr>
+                    <th>Activity</th>
+                    <th>Goal name</th>
+                    <th style="width: 60px">Due date</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% if @goals %>
+              <% @goals.each do |goal| %>
+                <tr>
+                    <td class="f-500 c-cyan"><span class='badge badge-activity'><%= goal.activities.count %></span></td>
+                    <td><%= link_to "#{goal.name}", goal_path(goal) %></td>
+                    <td class="f-500 c-cyan"><small><%= goal.due_date %></small></td>
+                </tr>
+              <%end%>
+            <%end%>
+            </tbody>
+        </table>
+    <!-- </div> -->
+</div>

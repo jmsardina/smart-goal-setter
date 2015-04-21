@@ -1,56 +1,17 @@
 <section id="content">
+    <%= render 'mini_dashboard_charts' %>
   <div class="container">
     <div class="block-header">
       <h2 style="font-family:comic sans ms, lucida console;"><strong><%= MotivationalQuote.find(rand(1..MotivationalQuote.count)).content %></strong></h2>
     </div>
-
-    <!-- BEGIN GOALS CARD -->
-    <div class="card m-v-0" id="messages-main">
-      <div class="ms-menu">
-        <div class="card m-v-0" id="messages-main" style="padding:0px;">
-          <h5 style="background-color:yellow;padding:5px;">My Goals</h5>
-          <div class="ms-user" style="height:160px;list-style-type:none;overflow:scroll;">
-            <ul class="list" style="list-style-type:none;">
-              <div class="card-body table-responsive" tabindex="0" style="overflow;outline:none;">
-                <div class="message-scroll">
-                  <div class="listview lv-message">
-                    <table class="table">
-                      <tbody>
-                        <%= render @goals %>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </ul>
-          </div>
-          <%= link_to "Create New Goal", new_goal_path %>
-        </div>
-    <!-- END OF GOALS CARD -->
-
-    <!-- BEGIN GROUPS CARD -->
-        <div class="card m-v-0" id="messages-main">
-          <h5 style="background-color:yellow;padding:5px;">My Groups</h5>
-          <div class="ms-user" style="height:160px;list-style-type:none;overflow:scroll;">
-            <%= render @groups %>
-          </div>
-          <%= link_to "Create New Group", new_group_path %>
-        </div>
-      </div>
-    <!-- END OF GROUPS CARD -->
-
-    <!-- BEING ACTIVITIES CARD -->
-      <div class="ms-body">
+    <!-- BEGIN ACTIVITIES CARD -->
+    <!-- <div class="ms-body"> -->
+      <div class=".col-xs-4 .col-sm-6">
         <div class="card">
-          <div class="card-header" style="padding:0px;background-color:orange;">
-            <h4>
-              Things To Do <small>one step-at-a-time</small>
-            </h4>  
-          </div>
-
-          <div class="card-body table-responsive" tabindex="0" style="overflow;outline:none;">
+          <h4>Things To Do <small>one step-at-a-time</small></h4>  
+          <!-- <div class="card-body table-responsive" tabindex="0" style="overflow;outline:none;"> -->
             <div class="activities-scroll">
-              <div class="listview lv-message">
+              <!-- <div class="listview lv-message"> -->
                 <table class="table">
                   <thead>
                     <tr>
@@ -76,38 +37,57 @@
                     </tbody>
                   <% end %>
                 </table>           
-              </div>
+              <!-- </div> -->
             </div>
-          </div>
-        </div>
-    <!-- END ACTIVITIES CARD -->
-
-        <div class="row" style="padding-left:15px;padding-top:0px;">
-          <div class="col-md-6">
-            <h5 style="background-color:blue;height:20px;">Card One</h5>
-            <div class="card">
-                <div class="activities-scroll">
-                  <div class="listview lv-message">
-                    <%= render @feeds %>
-                  </div>
-                </div>
-            </div>
-          </div>
-
-        <!-- BEGIN FEED CARD -->
-          <div class="col-md-6">
-            <h5 style="background-color:blue;padding-top:5px;">Feed</h5>
-            <div class="card">
-              <div class="activities-scroll">
-                <div class="listview lv-message">
-                  <%= render @feeds %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <!-- END FEED CARD -->
+          <!-- </div> -->
         </div>
       </div>
+    <!-- END ACTIVITIES CARD -->
+    <div class="row">
+      <div class="col-xs-6">
+        <div class-"card">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Goal</th>
+                <th>Due Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><%= render 'goal', goal: @goal %></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+            <%= render 'goal_progress', goals: @goals %>
+    
+        </div>
+      </div>
+    <div class="col-md-6">
+      <h5 style="background-color:#c3e0fb;padding:5px;">My Groups</h5>
+      <div class="ms-user" style="height:160px;list-style-type:none;overflow:scroll;">
+        <%= render @groups %>
+      </div>
+      <%= link_to "Create New Group", new_group_path %>
+    </div>
+    </div>
+    <!-- END OF GOALS CARD -->
+
+    <!-- BEGIN GROUPS CARD -->
+    <!-- <div class="card m-v-0" id="messages-main"> -->
+    <!-- END OF GROUPS CARD -->
+    <div class="row" style="padding-left:15px;padding-top:0px;">
+        <!-- BEGIN FEED CARD -->
+      <div class=".col-xs-6">
+      NewsFeed
+        <div class="activities-scroll">
+          <div class="listview lv-message">
+            <%= render @feeds %>
+          </div>
+        </div>
+      </div>
+    <!-- END FEED CARD -->
     </div>
   </div>
 </section>

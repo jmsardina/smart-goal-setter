@@ -19,7 +19,7 @@ class SearchController < ApplicationController
   # end
 
   def create
-    # binding.pry
+    binding.pry
     @results = Search.for(params["keyword"])
     # if @results.empty?
     #   flash[:notice] = "No results match your search..."
