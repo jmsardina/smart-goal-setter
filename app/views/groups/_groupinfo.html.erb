@@ -5,7 +5,7 @@
     </div>
     <%= image_tag group.avatar(:thumb) %>
     <small>
-      <%= @group.cheer_count %>
+      <i class="cheer-count"><%= @group.cheer_count %></i>
       <div class="form-inline">
         <%= render 'cheers/form', cheerable: group %>
       </div><br>
@@ -33,6 +33,4 @@
         <%= MotivationalQuote.find(rand(1..MotivationalQuote.count)).content %>
       </p>
     </div>
-
-
 </div>

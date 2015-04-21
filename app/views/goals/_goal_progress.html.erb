@@ -1,0 +1,24 @@
+<div class="col-xs-6">
+  <div class="card" style="height:300px;width:550px">
+    <div class="listview">
+      <div class="lv-header">
+          Goals Progress
+      </div>
+      <div class="lv-body scrollable goal-progess">
+      <% if goals %>
+        <% goals.each do |goal| %>
+          <div class="lv-item">
+              <div class="lv-title m-b-5"><%= goal.name %></div>
+
+              <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="<%= goal.percentage_activity_occurence_complete %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= goal.percentage_activity_occurence_complete %>%">
+                      <span class="sr-only"><%= goal.percentage_activity_occurence_complete %>% Complete (success)</span>
+                  </div>
+              </div>
+          </div>
+        <%end%>
+      <%end%>
+      </div>
+    </div>
+  </div>
+</div>

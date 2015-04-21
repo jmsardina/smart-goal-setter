@@ -1,56 +1,18 @@
-// function validateForm(e){
-//   e.preventDefault();
-//   e.stopPropagation();
-
-//   if($(this).parents("form:first").children("input:text").val ===  "") {
-//     $(this).prop('disabled', true);
-//   } else {
-//     // $(this).prop('disabled', false);  
-//     // $(this).unbind("input:submit").submit() 
-//     // function(e){ return true; } 
-//     function(){$(this).unbind("click").submit()}
-//   };
-// }
-
-// $(function(){
-//   $("div#group-boards").on("click", "input:submit", validateForm);
-// });
-
-function addCheer(e){
-  // $(this).parents("small").html()
-  // e.preventDefault();
-  // var $form = $(this);
-  // var href = $form.attr("action");
-  // var
+function addCheer(){
+  debugger
+  var $form = $this;
+  var href = $form.attr("action");
 
   // $.ajax(href, {
   //   "method": "POST",
   //   "data": $form.serialize(),
-  //   "success": function(){
-  //     $("")
+  //   "success": function(response){
+  //     debugger
+  //     $(this).parents("small").children("i").html("1"),
   //   }
-  // })
+  // });
 }
-//   function addComment(e){
-//     e.preventDefault();
-//     var $form = $(this);
-//     var $div = $form.parents("div:first");
-//     var href = $form.attr("action");
-//     var $comment = $div.clone();
-// debugger
-//     $.ajax(href,
-//       "method": "POST";
-//       "data": $form.serialize(),
-//       "success": function(){
-//         $comment.children(".media-header").html('USERNAME');
-//         $comment.html("CONTENT")
-//         $("div.message-scroll").prepend(comment);
-//       }
-//     });
-//   }
 
 $(function(){
   $("form.new_cheer").on("submit", addCheer);
-  $("div#messages-main").on("submit", "form.new_comment", addComment);
-});
-
+})

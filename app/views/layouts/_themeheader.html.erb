@@ -1,4 +1,4 @@
-<header id="header" style="background-color:#c3e0fb">
+<header id="header">
   <ul class="header-inner">
     <li class="pull-right" id="top-search"><a class="tm-search"><%= render 'search/form' %></a></li>
 
@@ -6,10 +6,14 @@
     
     <li class="pull-right">
       <ul class="top-menu" style="font-family:comic sans ms;" >
-        <img src="<%=current_user.avatar.url%>" style="height:auto;width:auto;max-width:40px;max-height:40px;">
+        <% if current_user.uid %>
+          <img src="<%= current_user.image_url %>" style="height:auto;width:auto;max-width:40px;max-height:40px;">
+        <% else %>
+          <img src="<%=current_user.avatar.url%>" style="height:auto;width:auto;max-width:40px;max-height:40px;">
+        <% end %>
         <%= "Hello #{current_user.name}!" %> |
         <a href="/users/edit"><span style="color:blue">  Edit Profile </span></a>|
-        <a href="users/sign_out"><span style="color:blue;">  Sign Out </span> </a>
+        <a href="/users/sign_out"><span style="color:blue;"> Sign Out </span> </a>
       </ul>
     </li>
   </ul>

@@ -56,7 +56,7 @@ function deleteGoal(e){
   $.ajax(href + '/' + id, {
     "method": "DELETE",
     "success": function(){
-      $tr.slideUp(function(){
+      $tr.slideUp("slow", function(){
         $(this).remove();
       });
     }
