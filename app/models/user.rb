@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :goals
   has_many :comments
 
-  has_many :groups, foreign_key: :creator_id
+  has_many :groups, foreign_key: :creator_id, dependent: :destroy
 
   #as member
   has_many :user_groups, foreign_key: :member_id
@@ -20,13 +20,13 @@ class User < ActiveRecord::Base
   #as invitation recipient
   has_many :requests_received, class_name: "Invitation", foreign_key: :recipient_id
 
-  has_many :goals
+  has_many :goals, dependent: :destroy
   has_many :activities, through: :goals
   has_many :comments
   has_many :cheers
   # has_many :groups, through: :user_groups
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "../assets   /missing.png"
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   # validates :avatar, presence: true
   validates :name, presence: true

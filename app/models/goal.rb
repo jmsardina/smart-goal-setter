@@ -86,6 +86,7 @@ class Goal < ActiveRecord::Base
     self.activities.each do |activity|
       points += activity.number_occurences
     end
+    points
   end
 
 end

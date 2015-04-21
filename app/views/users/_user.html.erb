@@ -1,11 +1,10 @@
 <div class="member-block">
   <%= div_for_user(user) do %>
     <!-- <div class="member-picture"> -->
-      <% if !user.uid %>
-      <img src="<%=user.avatar.url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
-        <%#=image_tag user.avatar(:thumb) %><br>
+      <% if user.image_url %>
+        <img src="<%=user.image_url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;"><br>
       <% else %>
-        <%=image_tag user.image_url %><br>
+        <img src="<%=user.avatar.url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;"><br>
       <% end %>
     <!-- </div> -->
         <%=user.name %>

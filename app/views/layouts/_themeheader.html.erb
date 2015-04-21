@@ -6,7 +6,7 @@
     
     <li class="pull-right">
       <ul class="top-menu" style="font-family:comic sans ms;" >
-        <% if current_user.uid %>
+        <% if current_user.image_url %>
           <img src="<%= current_user.image_url %>" style="height:auto;width:auto;max-width:40px;max-height:40px;">
         <% else %>
           <img src="<%=current_user.avatar.url%>" style="height:auto;width:auto;max-width:40px;max-height:40px;">
