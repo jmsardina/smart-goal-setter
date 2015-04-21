@@ -1,0 +1,2 @@
+$("ul.comments-list").prepend("<%= j render partial: 'comments/comment', locals: {comment: @comment, commentable: @commentable} %>");
+$("textarea").val("");

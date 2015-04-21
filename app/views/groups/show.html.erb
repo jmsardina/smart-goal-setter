@@ -13,8 +13,11 @@
 		    <div class="message-scroll">
 		      <div class="listview lv-message">
 		        <div class="mgroedia-demo">
-		          <ul style="list-type-style:none;">
-		            <%= render @comments %>
+		          <ul class="comments-list" style="list-type-style:none;">
+		            <%#= render @comments %>
+		            <%= @comments.each do |comment| %>
+		            	<%= render "comments/comment", :comment => comment %>
+		            <% end %>
 		          </ul>
 		        </div>
 		      </div>

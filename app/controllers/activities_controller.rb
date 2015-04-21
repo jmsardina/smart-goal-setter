@@ -13,11 +13,6 @@ class ActivitiesController < ApplicationController
 		@activity = Activity.new(activity_params)
 		@activity.goal = @goal
 		if @activity.save
-			# track_feed(@activity)
-		# 	@activity.occurences = @activity.number_occurences
-		# 	@activity.save
-		# end
-		# redirect_to goal_path(@goal)
 			respond_to do |format|
 		    if @activity.save
 		      format.html { redirect_to @activity, notice: 'Activity was successfully created.' }

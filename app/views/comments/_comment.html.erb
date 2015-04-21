@@ -15,7 +15,7 @@
         <%= time_ago_in_words(comment.created_at) + " ago" %> 
         <%= comment.reply_counter %> comments
         <%= comment.cheer_count %> cheers
-        <%= render 'cheers/form', cheerable: comment %>
+        <%#= render 'cheers/form', cheerable: comment %>
         <div class="reply-to-comment">
           <div class="reply-form hidden">
             <%= render "comments/form", commentable: comment%>
