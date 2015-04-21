@@ -9,9 +9,9 @@
       <%= image_tag group.avatar(:thumb) %>
     <% end %>
     <small>
-      <i class="cheer-count"><%= @group.cheer_count %></i>
+      <i class="cheer-count"><%#= @group.cheer_count %></i>
       <div class="form-inline">
-        <%= render 'cheers/form', cheerable: group %>
+        <%#= render 'cheers/form', cheerable: group %>
       </div><br>
       <%= "#{@group.members.count}" + " members"%>
     </small>

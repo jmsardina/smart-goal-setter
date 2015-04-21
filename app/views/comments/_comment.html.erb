@@ -24,7 +24,7 @@
         </div>
       </small>
       <div class="newest-comment">
-    
+
       </div>
       <% replies = Comment.where(commentable_type: "Comment", commentable_id: comment.id).order(:created_at).reverse_order %>
       <% replies.each do |reply| %>
