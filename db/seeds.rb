@@ -33,7 +33,7 @@ def create_tags
 end
 
 GROUP_NAMES = [
-  {"Weight-aThon" => ["Getting Healthier, one pound-at-a-time", 
+  {"Biggest Losers" => ["Getting Healthier, one pound-at-a-time", 
     [Tag.find_by(name: "fitness"), Tag.find_by(name: "weight-loss"), Tag.find_by(name: "health")]
     ]
   }, 
@@ -52,7 +52,12 @@ GROUP_NAMES = [
   {"Family Matters" => ["Let's treat our loved ones with respect they deserve", 
   [Tag.find_by(name: "family"), Tag.find_by(name: "relationship")]
     ]
-  }]
+  },
+  {"Team FitBody" => ["Aiming for a great body this Christmas!", 
+    [Tag.find_by(name: "fitness"), Tag.find_by(name: "health")]
+    ]
+  }
+]
 
 def create_groups
   GROUP_NAMES.each do |group_hash|
@@ -77,7 +82,7 @@ end
 
 # # BEGIN GOALS
 # LANGUAGE GOAL
-8.times do 
+User.all.each do |user| 
   Goal.create(
     name: "French", 
     description: "Become conversationally proficient in French in 6 months", 
@@ -86,7 +91,7 @@ end
     potential_barrier: "I don't know how I'll find the time", 
     coping_strategy: "Using Goaly!", 
     support: "My friend so-and-so is learning with me.", 
-    user_id: rand(1..20),
+    user_id: user.id,
     activities:
       Activity.create([
         {
@@ -118,59 +123,67 @@ end
           }
         ])
     )
-end
 
 #FITNESS GOAL
-8.times do 
-Goal.create(
-  name: "Exercise", 
-  description: "Exercise 3x/week for the next 3 months", 
-  due_date: "2015-07-15T".to_date, 
-  motivation: "I want to go hiking this summer", 
-  potential_barrier: "I don't know how I'll find the time", 
-  coping_strategy: "Using Goaly!", 
-  support: "My friend so-and-so is doing this with me.", 
-  user_id: rand(1..20),
-  activities: 
-    Activity.create(
-      [{
-          description: "Do yoga",
-          period: "week", 
-          barrier: "I feel like I don't have time.", 
-          facilitator: "Jennifer will always be there cheering me on!", 
-          frequency: 3
-        },
-        {
-          description: "Go for a walk outside", 
-          period: "week", 
-          barrier: "It's very rainy", 
-          facilitator: "I can ask a friend to come with.", 
-          frequency: 7
-        },
-        {
-          description: "Do strength-training in the gym", 
-          period: "week", 
-          barrier: "I don't like strength-training that much.", 
-          facilitator: "???", 
-          frequency: 4
-        }
-      ]
+  Goal.create(
+    name: "Exercise", 
+    description: "Exercise 3x/week for the next 3 months", 
+    due_date: "2015-07-15T".to_date, 
+    motivation: "I want to go hiking this summer", 
+    potential_barrier: "I don't know how I'll find the time", 
+    coping_strategy: "Using Goaly!", 
+    support: "My friend so-and-so is doing this with me.", 
+    user_id: user.id,
+    activities: 
+      Activity.create(
+        [{
+            description: "Do yoga",
+            period: "week", 
+            barrier: "I feel like I don't have time.", 
+            facilitator: "Jennifer will always be there cheering me on!", 
+            frequency: 3
+          },
+          {
+            description: "Go for a walk outside", 
+            period: "week", 
+            barrier: "It's very rainy", 
+            facilitator: "I can ask a friend to come with.", 
+            frequency: 7
+          },
+          {
+            description: "Do strength-training in the gym", 
+            period: "week", 
+            barrier: "I don't like strength-training that much.", 
+            facilitator: "???", 
+            frequency: 4
+          }
+        ]
+      )
     )
-)
 end
 
-# def scrape_quotes(link, css_selector, language)   
-#   html = open(link)   
-#   doc = Nokogiri::HTML(html)
+# GENERIC_COMMENTS = ["This challenge has been more difficult than I expected...", "What has been the most difficult part of this challenge?", "I would say the best thing to do is to stay positive!", "It's not helpful to compare yourself with other people -- look at how far you've come.", "I am so glad I found such an amazing group of people..."]
 
-#   doc.css(css_selector).each{|quote| MotivationalQuote.create(content: quote.text, language: language) if quote.text.length > 10} 
+# GENERIC_COMMENTS.each do |content|
+#   Board.all.each do |board|
+#     # Comment.all.each do |comment|
+#       Comment.create(content: content, user_id: User.all.sample.id, commentable_type: board.class.name, commentable_id: board.id)
+#     # end
+#   end
 # end
 
-# #SEED MOTIVATIONAL QUOTES 
-# (1..9).map{|num| scrape_quotes(("http://www.brainyquote.com/quotes/topics/topic_motivational" +
-# "#{num}"), 'span a', "English")}
+def scrape_quotes(link, css_selector, language)   
+  html = open(link)   
+  doc = Nokogiri::HTML(html)
+
+  doc.css(css_selector).each{|quote| MotivationalQuote.create(content: quote.text, language: language) if quote.text.length > 10} 
+end
+
+#SEED MOTIVATIONAL QUOTES 
+(1..9).map{|num| scrape_quotes(("http://www.brainyquote.com/quotes/topics/topic_motivational" +
+"#{num}"), 'span a', "English")}
 
 
-create_users
 create_tags
+create_users
 create_groups

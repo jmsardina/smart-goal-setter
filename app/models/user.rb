@@ -62,13 +62,9 @@ class User < ActiveRecord::Base
     @user
   end
 
-  # def user_board_count
-  #   sum = 0
-  #   self.groups.each do |group|
-  #     sum += group.boards.count
-  #   end
-  #   sum
-  # end
+  def pending_requests
+    self.requests_received.where(status: "pending")
+  end
 
   def completed_activity_occurences
     ( total_remaining_occurences- total_occurences)
