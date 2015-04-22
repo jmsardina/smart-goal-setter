@@ -1,7 +1,7 @@
 // BEGIN INTERACTING WITH ACTIVITIES FROM DASHBOARD
 function completeActivity(){
   var $checkbox = $(this);
-  var $form = $(this).parents("tr").children("form");
+  var $form = $(this).parents("form:first");
   var href = $form.attr("action");
 
   $.ajax(href, {
@@ -27,6 +27,7 @@ function deleteActivity(e){
     }
   })
 }
+
 // END OF INTERATING WITH ACTIVITIES FROM DASHBOARD
 
 function Goal(){
@@ -63,20 +64,14 @@ function deleteGoal(e){
   })
 }
 
-function Invitation(){
-
-}
-
-Invitation.declineRequest = function(){
-  var $this = $(this)
-}
-
 
 $(function(){
   $("table.table").on("change", "input:checkbox", completeActivity);
   $("table.table").on("click", "button.destroy", deleteActivity);
   $("table.table").on("change", "input#goal_status", Goal.updateStatus);
-  $("table.table").on("click", "button.destroy", deleteGoal)
-
-  $("div.container").on("click", "button.destroy", Invitation.declineRequest)
+  $("table.table").on("click", "button.destroy", deleteGoal);
+  $(".circle").on('click', function(){
+    $(this).toggleClass('filled');
+    $(this).parents("tr").toggleClass("completed");
+  });
 });

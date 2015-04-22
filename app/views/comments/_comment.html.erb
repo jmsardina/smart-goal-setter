@@ -2,9 +2,9 @@
   <div class="media">
     <div class="pull-left">
       <% if comment.user.image_url %>
-        <img src="<%=current_user.image_url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
+        <img src="<%=current_user.image_url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;"/>
       <% else %>
-        <img src="<%=current_user.avatar.url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
+        <img src="<%=current_user.avatar.url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;"/>
       <% end %>
     </div>
   
@@ -14,26 +14,27 @@
       <small class="ms-date">
         <%= time_ago_in_words(comment.created_at) + " ago" %> 
         <%= comment.reply_counter %> comments
-        <%#= comment.cheer_count %> <!-- cheers -->
-        <%#= render 'cheers/form', cheerable: comment %>
+        <%= comment.cheer_count %> <!-- cheers -->
+        <%= render 'cheers/form', cheerable: comment %>
         <div class="reply-to-comment">
           <div class="reply-form hidden">
             <%= render "comments/form", commentable: comment%>
           </div>
+
           <button class="reply">Reply</button>
         </div>
       </small>
       <div class="newest-comment">
 
       </div>
-      <% replies = Comment.where(commentable_type: "Comment", commentable_id: comment.id).order(:created_at).reverse_order %>
-      <% replies.each do |reply| %>
+        <% (replies = Comment.where(commentable_type: "Comment", commentable_id: comment.id).order(:created_at).reverse_order) %>
+        <% replies.each do |reply| %>
         <div class="media">
           <div class="pull-left" style="size:50x50;">
             <% if reply.user.image_url %>
-              <img src="<%=reply.user.image_url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
+              <img src="<%=reply.user.image_url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;"/>
             <% else %>
-              <img src="<%=reply.user.avatar.url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
+              <img src="<%=reply.user.avatar.url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;"/>
             <% end %>
           </div>
 
@@ -41,16 +42,17 @@
             <div class="media-heading">
               <h4><%= reply.user.name %></h4>
                <%= reply.content %>
-               <%#= render 'cheers/form', cheerable: reply %>
+               <%= render 'cheers/form', cheerable: reply %>
             </div>
 
             <small class="ms-date">
               <%= time_ago_in_words(reply.created_at) + " ago" %><br>
-              <!-- <%#= reply.cheer_count %> cheers<br> -->
+              <%= reply.cheer_count %> cheers<br>
             </small>
           </div>
         </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 <% end %>

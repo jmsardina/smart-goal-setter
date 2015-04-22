@@ -1,21 +1,21 @@
 <!-- RESULT == USER -->
-<% if result.class.name == "User" %>
-  <% if !!result.uid %>
-    <%= image_tag result.image_url %>
-  <% else %>
-    <%= image_tag result.avatar.url(:thumb)%>
-  <% end %>
-  <%= result.name %>
+<%# if result.class.name == "User" %>
+  <%# if result.image_url %>
+    <%#= image_tag result.image_url %>
+  <%# else %>
+    <%#= image_tag result.avatar.url(:thumb)%>
+  <%# end %>
+  <%#= result.name %>
 
-  <% if !result.groups.include?(Group.find(params[:group_id]))%>
-    <%= render 'invitations/form', invitable: @group, recipient: result, invitation: @invitation %>
-  <% else %>
-    <span class="member-already"><%= "Already a member of #{Group.find(params[:group_id]).name}!"%></span>
-  <% end %>
+  <%# if !result.groups.include?(Group.find(params[:group_id]))%>
+    <%#= render 'invitations/form', invitable: @group, recipient: result, invitation: @invitation %>
+  <%# else %>
+   <!--  <span class="member-already"><%#= "Already a member of #{Group.find(params[:group_id]).name}!"%></span> -->
+  <%# end %>
 <!-- END RESULT == USER -->
-
+<% binding.pry %>
 <!-- RESULT == GROUP -->
-<% elsif result.class.name == "Group" %>
+<%# if result.class.name == "Group" %>
 <a href="/groups/<%=result.id%>"><%= image_tag result.avatar.url(:thumb)%>
   <%= result.name %></a><br>
   
@@ -24,5 +24,6 @@
   <% else %>
     <%= "You're a member already!"%>
   <% end %>
-<% end %>
+<%# end %>
 <!-- END RESULT == GROUP -->
+<br>
