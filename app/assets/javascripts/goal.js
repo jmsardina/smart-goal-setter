@@ -9,6 +9,7 @@ function completeActivity(){
     "data": $form.serialize(),
     "success": function(response){
       $checkbox.parents("tr").toggleClass("completed");
+      $checkbox.parents("div.circle:first").addClass("checked");
     }
   })
 }
@@ -28,7 +29,7 @@ function deleteActivity(e){
   })
 }
 
-// END OF INTERATING WITH ACTIVITIES FROM DASHBOARD
+// END OF INTERACTING WITH ACTIVITIES FROM DASHBOARD
 
 function Goal(){
 }
@@ -64,14 +65,9 @@ function deleteGoal(e){
   })
 }
 
-
 $(function(){
   $("table.table").on("change", "input:checkbox", completeActivity);
   $("table.table").on("click", "button.destroy", deleteActivity);
   $("table.table").on("change", "input#goal_status", Goal.updateStatus);
   $("table.table").on("click", "button.destroy", deleteGoal);
-  $(".circle").on('click', function(){
-    $(this).toggleClass('filled');
-    $(this).parents("tr").toggleClass("completed");
-  });
 });

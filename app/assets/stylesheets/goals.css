@@ -7,8 +7,8 @@ div.activities-scroll {
   background-color: red;
   border: 2px solid #666666;
   border-radius: 50%;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
-  filter: alpha(opacity=60);
+  /*-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";*/
+  /*filter: alpha(opacity=60);*/
   opacity: 0.6;
 
   -webkit-box-shadow: 0 0 1px 0px rgb( 255, 255, 255);
@@ -17,22 +17,22 @@ div.activities-scroll {
   height: 20px;
   z-index: 86;
 
-  -webkit-transition: background-color .5s ease-in-out;
-  -moz-transition: background-color .5s ease-in-out;
+  /*-webkit-transition: background-color .5s ease-in-out;*/
+  /*-moz-transition: background-color .5s ease-in-out;*/
   -o-transition: background-color .5s ease-in-out;
   -ms-transition: background-color .5s ease-in-out;
-  transition: background-color .5s ease-in-out;
+  /*transition: background-color .5s ease-in-out;*/
 }
-
+/*
 .circle.filled {
   background-color: green;
 }
-
+*/
 .checked {
   background-color: green;
 }
 
-#activities-list li.completed {
+/*#activities-list li.completed {
   color: #d9d9d9;
   text-decoration: line-through;
 }
@@ -59,7 +59,7 @@ div.activities-scroll {
 
 #activities-list li.editing:last-child {
   margin-bottom: -1px;
-}
+}*/
 
 /*#activity-list li .toggle {
   text-align: center;

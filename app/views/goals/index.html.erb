@@ -28,11 +28,12 @@
                         <div class="circle" style="display:inline-block">
                         <%= form_for([goal, activity]) do |f| %>
                           <%= f.check_box :status, class: "toggle", style: "opacity:0" %>
+                          <%= activity.remaining_for_period %>
                         <% end %>
                         </div>
                       <% end %>
                       </td>
-                      <td><%=activity.upcoming_due_dates.first.strftime("%B %d, %Y") %></td>
+                      <td style="<%if activity.upcoming_due_dates.first <= 3.days.from_now%>color:red<%end%>"><%= activity.upcoming_due_dates.first.strftime("%B %d, %Y") %></td>
                       <td><button class="destroy">X</button></td>
                     <% end %>
                     </tr>
