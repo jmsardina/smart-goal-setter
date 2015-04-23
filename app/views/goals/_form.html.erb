@@ -1,112 +1,52 @@
-<section id="main">
-  <section id="content">
-    <%= form_for(@goal) do |f| %> <!-- Form Helper Begin -->
-    <div class="card" id="error_explanation">
-      <% if @goal.errors.any? %>
-      <div class="alert alert-warning" role="alert">
-        <h2>This goal couldn't be saved - see below for a description of the problem and try again.</h2>
-      </div>
-      <p>
-        <ul><% @goal.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </p>
-      <% end %>
-    </div> <!-- Error Card End -->
+<%= form_for(@goal) do |f| %>
+  <div class="field">
+    <%= f.label :name, "Title" %>
+    <%= f.text_field :name %>
+  </div><br>
 
-    <div class="card"> <!-- Describe Goal Card Begin -->
-      <div class="card-header">
-        <h2>Describe Your Goal <small>Make your goal SMART!</small></h2>
-      </div>
-      <div class="card-body card-padding">
-        <div class="fg-line">
-          <p class="c-black f-500 m-b-20">
-            <%= f.label :name %>
-            <%= f.text_field :name, class: "form-control input-lg", placeholder: "Name of the goal...", autofocus: true %>
-          </p>
+  <div class="field">
+    <%= f.label :description, "I will" %><br>
+    <%= f.text_area :description %>
+  </div>
 
-        </div>
+  <div class="field">
+    <%= f.label :tags, "I would describe this goal as" %><br>
+    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
+  </div>
 
-        <div class="row">
-          <div class="col-sm-4">
-            <p class="c-black f-500 m-b-20"><%= f.label :due_date, "Completion Date"%></p>
-            <div class="input-group form-group">
-              <div class="dtp-container dropdown fg-line">
-                <%= f.date_field :due_date, value: 30.days.from_now %>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-8">
-            <p class="c-black f-500 m-t-20 m-b-20">
-              <div class="fg-line">
-                <%= f.label :description %></p>
-                <%= f.text_area :description, placeholder: "How is your goal Specific, Measurable, Attainable, Relevant (important), Time-based??", class: "form-control auto-size", style: "overflow: hidden; word-wrap: break-word;" %>
-              </div>
-            </div><br>
+  <div class="field">
+    <%= f.label :motivation, "I will do this because" %><br>
+    <%= f.text_area :motivation %>
+  </div>
 
-          </div>
-            <p class="c-black f-500 m-b-20 m-t-20">
-              <%= f.label :tags %><br>
-              <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name)%>
-            </p>
-        </div>
-      </div> <!-- Describe Goal Card End -->
+  <div class="field">
+    <%= f.label :measure, "I will know when I will have achieved my goal because" %><br>
+    <%= f.text_area :measure %>
+  </div>
 
-      <div class="card"> <!-- Describe Goal Barriers Begin -->
-        <div class="card-header">
-          <h2><%= f.label :potential_barrier, "Potential Barriers"%><br><small>What might get in the way of meeting your goal?</small></h2>
-        </div>
-        <div class="card-body card-padding">
-          <div class="form-group">
-            <div class="fg-line">
-              <p class="c-black f-500 m-b-20">                 
+  <div class="field">
+    <%= f.label :consequence, "If I don't achieve this goal, I will" %><br>
+    <%= f.text_area :consequence %>
+  </div>
 
-                <%= f.text_area :potential_barrier, placeholder: "List some things that will make it difficult to achieve your goal.", class: "form-control auto-size", style: "overflow: hidden; word-wrap: break-word; height:60px;" %>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div><!-- Describe Goal Barriers End -->
+  <div class="field">
+    <%= f.label :potential_barrier, "Something that will make this difficult is"%><br>
+    <%= f.text_area :potential_barrier %>
+  </div><br>
 
-      <div class="card"> <!-- Describe Goal Supports Begin -->
-        <div class="card-header">
-          <h2>Supports <small>What will help you and keep you going when things get tough?</small></h2>
-        </div>
-        <div class="card-body card-padding">
-          <div class="form-group">
-            <div class="fg-line">
-              <p class="c-black f-500 m-b-20">
-                <%= f.label :motivation %><br>
-                <%= f.text_area :motivation, placeholder: "I will do this because...", class: "form-control auto-size", style: "overflow: hidden; word-wrap: break-word; height:32px;" %>
-              </p>
-            </div>
-          </div>
+  <div class="field">
+    <%= f.label :coping_strategy, "In order to cope with this difficulty, I will"%><br>
+    <%= f.text_area :coping_strategy %>
+  </div><br>
 
-          <div class="form-group">
-            <div class="form-group">
-              <div class="fg-line">
-                <p class="c-black f-500 m-b-20">
-                  <%= f.label :coping_strategy, "Strategies for Overcoming Barriers"%><br>
-                  <%= f.text_area :coping_strategy, placeholder: "List specific actions you can take to overcome the challenges you identified.", class: "form-control auto-size", style: "overflow: hidden; word-wrap: break-word; height:32px;" %>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="fg-line"> 
-              <p class="c-black f-500 m-b-20">
-                <%= f.label :support, "Support"%><br>
-                <%= f.text_area :support, placeholder: "Who or what will help you in meeting your goal?", class: "form-control auto-size", style: "overflow: hidden; word-wrap: break-word; height:32px;" %>
-              </p>
-            </div>
-            <%= f.submit nil, class: 'goal-submit btn btn-primary col-md-4 col-md-offset-4' %>
-          </div>
-        </div>
+  <div class="field">
+    <%= f.label :due_date, "I will complete this goal by"%><br>
+    <%= f.date_field :due_date, value: Time.now, min: Time.now%>
+  </div>
 
-      </div> <!-- Describe Goal Supports End -->
-    </div><!-- Form Group End -->
-    <% end %> <!-- Form Helper End -->
-
-  </section> <!-- Content End -->
-</section> <!-- Main End -->
+  <div class="field">
+    <%= f.label :support, "My support network includes"%><br>
+    <%= f.text_area :support %>
+  </div><br>
+  <%= f.submit %>
+<% end %>

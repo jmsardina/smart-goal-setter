@@ -13,6 +13,17 @@ class ActivitiesController < ApplicationController
 		@activity = Activity.new(activity_params)
 		@activity.goal = @goal
 		if @activity.save
+			@activity.occurences = @activity.number_occurences
+			@activity.upcoming_deadline = @activity.upcoming_due_dates[0]
+			for i in 1..@activity.upcoming_due_dates.size-1
+				Activity.new(activity_params) do |a|
+					a.goal = @goal
+					a.save #object must be persisted in order to find upcoming_due_dates
+					a.upcoming_deadline = @activity.upcoming_due_dates[i]
+					a.save
+				end
+			end
+
 			respond_to do |format|
 		    if @activity.save
 		      format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
@@ -56,7 +67,7 @@ class ActivitiesController < ApplicationController
 		end
 
 		def activity_params
-			params.require(:activity).permit(:description, :period, :status, :barrier, :facilitator, :goal_id, :trackable, :action, :frequency)
+			params.require(:activity).permit(:description, :period, :deadline, :status, :barrier, :facilitator, :goal_id, :trackable, :action, :frequency)
 		end
 
 end

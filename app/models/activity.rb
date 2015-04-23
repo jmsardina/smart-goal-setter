@@ -4,7 +4,7 @@ class Activity < ActiveRecord::Base
 	# has_many :comments, as: :commentable, dependent: :destroy
 	delegate :user, to: :goal
   validates :description, presence: true
-  validates :frequency, :period, presence: true
+  validates :frequency, :period, :deadline, presence: true
 
   before_save :default_values
   def default_values
@@ -20,7 +20,7 @@ class Activity < ActiveRecord::Base
   end
 
   def activity_timeline
-  	(self.goal.due_date - self.created_at.to_date).to_i
+  	(self.deadline - self.created_at.to_date).to_i
   end
 
 
@@ -45,9 +45,7 @@ class Activity < ActiveRecord::Base
   end
 
   def number_occurences #returns the total number of times an activity will occur
-  	if periods_in_timeline
-      self.frequency * periods_in_timeline
-    end
+    self.frequency * periods_in_timeline
   end
 
   def cycle_start_date #returns the first date of the cycle
@@ -73,14 +71,14 @@ class Activity < ActiveRecord::Base
     start_date = self.created_at.to_date
     upcoming = []
 
-    while start_date < self.goal.due_date
-      if (start_date + 1.send(self.period)) <= self.goal.due_date
+    while start_date < self.deadline
+      if (start_date + 1.send(self.period)) <= self.deadline
         new_due_date = start_date + 1.send(self.period)
         upcoming << new_due_date
         start_date = new_due_date
       else
-        upcoming << self.goal.due_date unless upcoming.include?(self.goal.due_date)
-        start_date = self.goal.due_date
+        upcoming << self.deadline unless upcoming.include?(self.deadline)
+        start_date = self.deadline
       end
     end
     upcoming.delete(upcoming[0]) if Time.now.to_date >= upcoming[0]
@@ -96,8 +94,8 @@ class Activity < ActiveRecord::Base
         self.decrement!(:remaining_for_period)
         self.goal.increment!(:goal_points)
         @user.increment!(:points)
+        self.status = false
       end
-      self.status = false
       self.save
     end
   end
