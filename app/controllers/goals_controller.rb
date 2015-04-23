@@ -4,7 +4,10 @@ class GoalsController < ApplicationController
 	def index
 		if current_user
 			@goals = current_user.goals.order("due_date ASC")
-			@activities = current_user.activities.where(status: false)
+			@activities = []
+			current_user.activities.each do |activity|
+				@activities << activity if activity.valid_cycle_dates === Time.now.to_date
+			end
 		else
 			@goals = Goal.all
 			redirect_to '/welcome/index'
