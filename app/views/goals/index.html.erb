@@ -7,43 +7,42 @@
       <div class=".col-xs-4 .col-sm-6">
         <div class="card">
           <h4>Things To Do <small>one step-at-a-time</small></h4>  
-            <div class="activities-scroll" style="height:400px">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <!-- <th>Status</th> -->
-                    <th>Description</th>
-                    <th>Times Left</th>
-                    <th>By</th>
-                    <th>Delete</th>
-                  </tr>
-                </thead>                  
-                <% @activities.each do |activity| %>
-                  <tbody>       
-                    <tr data-activity-id="<%=activity.id %>" class="" >
-                    <% goal = activity.goal %>
-                    <%= form_for([goal, activity]) do |f| %>
-                      <%= f.check_box :status, class: "toggle", style: "display:none" %>
-                    <% end %>
+          <div class="activities-scroll" style="height:400px">
+            <table class="table">
+              <thead>
+                <tr>
+                  <!-- <th>Status</th> -->
+                  <th>Description</th>
+                  <th>Times Left</th>
+                  <th>By</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>                  
+              <% @activities.each do |activity| %>
+                <tbody>       
+                  <tr data-activity-id="<%=activity.id %>" class="" >
+                  <% goal = activity.goal %>
+                  <%= form_for([goal, activity]) do |f| %>
+                    <%= f.check_box :status, class: "toggle", style: "display:none" %>
+                  <% end %>
 
-                      <td><%=link_to activity.description, goal_path(activity.goal) %></td>
-                      <td>
-                      <% activity.remaining_for_period.times do %>
-                        <div class="circle" style="display:inline-block">
-                        <%= form_for([goal, activity], remote: true) do |f| %>
-                          <%= f.check_box :status, class: "toggle", style: "opacity:0" %>
-                          <%= activity.remaining_for_period %>
-                        <% end %>
-                        </div>
+                    <td><%=link_to activity.description, goal_path(activity.goal) %></td>
+                    <td class="remaining">
+                    <% activity.remaining_for_period.times do %>
+                      <div class="circle" style="display:inline-block">
+                      <%= form_for([goal, activity]) do |f| %>
+                        <%= f.check_box :status, class: "toggle", style: "opacity:0" %>
                       <% end %>
-                      </td>
-                      <td style="<%if activity.upcoming_due_dates.first <= 3.days.from_now%>color:red<%end%>"><%= activity.upcoming_deadline.strftime("%B %d, %Y") %></td>
-                      <td><button class="destroy">X</button></td>
+                      </div>
                     <% end %>
-                    </tr>
-                  </tbody>
-              </table>           
-            </div>
+                    </td>
+                    <td style="<%if activity.upcoming_due_dates.first <= 3.days.from_now%>color:red<%end%>"><%= activity.upcoming_deadline.strftime("%B %d, %Y") %></td>
+                    <td><button class="destroy">X</button></td>
+                  <% end %>
+                  </tr>
+                </tbody>
+            </table>           
+          </div>
         </div>
       </div>
       <div class=".col-xs-4 .col-sm-6">

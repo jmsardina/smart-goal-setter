@@ -15,14 +15,9 @@ class Activity < ActiveRecord::Base
     self.status == true
   end
 
-  def incomplete?
-    status == false
-  end
-
   def activity_timeline
   	(self.deadline - self.created_at.to_date).to_i
   end
-
 
   def days_in_period
   	case self.period
@@ -49,11 +44,11 @@ class Activity < ActiveRecord::Base
   end
 
   def cycle_start_date #returns the first date of the cycle
-    (self.upcoming_due_dates.first - 1.send(self.period))
+    (self.upcoming_deadline - 1.send(self.period))
   end
 
-  def valid_period_dates #returns a range (period start date..period end date)
-    self.cycle_start_date..self.upcoming_due_dates.first
+  def valid_cycle_dates #returns a range (period start date..period end date)
+    self.cycle_start_date..self.upcoming_deadline
   end
 
   def needs_counter_reset? #returns true if activity has not been completed this cycle.
@@ -94,10 +89,8 @@ class Activity < ActiveRecord::Base
         self.decrement!(:remaining_for_period)
         self.goal.increment!(:goal_points)
         @user.increment!(:points)
-        self.status = false
       end
       self.save
     end
   end
-
 end

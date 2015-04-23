@@ -10,7 +10,7 @@ function completeActivity(){
     "success": function(response){
       $checkbox.parents("tr").toggleClass("completed");
       $checkbox.parents("div.circle:first").addClass("green");
-      // $.isEmptyObject($checkbox.parents("td:first")).parents("tr").addClass("done");
+      // $.isEmptyObject($checkbox.parents("td:first")).parents("tr").hide();
     }
   })
 }

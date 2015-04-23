@@ -19,6 +19,7 @@ class ActivitiesController < ApplicationController
 				Activity.new(activity_params) do |a|
 					a.goal = @goal
 					a.save #object must be persisted in order to find upcoming_due_dates
+					a.occurences = @activity.occurences
 					a.upcoming_deadline = @activity.upcoming_due_dates[i]
 					a.save
 				end
