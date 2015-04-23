@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421134758) do
+ActiveRecord::Schema.define(version: 20150423161935) do
 
   create_table "activities", force: :cascade do |t|
     t.text     "description"
@@ -27,6 +27,9 @@ ActiveRecord::Schema.define(version: 20150421134758) do
     t.integer  "activity_points",      default: 0
     t.integer  "remaining_for_period"
     t.boolean  "removed",              default: false
+    t.date     "deadline"
+    t.date     "upcoming_activities"
+    t.date     "upcoming_deadline"
   end
 
   create_table "boards", force: :cascade do |t|
@@ -86,6 +89,8 @@ ActiveRecord::Schema.define(version: 20150421134758) do
     t.string   "coping_strategy"
     t.string   "support"
     t.integer  "goal_points",       default: 0
+    t.string   "measure"
+    t.string   "consequence"
   end
 
   create_table "groups", force: :cascade do |t|

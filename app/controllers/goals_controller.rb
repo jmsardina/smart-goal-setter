@@ -4,7 +4,7 @@ class GoalsController < ApplicationController
 	def index
 		if current_user
 			@goals = current_user.goals.order("due_date ASC")
-			@activities = current_user.activities
+			@activities = current_user.activities.where(status: false)
 		else
 			@goals = Goal.all
 			redirect_to '/welcome/index'
@@ -19,7 +19,6 @@ class GoalsController < ApplicationController
 		@goal = Goal.new(goal_params)
 		@goal.user = current_user
 		if @goal.save
-			UserMailer.new_goal(user).deliver_now
 			redirect_to goal_path(@goal)
 		else
 			flash[:notice] = "Something went wrong...Try again."
@@ -60,6 +59,6 @@ class GoalsController < ApplicationController
 		end
 
 		def goal_params
-			params.require(:goal).permit(:name, :user_id, :description, :status, :due_date, :motivation, :potential_barrier, :coping_strategy, :support, tag_ids: [])
+			params.require(:goal).permit(:name, :user_id, :description, :measure, :consequence, :status, :due_date, :motivation, :potential_barrier, :coping_strategy, :support, tag_ids: [])
 		end
 end

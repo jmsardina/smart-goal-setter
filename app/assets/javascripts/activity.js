@@ -1,19 +1,19 @@
 function Activity(){
 }
 
-// Activity.updateStatus = function(e){
-//   var $checkbox = $(this);
-//   var $form = $(this).parents("tr").children("form");
-//   var href = $form.attr("action");
+Activity.updateStatus = function(e){
+  var $checkbox = $(this);
+  var $form = $(this).parents("tr").children("form");
+  var href = $form.attr("action");
 
-//   $.ajax(href, {
-//     "method": "PATCH",
-//     "data": $form.serialize(),
-//     "success": function(response){
-//     $checkbox.parents("tr").toggleClass("completed");
-//     }
-//   })
-// }
+  $.ajax(href, {
+    "method": "PATCH",
+    "data": $form.serialize(),
+    "success": function(response){
+    $checkbox.parents("tr").toggleClass("completed");
+    }
+  })
+}
 
 function deleteActivity(e){
   e.preventDefault();

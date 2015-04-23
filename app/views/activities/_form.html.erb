@@ -38,6 +38,10 @@
    <%= f.select :facilitator, options_for_select(["I will set my alarm", "I will ask a friend to remind me", "I will take a warm shower afterwards"]) %>
   </div><br>
 
+  <div class="field">
+    <%= f.label :deadline, "Deadline"%>
+    <%= f.date_field :deadline, value: 1.day.from_now %>
+  </div><br>
 
   <%= f.submit %>
 <% end %>
