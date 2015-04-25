@@ -99,11 +99,30 @@ function showActivityForm(){
   $(this).parents("div.view").children("div#edit-activity.hidden").removeClass("hidden")
 }
 
+function makeSelection(){
+  var $form = $(this).parents("form:first")
+  var href = $form.attr("action");
+
+  $.ajax(href, {
+    "method": "PATCH",
+    "data": $form.serialize(),
+    "success": function(response){
+      var newValue = $("select", $form).val();
+      var $td = $form.parents("td:first");
+      $td.html(newValue)
+      hideEditInPlace($td);
+    }
+  })
+}
+
 $(function(){
-  $("form#new_activity").hide() 
+  $("form#new_activity").hide();
+  $("select").addClass("edit");
   $("table.table").on("change", "input:checkbox", Activity.updateStatus);
   $("table.table").on("click", "button.destroy", deleteActivity);
   $("table.table").on("submit", "form.update", Activity.updateContent);
+  $("select").on("change", makeSelection);
+
   $("table.table").on("dblclick", "td", Activity.edit);
   $("table.table").on("blur", "td input.edit", Activity.stopEdit);
 
