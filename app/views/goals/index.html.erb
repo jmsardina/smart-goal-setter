@@ -7,7 +7,7 @@
       <div class=".col-xs-4 .col-sm-6">
         <div class="card">
           <h4>Things To Do <small>one step-at-a-time</small></h4>  
-          <div class="activities-scroll" style="height:400px">
+          <div class="activities-scroll" style="height:300px">
             <table class="table">
               <thead>
                 <tr>
@@ -20,7 +20,7 @@
               </thead>                  
               <% @activities.each do |activity| %>
               <tbody>       
-                <tr data-activity-id="<%=activity.id %>" class="" >
+                <tr data-activity-id="<%=activity.id %>"  class="<% if activity.remaining_for_period == 0 %>done<% end %>" >
                 <% goal = activity.goal %>
                 <%= form_for([goal, activity]) do |f| %>
                   <%= f.check_box :status, class: "toggle", style: "display:none" %>
