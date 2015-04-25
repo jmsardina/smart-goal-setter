@@ -2,11 +2,36 @@
   <%= form_for([goal, activity]) do |f| %>
     <td><%= f.check_box :status, class: "toggle" %></td>
   <% end %>
-  <td><%= activity.description %></td>
-  <td><%= activity.barrier %></td>
-  <td><%= activity.facilitator %></td>
-  <td><%= activity.frequency %></td>
-  <td><%= activity.period %></td>
+  <td>
+    <span class="view"><%= activity.description %></span>
+    <%= form_for([goal, activity], :html => {:class => "update"}, :remote => true) do |f| %>
+      <%= f.text_field :description, :class => "edit" %>
+    <% end %>
+  </td>
+  <td>
+    <span class="view"><%= activity.barrier %></span>
+    <%= form_for([goal, activity], :html => {:class => "update"}, :remote => true) do |f| %>
+      <%= f.text_field :barrier, :class => "edit" %>
+    <% end %>
+  </td>
+  <td>
+    <span class="view"><%= activity.facilitator %></span>
+    <%= form_for([goal, activity], :html => {:class => "update"}, :remote => true) do |f| %>
+      <%= f.text_field :facilitator, :class => "edit" %>
+    <% end %>
+  </td>
+  <td>
+    <span class="view"><%= activity.frequency %></span>
+    <%= form_for([goal, activity], :html => {:class => "update"}, :remote => true) do |f| %>
+      <%= f.select :frequency, options_for_select(1..12), :class => "edit" %>
+    <% end %>
+  </td>
+  <td>
+    <span class="view"><%= activity.period %></span>
+    <%= form_for([goal, activity], :html => {:class => "update"}, :remote => true) do |f| %>
+      <%= f.select :period, options_for_select(["day", "week", "month", "year"]), :class => "edit" %>
+    <% end %>
+  </td>
   <td><%= activity.activity_points %></td>
   <td><%= activity.remaining_for_period %></td>
   <td><%= activity.upcoming_deadline %></td>
