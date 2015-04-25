@@ -95,7 +95,6 @@ function addActivityListener(){
 }
 
 function showActivityForm(){
-  // $(this).parents().find($("form#edit-activity.hidden").removeClass("hidden"));
   $(this).parents("div.view").children("div#edit-activity.hidden").removeClass("hidden")
 }
 
