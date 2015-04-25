@@ -61,6 +61,7 @@ class ActivitiesController < ApplicationController
 				Activity.where(goal_id: @goal.id, description: @activity.description) do |a|
 					a.occurences = @activity.occurences
 					a.upcoming_deadline = @activity.upcoming_due_dates[i]
+					a.remaining_for_period = @activity.frequency
 					a.save
 				end
 			end
