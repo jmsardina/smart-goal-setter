@@ -119,10 +119,11 @@ $(function(){
   $("form#new_activity").hide();
   $("select").addClass("edit");
   $("table.table").on("change", "input:checkbox", Activity.updateStatus);
+  $("table.table").on("change", "select", makeSelection);
+  $("table.table").on("change", "input", makeSelection);
+
   $("table.table").on("click", "button.destroy", deleteActivity);
   $("table.table").on("submit", "form.update", Activity.updateContent);
-  $("select").on("change", makeSelection);
-
   $("table.table").on("dblclick", "td", Activity.edit);
   $("table.table").on("blur", "td input.edit", Activity.stopEdit);
 
