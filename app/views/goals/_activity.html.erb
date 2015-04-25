@@ -1,4 +1,4 @@
-<tr id="activity_<%= activity.id %>">
+<tr id="activity_<%= activity.id %>" class="<% if activity.remaining_for_period == 0 %>cleared<% end %>">
   <%= form_for([goal, activity]) do |f| %>
     <td><%= f.check_box :status, class: "toggle" %></td>
   <% end %>

@@ -5,7 +5,7 @@ class GoalsController < ApplicationController
 		if current_user
 			@goals = current_user.goals.order("due_date ASC")
 			@activities = []
-			current_user.activities.each do |activity|
+			current_user.activities.order(:upcoming_deadline).each do |activity|
 				@activities << activity if activity.valid_cycle_dates === Time.now.to_date
 			end
 		else
