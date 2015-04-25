@@ -19,28 +19,29 @@
                 </tr>
               </thead>                  
               <% @activities.each do |activity| %>
-                <tbody>       
-                  <tr data-activity-id="<%=activity.id %>" class="" >
-                  <% goal = activity.goal %>
-                  <%= form_for([goal, activity]) do |f| %>
-                    <%= f.check_box :status, class: "toggle", style: "display:none" %>
-                  <% end %>
+              <tbody>       
+                <tr data-activity-id="<%=activity.id %>" class="" >
+                <% goal = activity.goal %>
+                <%= form_for([goal, activity]) do |f| %>
+                  <%= f.check_box :status, class: "toggle", style: "display:none" %>
+                <% end %>
 
-                    <td><%=link_to activity.description, goal_path(activity.goal) %></td>
-                    <td class="remaining">
-                    <% activity.remaining_for_period.times do %>
-                      <div class="circle" style="display:inline-block">
-                      <%= form_for([goal, activity]) do |f| %>
-                        <%= f.check_box :status, class: "toggle", style: "opacity:0" %>
-                      <% end %>
-                      </div>
+                  <td><%=link_to activity.description, goal_path(activity.goal) %></td>
+                  <td class="remaining">
+                  <% activity.remaining_for_period.times do %>
+                    <div class="circle" style="<%if activity.complete?%>background-color:green<%end%>;display:inline-block;">
+                    <%= form_for([goal, activity]) do |f| %>
+                      <%= f.check_box :status, class: "toggle", style: "opacity:0" %>
                     <% end %>
-                    </td>
-                    <td style="<%if activity.upcoming_due_dates.first <= 3.days.from_now%>color:red<%end%>"><%= activity.upcoming_deadline.strftime("%B %d, %Y") %></td>
-                    <td><button class="destroy">X</button></td>
+                    </div>
                   <% end %>
-                  </tr>
-                </tbody>
+                  </td>
+                  <td style="<%if activity.upcoming_deadline <= 3.days.from_now%>color:red<%end%>">
+                  <%= activity.upcoming_deadline.strftime("%B %d, %Y") %></td>
+                  <td><button class="destroy">X</button></td>
+                <% end %>
+                </tr>
+              </tbody>
             </table>           
           </div>
         </div>

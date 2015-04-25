@@ -43,6 +43,13 @@ function deleteActivity(e){
 //   })
 // }
 
+Activity.edit = function(e){
+  e.preventDefault();
+  var $td = $(this);
+  $td.addClass("editing");
+  $("input.edit", $td).focus();
+}
+
 Activity.updateContent = function(e){
   e.preventDefault();
 
@@ -53,25 +60,16 @@ Activity.updateContent = function(e){
     "method": "PATCH",
     "data": $form.serialize(),
     "success": function(response){
-      var newLabelValue = $("input.edit", $form).val();
-      var $li = $form.parents("li:first");
-      $("label", $li).html(newLabelValue)
-      hideEditInPlace($li);
+      var newValue = $("input.edit", $form).val();
+      var $td = $form.parents("td:first");
+      $td.html(newValue)
+      hideEditInPlace($td);
     }
   })
 }
 
-
-Activity.edit = function(e){
-  e.preventDefault();
-  var $li = $(this).parents("li:first");
-  $li.addClass("editing");
-  $("input.edit", $li).focus();
-  $('select', $li).focus();
-}
-
-function hideEditInPlace($li){
-  $li.removeClass("editing");
+function hideEditInPlace($td){
+  $td.removeClass("editing");
 }
 
 Activity.clear = function(e){
@@ -84,10 +82,10 @@ Activity.show = function(e){
 
 Activity.stopEdit = function(e){
   e.preventDefault();
-  var $li = $(this).parents("li:first");
-  hideEditInPlace($li);
+  var $td = $(this).parents("td:first");
+  hideEditInPlace($td);
 
-  $("form.update", $li).trigger("submit")
+  $("form.update", $td).trigger("submit")
 }
 
 function addActivityListener(){
@@ -105,13 +103,9 @@ $(function(){
   $("form#new_activity").hide() 
   $("table.table").on("change", "input:checkbox", Activity.updateStatus);
   $("table.table").on("click", "button.destroy", deleteActivity);
-  
-  $("ul.list").on("submit", "form.update", Activity.updateContent);
-
-  // $("ul.list").on("dblclick", "li label", Activity.edit);
-  // $("ul.list").on("dblclick", "span.act-frequency", Activity.edit);
-  // $("ul.list").on("dblclick", "span.act-period", Activity.edit);
-  // $("ul.list").on("blur", "li input.edit", Activity.stopEdit);
+  $("table.table").on("submit", "form.update", Activity.updateContent);
+  $("table.table").on("dblclick", "td", Activity.edit);
+  $("table.table").on("blur", "td input.edit", Activity.stopEdit);
 
   addActivityListener();
 });

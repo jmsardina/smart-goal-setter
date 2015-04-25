@@ -51,12 +51,6 @@ class ActivitiesController < ApplicationController
 		render nothing: true, status: :ok
 	end
 
-
-
-	def show
-		set_activity
-	end
-
 	def destroy
 		set_activity.destroy
 		render nothing: :true, status: :ok
