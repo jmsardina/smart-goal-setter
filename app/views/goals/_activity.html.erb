@@ -23,17 +23,22 @@
   <td>
     <span class="view"><%= activity.frequency %></span>
     <%= form_for([goal, activity], :html => {:class => "update"}, :remote => true) do |f| %>
-      <%= f.select :frequency, options_for_select(1..12), :class => "edit" %>
+      <%= f.select :frequency, options_for_select((1..12), activity.frequency), :class => "edit" %>
     <% end %>
   </td>
   <td>
     <span class="view"><%= activity.period %></span>
     <%= form_for([goal, activity], :html => {:class => "update"}, :remote => true) do |f| %>
-      <%= f.select :period, options_for_select(["day", "week", "month", "year"]), :class => "edit" %>
+      <%= f.select :period, options_for_select(["day", "week", "month", "year"], activity.period), :class => "edit" %>
     <% end %>
   </td>
   <td><%= activity.activity_points %></td>
   <td><%= activity.remaining_for_period %></td>
-  <td><%= activity.upcoming_deadline %></td>
+  <td>
+    <span class="view"><%= activity.upcoming_deadline %></span>
+    <%= form_for([goal, activity], :html => {:class => "update"}, :remote => true) do |f| %>
+      <%= f.date_field :deadline, :class => "edit" %>
+    <% end %>
+  </td>
   <td><button class="destroy"></button></td>
 </tr>
