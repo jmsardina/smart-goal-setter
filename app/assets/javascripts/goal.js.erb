@@ -54,8 +54,8 @@ function deleteGoal(e){
   e.preventDefault();
   var $tr = $(this).parents("tr");
   var href = $("form", $tr).attr("action");
-  var id = $(this).data("id")
-
+  var id = $(this).attr("id")
+  
   $.ajax(href + '/' + id, {
     "method": "DELETE",
     "success": function(){
@@ -70,5 +70,5 @@ $(function(){
   $("table.table").on("change", "input:checkbox", completeActivity);
   $("table.table").on("click", "button.destroy", deleteActivity);
   $("table.table").on("change", "input#goal_status", Goal.updateStatus);
-  $("table.table").on("click", "button.destroy", deleteGoal);
+  $("table.table").on("click", "button.destroy-goal", deleteGoal);
 });
