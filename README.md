@@ -2,7 +2,7 @@
 
 Organize your goals in a SMART way!
 
-SSG provides is a simple tool for setting goals that are:
+SSG is a simple tool for setting goals that are:
   Specific
   Measurable
   Attainable
