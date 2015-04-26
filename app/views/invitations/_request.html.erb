@@ -1,9 +1,0 @@
-<% requests.each do |request| %>
-  <% group = Group.find(request.invitable_id)%>
-  <% sender = User.find(request.sender_id) %>
-  <% recipient = User.find(request.recipient_id) %>
-
-  <% group.members.include?(recipient) ? member = sender : member = recipient %>
-
-  <%= "Request from #{sender.name} to join #{group.name}"%><%= render "user_groups/form", group: group, member: member, invitation: request %>
-<% end %>

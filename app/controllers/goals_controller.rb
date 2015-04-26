@@ -10,7 +10,7 @@ class GoalsController < ApplicationController
 			end
 		else
 			@goals = Goal.all
-			redirect_to '/welcome/index'
+			render 'welcome_page'
 		end
 	end
 

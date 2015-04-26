@@ -27,15 +27,15 @@
   </div><br>
 
   <div class="field">
-    <%= f.label :barrier, "Challenge"%>
+    <%= f.label :barrier, "What may get on the way?"%>
     <%#= f.text_area :barrier %>
-    <%= f.select :barrier, options_for_select(["Lack of time", "Lack of Support", "I forget", "I don't like to do it", "It hurts"]) %>
+    <%= f.text_field :barrier, placeholder: "Ex. I forget." %>
   </div><br>
 
   <div class="field">
-    <%= f.label :facilitator, "How will you cope with this challenge?"%>
+    <%= f.label :facilitator, "How will you overcome this challenge?"%>
     <%#= f.text_area :facilitator %>
-   <%= f.select :facilitator, options_for_select(["I will set my alarm", "I will ask a friend to remind me", "I will take a warm shower afterwards"]) %>
+   <%= f.text_field :facilitator, placeholder: "Ex. I will set an alarm." %>
   </div><br>
 
   <div class="field">

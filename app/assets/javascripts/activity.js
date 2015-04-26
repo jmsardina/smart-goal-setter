@@ -30,19 +30,6 @@ function deleteActivity(e){
   })
 }
 
-// function createActivity(e){
-//   e.preventDefault();
-//   var $form = $(this).parents("form");
-//   var href = $form.attr("action");
-
-//   $.ajax(href, {
-//     "method": "POST",
-//     "success": function(){
-//       $(this).create();
-//     }
-//   })
-// }
-
 Activity.edit = function(e){
   e.preventDefault();
   var $td = $(this);

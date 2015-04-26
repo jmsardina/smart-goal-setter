@@ -4,10 +4,6 @@ class ActivitiesController < ApplicationController
 		@activities = Activity.all
 	end
 
-	def new
-		@activity = Activity.new
-	end
-
 	def create
 		@goal = Goal.find(params[:goal_id])
 		@activity = Activity.new(activity_params)
@@ -35,10 +31,6 @@ class ActivitiesController < ApplicationController
 		    end
 		  end
 		end
-	end
-
-	def edit
-		set_activity
 	end
 
 	def update

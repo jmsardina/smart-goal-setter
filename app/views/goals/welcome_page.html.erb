@@ -1,7 +1,69 @@
-<p>Find me in views/goals/welcome_page!</p>
-
-<p>This page will be rendered when there is no current_user.</p>
-
-<p>This will be the main landing page where users can choose to sign in or sign up</p>
-
-<p>It would be cool to render user testimonies here!</p>
+<section id="content">
+    <%= render 'mini_dashboard_charts' %>
+  <div class="container">
+    <div class="block-header">
+      <h2 style="font-family:comic sans ms, lucida console;"><strong><%= MotivationalQuote.find(rand(1..MotivationalQuote.count)).content %></strong></h2>
+    </div>
+    <div class=".col-xs-4 .col-sm-6">
+      <div class="card">
+        <h4>Things To Do <small>one step-at-a-time</small></h4>  
+        <div class="activities-scroll" style="height:300px">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Times Left</th>
+                <th>By</th>
+                <th>Delete</th>
+              </tr>
+            </thead>                  
+           
+            <tbody>       
+              <tr>
+                <td>Sign up for Goal setter!</td>
+                <td class="remaining">
+                  <div class="circle" style="display:inline-block;"></div>
+                </td>
+                <td style="color:red">
+                  <%= Time.now.to_date("%B %d, %Y") %></td>
+                <td><button class="destroy">X</button></td>
+              </tr>
+            </tbody>
+          </table>           
+        </div>
+      </div>
+    </div>
+    <div class=".col-xs-4 .col-sm-6">
+      <div class="card" style="height:300px">
+        <div class="card-header">
+          <div class="listview">
+            <div class="lv-header">
+                My Goals
+            </div>
+            <ul class="actions">
+              <li class="dropdown">
+                <a href="<%= new_goal_path %>">
+                  <i class="md  md-add"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Goal</th>
+              <th>Due Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <td></td>
+            <td>Set SMART goals and stick to them!</td>
+            <td>30.days.from_now</td>
+          </tbody>
+        </table>
+      </div>
+    </div> 
+  </div>
+</section>

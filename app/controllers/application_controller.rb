@@ -23,10 +23,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def track_feed(trackable, action = params[:action])
-      current_user.feeds.create! action: action, trackable: trackable
-    end
-
 	  def configure_permitted_parameters
 	  	devise_parameter_sanitizer.for(:sign_up) << ([:name, :avatar])
 	  end
