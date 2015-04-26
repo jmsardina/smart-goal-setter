@@ -1,6 +1,42 @@
 function Activity(){
 }
 
+Activity.updateStatus = function(e){
+  var $checkbox = $(this);
+  var $form = $(this).parents("tr").children("form");
+  var href = $form.attr("action");
+
+  $.ajax(href, {
+    "method": "PATCH",
+    "data": $form.serialize(),
+    "success": function(response){
+    $checkbox.parents("tr").toggleClass("completed");
+    }
+  })
+}
+
+function deleteActivity(e){
+  e.preventDefault();
+  var $tr = $(this).parents("tr");
+  var href = $("form", $tr).attr("action");
+
+  $.ajax(href, {
+    "method": "DELETE",
+    "success": function(){
+      $tr.slideUp(function(){
+        $(this).remove();
+      });
+    }
+  })
+}
+
+Activity.edit = function(e){
+  e.preventDefault();
+  var $td = $(this);
+  $td.addClass("editing");
+  $("input.edit", $td).focus();
+}
+
 Activity.updateContent = function(e){
   e.preventDefault();
 
@@ -11,38 +47,16 @@ Activity.updateContent = function(e){
     "method": "PATCH",
     "data": $form.serialize(),
     "success": function(response){
-      var newLabelValue = $("input.edit", $form).val();
-      var $li = $form.parents("li:first");
-      $("label", $li).html(newLabelValue)
-      hideEditInPlace($li);
+      var newValue = $("input.edit", $form).val();
+      var $td = $form.parents("td:first");
+      $td.html(newValue)
+      hideEditInPlace($td);
     }
   })
 }
 
-Activity.updateStatus = function(e){
-  var $checkbox = $(this);
-  var $form = $(this).parents("form:first");
-  var href = $form.attr("action");
-
-  $.ajax(href, {
-    "method": "PATCH",
-    "data": $form.serialize(),
-    "success": function(response){
-      $checkbox.parents("li:first").toggleClass("completed");
-    }
-  })
-}
-
-Activity.edit = function(e){
-  e.preventDefault();
-  var $li = $(this).parents("li:first");
-  $li.addClass("editing");
-  $("input.edit", $li).focus();
-  $('select', $li).focus();
-}
-
-function hideEditInPlace($li){
-  $li.removeClass("editing");
+function hideEditInPlace($td){
+  $td.removeClass("editing");
 }
 
 Activity.clear = function(e){
@@ -55,10 +69,10 @@ Activity.show = function(e){
 
 Activity.stopEdit = function(e){
   e.preventDefault();
-  var $li = $(this).parents("li:first");
-  hideEditInPlace($li);
+  var $td = $(this).parents("td:first");
+  hideEditInPlace($td);
 
-  $("form.update", $li).trigger("submit")
+  $("form.update", $td).trigger("submit")
 }
 
 function addActivityListener(){
@@ -67,41 +81,37 @@ function addActivityListener(){
     });
 }
 
-function deleteActivity(e){
-  e.preventDefault();
-  var $li = $(this).parents("li");
-  var href = $("form", $li).attr("action");
+function showActivityForm(){
+  $(this).parents("div.view").children("div#edit-activity.hidden").removeClass("hidden")
+}
+
+function makeSelection(){
+  var $form = $(this).parents("form:first")
+  var href = $form.attr("action");
 
   $.ajax(href, {
-    "method": "DELETE",
-    "success": function(){
-      $li.slideUp(function(){
-
-        $(this).remove();
-      });
+    "method": "PATCH",
+    "data": $form.serialize(),
+    "success": function(response){
+      var newValue = $("select", $form).val();
+      var $td = $form.parents("td:first");
+      $td.html(newValue)
+      hideEditInPlace($td);
     }
   })
 }
 
-function showActivityForm(){
-  // $(this).parents().find($("form#edit-activity.hidden").removeClass("hidden"));
-  $(this).parents("div.view").children("div#edit-activity.hidden").removeClass("hidden")
-}
-
 $(function(){
-  $("ul.list").on("change", "input:checkbox", Activity.updateStatus);
-  $("ul.list").on("submit", "form.update", Activity.updateContent);
-  $("ul.list").on("dblclick", "li form label", showActivityForm);
-  // $("ul.list").on("dblclick", "li label", Activity.edit);
-  // $("ul.list").on("dblclick", "span.act-frequency", Activity.edit);
-  // $("ul.list").on("dblclick", "span.act-period", Activity.edit);
-  // $("ul.list").on("blur", "li input.edit", Activity.stopEdit);
-  $("button.clear-completed").on("click", Activity.clear);
-  $("button.show-completed").on("click", Activity.show);
-  $("ul.list").on("click", "button.destroy", deleteActivity);
-  addActivityListener();
   $("form#new_activity").hide();
-  $("button#show-activity-form").on("click", function() {
-    $("form#new-activity").toggle()
-  });
+  $("select").addClass("edit");
+  $("table.table").on("change", "input:checkbox", Activity.updateStatus);
+  $("table.table").on("change", "select", makeSelection);
+  $("table.table").on("change", "input", makeSelection);
+
+  $("table.table").on("click", "button.destroy", deleteActivity);
+  $("table.table").on("submit", "form.update", Activity.updateContent);
+  $("table.table").on("dblclick", "td", Activity.edit);
+  $("table.table").on("blur", "td input.edit", Activity.stopEdit);
+
+  addActivityListener();
 });

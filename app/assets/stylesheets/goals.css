@@ -1,32 +1,73 @@
-/*#activities-list li.completed {
+div.activities-scroll {
+  height: 200px;
+  overflow: scroll;
+}
+
+.circle {
+  background-color: red;
+  border: 2px solid #666666;
+  border-radius: 50%;
+  /*-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";*/
+  /*filter: alpha(opacity=60);*/
+  opacity: 0.6;
+
+  -webkit-box-shadow: 0 0 1px 0px rgb( 255, 255, 255);
+  box-shadow: 0 0 1px 0px rgb( 255, 255, 255);
+  width: 20px;
+  height: 20px;
+  z-index: 86;
+
+  /*-webkit-transition: background-color .5s ease-in-out;*/
+  /*-moz-transition: background-color .5s ease-in-out;*/
+  -o-transition: background-color .5s ease-in-out;
+  -ms-transition: background-color .5s ease-in-out;
+  /*transition: background-color .5s ease-in-out;*/
+}
+
+.circle.green {
+  background-color: green;
+}
+
+.done {
+  display: none;
+}
+
+.cleared{
   color: #d9d9d9;
   text-decoration: line-through;
 }
 
-#activities-list li.editing .view {
+.completed {
+  color: #d9d9d9;
+  text-decoration: line-through;
+}
+
+td.completed {
+  color: #d9d9d9;
+  text-decoration: line-through;
+}
+
+td.editing .view {
   display: none;
 }
 
-#activities-list li.editing {
+td.editing {
   border-bottom: none;
-  padding: 0;
 }
 
-#activities-list li.editing .edit {
+td.editing .edit {
   display: block;
-  width: 506px;
-  padding: 13px 17px 12px 17px;
-  margin: 0 0 0 43px;
+  width: auto;
 }
 
-#activities-list li .edit {
+td .edit {
   display: none;
 }
 
-#activities-list li.editing:last-child {
+td.editing:last-child {
   margin-bottom: -1px;
 }
-*/
+
 /*#activity-list li .toggle {
   text-align: center;
   width: 40px;

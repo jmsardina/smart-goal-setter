@@ -7040,13 +7040,7 @@ button.close {
 /*
  * Roboto Light
  */
-@font-face {
-  font-family: roboto;
-  src: asset-url('roboto/Roboto-Light-webfont.eot');
-  src: asset-url('roboto/Roboto-Light-webfont.eot?#iefix') format('embedded-opentype'), asset-url('roboto/Roboto-Light-webfont.woff') format('woff'), asset-url('roboto/Roboto-Light-webfont.ttf') format('truetype'), asset-url('roboto/Roboto-Light-webfont.svg#icon') format('svg');
-  font-weight: 300;
-  font-style: normal;
-}
+
 /*
  * Roboto Regular
  */
@@ -7094,13 +7088,7 @@ button.close {
  *  Material Design Iconic Font 1.0.1 by Sergey Kupletsky (@zavoloklom) - http://zavoloklom.github.io/material-design-iconic-font/
  *  License - https://github.com/zavoloklom/material-design-iconic-font/blob/gh-pages/License.md (Attribution-ShareAlike 4.0 International license)
  */
-@font-face {
-  font-family: 'Material Design Iconic Font';
-  src: asset-url('material-icons/Material-Design-Iconic-Font.eot?v=1.0.1');
-  src: asset-url('material-icons/Material-Design-Iconic-Font.eot?#iefix&v=1.0.1') format('embedded-opentype'), asset-url('material-icons/Material-Design-Iconic-Font.woff?v=1.0.1') format('woff'), asset-url('material-icons/Material-Design-Iconic-Font.ttf?v=1.0.1') format('truetype'), asset-url('material-icons/Material-Design-Iconic-Font.svg?v=1.0.1#Material-Design-Iconic-Font') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
+
 [class^="md-"],
 [class*=" md-"] {
   display: inline-block;
@@ -11561,9 +11549,7 @@ body #content {
     background-size: 24px 24px;
   }
 }
-.top-menu > li > a.tm-search {
-  background-image: url("../img/icons/search.png");
-}
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   .top-menu > li > a.tm-search {
     background-image: url("../img/icons/search@2x.png");
@@ -11686,7 +11672,6 @@ body #content {
   border-radius: 2px;
   color: rgba(51, 51, 51, 0.69);
   background-color: rgba(255, 255, 255, 0.26);
-  background-image: url("../img/icons/search.png");
   background-repeat: no-repeat;
   background-position: 10px center;
 }

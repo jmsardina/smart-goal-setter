@@ -4,7 +4,6 @@
 
   <div class="block-header">
     <% if @goal.user == current_user %>
-     <!--  <header id="header"> -->
       <h2>
         <%= @goal.name %>
         <strong>Tags:</strong>
@@ -16,7 +15,7 @@
         <h4><%= @goal.description %></h4>
 
         <button id="show-activity-form">Add Activity</button>
-        <%= render 'activities/form' %>
+        <%= render 'activities/form', remote: true %>
   </div>
 
       </header>
@@ -27,8 +26,7 @@
         </h2>
       </div>
 
-      <div class="card-body table-responsive">
-       <!--  <ul id="activities-list" data-actvity-id="<%#= @goal.id %>" class="list"> -->
+      <div class="card-body table-responsive" style="height:400px;overflow:scroll;">
         <table class="table">
           <thead>
             <tr>
@@ -45,13 +43,12 @@
           </thead>
 
           <tbody style="overflow=scroll;">
-            <%= render @activities %>
+            <% @activities.each do |activity| %>
+              <%= render "activity", :activity => activity, :goal => @goal %>
+            <% end %>
           </tbody>
         </table>
-        <!-- </ul> -->
-      
       </div>
     </div>
     <% end %>
 </section>
-
