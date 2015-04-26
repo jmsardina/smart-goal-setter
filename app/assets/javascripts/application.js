@@ -16,5 +16,4 @@
 //= require bootstrap
 //= require goal
 //= require activity
-//= require group.js.erb
 //= require_tree .
