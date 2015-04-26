@@ -1,5 +1,40 @@
 <section id="content">
-    <%= render 'mini_dashboard_charts' %>
+  <div class="mini-charts chart-margin">
+    <div class="row">
+      <div class="col-sm-6 col-md-4">
+        <div class="mini-charts-item bgm-cyan">
+          <div class="clearfix">
+            <div class="count">
+              <small>Total Activities</small>
+              <h2></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-4">
+        <div class="mini-charts-item bgm-lightgreen">
+          <div class="clearfix">
+            <div class="count">
+              <small>Total Goals</small>
+              <h2></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-md-4">
+        <div class="mini-charts-item bgm-orange">
+          <div class="clearfix">
+            <div class="count">
+              <small>Total Points</small>
+              <h2></h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <div class="block-header">
       <h2 style="font-family:comic sans ms, lucida console;"><strong><%= MotivationalQuote.find(rand(1..MotivationalQuote.count)).content %></strong></h2>

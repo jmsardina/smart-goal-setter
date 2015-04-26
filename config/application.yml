@@ -10,13 +10,11 @@
 #   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
 #   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
 
-facebook_key: "827475133985838"
-facebook_secret: "4a5d30501200be998fed729f58fa5abf"
+pusher_facebook_key: "1436948926602803"
+pusher_facebook_secret: "0da6a31f873ff08a923e2e3880c47a08"
 
-email_user_name: 'team.goaly@gmail.com'
-email_password: 'flatIronGoalies123'
+pusher_email_user_name: 'team.goaly@gmail.com'
+pusher_email_password: 'flatIronGoalies123'
 
-twilio_account_sid: "AC5fe0b95954eb6fdd314b6cb0cb1297f6"
-twilio_auth_token: "b024aabb1c2eeaa0327cc77d27b96deb"
-
-twilio_number: +1 (347) 960-5821
+pusher_twilio_account_sid: "AC5fe0b95954eb6fdd314b6cb0cb1297f6"
+pusher_twilio_auth_token: "b024aabb1c2eeaa0327cc77d27b96deb"

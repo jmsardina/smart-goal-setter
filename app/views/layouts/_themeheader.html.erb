@@ -1,6 +1,5 @@
 <header id="header">
   <ul class="header-inner">
-    <!-- <li class="pull-right" id="top-search"><a class="tm-search"><%#= render 'search/form' %></a></li> -->
     <a href="/"><strong style="font-size: 40px;font-family:comic sans ms;">Goal-Setter</strong></a>
     
     <li class="pull-right">
@@ -10,9 +9,14 @@
         <% else %>
           <img src="<%=current_user.avatar.url%>" style="height:auto;width:auto;max-width:40px;max-height:40px;">
         <% end %>
-        <%= "Hello #{current_user.name}!" %> |
-        <a href="/users/edit"><span style="color:blue">  Edit Profile </span></a>|
-        <a href="/users/sign_out"><span style="color:blue;"> Sign Out </span> </a>
+        <% if current_user %>
+          <%= "Hello #{current_user.name}!" %> |
+          <a href="/users/edit"><span style="color:blue">  Edit Profile </span></a>|
+          <a href="/users/sign_out"><span style="color:blue;"> Sign Out </span> </a>
+        <% else %>
+          <a href="/users/sign_up"><span style="color:blue">  Sign Up </span></a>|
+          <a href="/users/sign_in"><span style="color:blue;"> Sign In </span> </a>
+        <% end %>
       </ul>
     </li>
   </ul>
