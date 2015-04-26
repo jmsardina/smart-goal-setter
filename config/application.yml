@@ -14,3 +14,8 @@ facebook_secret: "4a5d30501200be998fed729f58fa5abf"
 
 email_user_name: 'team.goaly@gmail.com'
 email_password: 'flatIronGoalies123'
+
+twilio_account_sid: "AC5fe0b95954eb6fdd314b6cb0cb1297f6"
+twilio_auth_token: "b024aabb1c2eeaa0327cc77d27b96deb"
+
+twilio_number: +1 (347) 960-5821

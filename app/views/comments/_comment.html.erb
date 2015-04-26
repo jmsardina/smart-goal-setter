@@ -1,56 +1,58 @@
-<%= li_for_comment(comment) do %>
-  <div class="lv-item media">
-    <div class="lv-avatar pull-left">
-      <% if comment.user.uid %>
-        <%= image_tag comment.user.image_url %>
+<%= div_for_comment(comment) do %>
+  <div class="media">
+    <div class="pull-left">
+      <% if comment.user.image_url %>
+        <img src="<%=current_user.image_url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;"/>
       <% else %>
-        <%= image_tag comment.user.avatar.url(:thumb) %>
+        <img src="<%=current_user.avatar.url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;"/>
       <% end %>
     </div>
-    
+  
     <div class="media-body">
-      <div class="ms-item">
-        <p><%= comment.content %></p>
-      </div>
-
+      <h4 class="media-heading"><%= comment.user.name %></h4>
+        <%= comment.content %>
       <small class="ms-date">
-        <%= comment.user.name + " wrote" %>
-        <%= time_ago_in_words(comment.created_at) + " ago" %><br>
+        <%= time_ago_in_words(comment.created_at) + " ago" %> 
         <%= comment.reply_counter %> comments
-        <%= comment.cheer_count %> cheers
+        <%= comment.cheer_count %> <!-- cheers -->
         <%= render 'cheers/form', cheerable: comment %>
-      </small>
-    </div>
-  </div>
-
-  <div class="reply-to-comment">
-    <div class="reply-form hidden">
-      <%= render "comments/form", commentable: comment%>
-    </div>
-    <button class="reply">Reply</button>
-  </div>
-
-    <% comment.replies.each do |reply| %>
-      <div class="lv-item media right">
-        <div class="lv-avatar pull-right">
-          <% if comment.user.uid %>
-            <%= image_tag comment.user.image_url %>
-          <% else %>
-            <%= image_tag comment.user.avatar.url(:thumb) %>
-          <% end %>
-        </div>
-
-        <div class="media-body">
-          <div class="ms-item">
-            <p><%= reply.content %></p>
-            <%= render 'cheers/form', cheerable: reply %>
+        <div class="reply-to-comment">
+          <div class="reply-form hidden">
+            <%= render "comments/form", commentable: comment%>
           </div>
-          <small class="ms-date">
-            <%= reply.user.name + " wrote" %>
-            <%= time_ago_in_words(reply.created_at) + " ago" %><br>
-            <%= reply.cheer_count %> cheers<br>
-          </small>
-        </div>
-    <% end %>
 
+          <button class="reply">Reply</button>
+        </div>
+      </small>
+      <div class="newest-comment">
+
+      </div>
+        <% (replies = Comment.where(commentable_type: "Comment", commentable_id: comment.id).order(:created_at).reverse_order) %>
+        <% replies.each do |reply| %>
+        <div class="media">
+          <div class="pull-left" style="size:50x50;">
+            <% if reply.user.image_url %>
+              <img src="<%=reply.user.image_url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;"/>
+            <% else %>
+              <img src="<%=reply.user.avatar.url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;"/>
+            <% end %>
+          </div>
+
+          <div class="media-body">
+            <div class="media-heading">
+              <h4><%= reply.user.name %></h4>
+               <%= reply.content %>
+               <%= render 'cheers/form', cheerable: reply %>
+            </div>
+
+            <small class="ms-date">
+              <%= time_ago_in_words(reply.created_at) + " ago" %><br>
+              <%= reply.cheer_count %> cheers<br>
+            </small>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>

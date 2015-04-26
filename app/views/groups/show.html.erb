@@ -2,29 +2,34 @@
   <div class="notice"><%= flash[:notice] %></div>
 <% end %> 
 
-<div>
-	<%= render 'search/form' %>
-	<%= render 'boards/form' %>
-	<% if @results %>
-		<%= render 'search/results' %>
-	<% end %>
-</div>
-
-<div class="card m-b-0" id="messages-main">
-	<%= render 'groups/groupinfo', group: @group, tags: @tags %>
-</div>
-
-<div class="ms-body">
-	<div>
-		<div class="row">
-			<%= render @boards %>
-		 </div>
-	</div>
-</div>
-<div class="row", style="padding-left:15px;">
-	<div class="member-scroll">
-		<div class="card", style="width:1140px;">
-			<%= render @members %>
+<section id="content">
+	<div class="container">
+		<div class="card m-b-0" id="messages-main" style="padding-top:20px">
+			<div class="ms-menu">
+					<%= render 'groups/groupinfo', group: @group, tags: @tags %>
+			</div>
+			<div class="ms-body">
+				<div class="listview lv-message">
+					<div class="lv-header-alt bgm-whilte">
+					  <div class="card-body card-padding">
+					    <div class="message-scroll">
+					      <div class="listview lv-message">
+					        <div class="mgroedia-demo">
+					          <ul class="comments-list" style="list-type-style:none;">
+					            <% @comments.each do |comment| %>
+						            <%= render "comments/comment", comment: comment %>
+					            <% end %>
+					          </ul>
+					        </div>
+					      </div>
+							</div>
+						</div>
+					</div>
+			 	</div>
+			 </div>
 		</div>
+	    <div class="lv-footer ms-reply">
+	    	<%= render 'comments/form', commentable: @board %>
+	  	</div>
 	</div>
-</div>
+</section>

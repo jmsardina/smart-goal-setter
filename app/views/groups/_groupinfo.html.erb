@@ -1,16 +1,23 @@
-<div class="ms-menu">
+<!-- <div class="ms-menu"> -->
   <div class="ms-block">
     <div class="ms-user">
       <h3><%= group.name %></h3>
     </div>
-    <%= image_tag group.avatar(:thumb) %>
+
+    <% if group.image_url %>
+      <img src="<%= group.image_url %>" style="height:auto;width:auto;max-width:60px;max-height:60px;">
+    <% else %>
+      <%= image_tag group.avatar(:thumb) %>
+    <% end %>
+
     <small>
-      <%= @group.cheer_count %>
+      <i class="cheer-count"><%= @group.cheer_count %></i>
       <div class="form-inline">
         <%= render 'cheers/form', cheerable: group %>
       </div><br>
       <%= "#{@group.members.count}" + " members"%>
     </small>
+
   </div>
 
   <div class="listview lv-user m-t-20">
@@ -27,7 +34,10 @@
       <% end %>
     </div>
 
-    <% if !@members.include?(current_user) %>
-      <%= render 'invitations/form', invitable: @group, recipient: @group.creator, invitation: @invitation %>
-    <% end %>
-</div>
+    <div class="lv-item media active">
+      <p class="about-group" style="overflow:scroll;">
+        <strong>Food For Thought</strong><br>
+        <%= MotivationalQuote.find(rand(1..MotivationalQuote.count)).content %>
+      </p>
+    </div>
+<!-- </div> -->

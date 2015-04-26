@@ -1,0 +1,23 @@
+<br>
+<%= div_for_comment(comment) do %>
+  <div class="media">
+    <div class="pull-left">
+      <% if comment.user.image_url %>
+        <img src="<%=current_user.image_url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
+      <% else %>
+        <img src="<%=current_user.avatar.url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
+      <% end %>
+    </div>
+  
+    <div class="media-body">
+      <h4 class="media-heading"><%= comment.user.name %></h4>
+        <%= comment.content %>
+      <small class="ms-date">
+        <%= time_ago_in_words(comment.created_at) + " ago" %> 
+        <%= comment.reply_counter %> comments
+        <%#= comment.cheer_count %> <!-- cheers -->
+        <%#= render 'cheers/form', cheerable: comment %>
+      </small>
+    </div>
+  </div>
+<% end %>

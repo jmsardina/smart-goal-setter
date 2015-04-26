@@ -1,0 +1,74 @@
+// BEGIN INTERACTING WITH ACTIVITIES FROM DASHBOARD
+function completeActivity(){
+  var $checkbox = $(this);
+  var $form = $(this).parents("form:first");
+  var href = $form.attr("action");
+
+  $.ajax(href, {
+    "method": "PATCH",
+    "data": $form.serialize(),
+    "success": function(response){
+      $checkbox.parents("tr").toggleClass("completed");
+      $checkbox.parents("div.circle:first").addClass("green");
+      // $.isEmptyObject($checkbox.parents("td:first")).parents("tr").hide();
+    }
+  })
+}
+
+function deleteActivity(e){
+  e.preventDefault();
+  var $tr = $(this).parents("tr");
+  var href = $tr.children("form").attr("action");
+
+  $.ajax(href, {
+    "method": "DELETE",
+    "success": function(){
+      $tr.slideUp(function(){
+        $(this).remove();
+      });
+    }
+  })
+}
+
+// END OF INTERACTING WITH ACTIVITIES FROM DASHBOARD
+
+function Goal(){
+}
+
+Goal.updateStatus = function(e){
+  var $checkbox = $(this);
+  var $form = $(this).parents("tr").children("form");
+  var href = $form.attr("action");
+  var id = $(this).data("id")
+
+  $.ajax(href + "/" + id, {
+    "method": "PATCH",
+    "data": $form.serialize(),
+    "success": function(response){
+      $checkbox.parents("li:first").toggleClass("completed");
+    }
+  })
+}
+
+function deleteGoal(e){
+  e.preventDefault();
+  var $tr = $(this).parents("tr");
+  var href = $("form", $tr).attr("action");
+  var id = $(this).data("id")
+
+  $.ajax(href + '/' + id, {
+    "method": "DELETE",
+    "success": function(){
+      $tr.slideUp("slow", function(){
+        $(this).remove();
+      });
+    }
+  })
+}
+
+$(function(){
+  $("table.table").on("change", "input:checkbox", completeActivity);
+  $("table.table").on("click", "button.destroy", deleteActivity);
+  $("table.table").on("change", "input#goal_status", Goal.updateStatus);
+  $("table.table").on("click", "button.destroy", deleteGoal);
+});

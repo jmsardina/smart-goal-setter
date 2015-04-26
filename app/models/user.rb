@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :goals
   has_many :comments
 
-  has_many :groups, foreign_key: :creator_id
+  has_many :groups, foreign_key: :creator_id, dependent: :destroy
 
   #as member
   has_many :user_groups, foreign_key: :member_id
@@ -20,20 +20,20 @@ class User < ActiveRecord::Base
   #as invitation recipient
   has_many :requests_received, class_name: "Invitation", foreign_key: :recipient_id
 
-  has_many :goals
+  has_many :goals, dependent: :destroy
   has_many :activities, through: :goals
   has_many :comments
   has_many :cheers
   # has_many :groups, through: :user_groups
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "../assets   /missing.png"
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
-  validates :avatar, presence: true
+  # validates :avatar, presence: true
   validates :name, presence: true
 
-  def self.search(query)
-    where("email like ?", "%#{query}%")
-  end
+  # def self.search(query)
+  #   where("email like ?", "%#{query}%")
+  # end
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -62,12 +62,13 @@ class User < ActiveRecord::Base
     @user
   end
 
-  def user_board_count
-    sum = 0
-    self.groups.each do |group|
-      sum += group.boards.count
-    end
-    sum
+  def pending_requests
+    self.requests_received.where(status: "pending")
+  end
+
+  def completed_activity_occurences
+    ( total_remaining_occurences- total_occurences)
+    ( total_occurences - total_remaining_occurences)
   end
   # def upcoming_activities
   #   activities_hash = {}

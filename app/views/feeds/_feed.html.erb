@@ -1,10 +1,12 @@
 <div class="ms-user">
-  <% if feed.user.uid %>
-    <%= image_tag feed.user.image_url %>
-  <% else %>
-    <%= image_tag feed.user.avatar(:thumb)%>
-  <% end %>
+  <% if feed.trackable %>
+    <% if feed.user.image_url %>
+      <img src="<%=feed.user.image_url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
+    <% else %>
+      <img src="<%=feed.user.avatar.url%>" style="height:auto;width:auto;max-width:50px;max-height:50px;">
+    <% end %>
 
-  <%= feed.user.name %>  <%= "will " + feed.trackable.description.downcase %> <small><%=time_ago_in_words(feed.trackable.created_at) %> ago </small><br>
+    <%= feed.user.name %>  <%= "will " + feed.trackable.description.downcase %> <small><%=time_ago_in_words(feed.trackable.created_at) %> ago </small><br>
+  <% end %>
 </div>
 
