@@ -1,12 +1,12 @@
 class Activity < ActiveRecord::Base
   attr_accessor :number_occurences
 	belongs_to :goal
-	# has_many :comments, as: :commentable, dependent: :destroy
+
 	delegate :user, to: :goal
-  validates :description, presence: true
-  validates :frequency, :period, :deadline, presence: true
+  validates :description, :frequency, :period, :deadline, presence: true
 
   before_save :default_values
+
   def default_values
     self.remaining_for_period ||= self.frequency
   end
@@ -58,7 +58,6 @@ class Activity < ActiveRecord::Base
   def restart_activity_counter #reset remaining_for_period to frequency at start of new period
     if self.needs_counter_reset?
       self.remaining_for_period = self.frequency
-      self.save
     end
   end
 
@@ -81,14 +80,13 @@ class Activity < ActiveRecord::Base
   end
 
   def add_point_and_decrement_occurences
-    @user = self.user
     if self.complete?
       unless self.remaining_for_period == 0
         self.decrement!(:occurences)
         self.increment!(:activity_points)
         self.decrement!(:remaining_for_period)
         self.goal.increment!(:goal_points)
-        @user.increment!(:points)
+        self.user.increment!(:points)
         self.status = false
       end
       self.save

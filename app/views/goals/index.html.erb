@@ -4,77 +4,76 @@
     <div class="block-header">
       <h2 style="font-family:comic sans ms, lucida console;"><strong><%= MotivationalQuote.find(rand(1..MotivationalQuote.count)).content %></strong></h2>
     </div>
-      <div class=".col-xs-4 .col-sm-6">
-        <div class="card">
-          <h4>Things To Do <small>one step-at-a-time</small></h4>  
-          <div class="activities-scroll" style="height:300px">
-            <table class="table">
-              <thead>
-                <tr>
-                  <!-- <th>Status</th> -->
-                  <th>Description</th>
-                  <th>Times Left</th>
-                  <th>By</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>                  
-              <% @activities.each do |activity| %>
-              <tbody>       
-                <tr data-activity-id="<%=activity.id %>"  class="<% if activity.remaining_for_period == 0 %>done<% end %>" >
-                <% goal = activity.goal %>
-                <%= form_for([goal, activity]) do |f| %>
-                  <%= f.check_box :status, class: "toggle", style: "display:none" %>
-                <% end %>
-
-                  <td><%=link_to activity.description, goal_path(activity.goal) %></td>
-                  <td class="remaining">
-                  <% activity.remaining_for_period.times do %>
-                    <div class="circle" style="<%if activity.complete?%>background-color:green<%end%>;display:inline-block;">
-                    <%= form_for([goal, activity]) do |f| %>
-                      <%= f.check_box :status, class: "toggle", style: "opacity:0" %>
-                    <% end %>
-                    </div>
-                  <% end %>
-                  </td>
-                  <td style="<%if activity.upcoming_deadline <= 3.days.from_now%>color:red<%end%>">
-                  <%= activity.upcoming_deadline.strftime("%B %d, %Y") %></td>
-                  <td><button class="destroy">X</button></td>
-                <% end %>
-                </tr>
-              </tbody>
-            </table>           
-          </div>
-        </div>
-      </div>
-      <div class=".col-xs-4 .col-sm-6">
-        <div class="card" style="height:300px">
-          <div class="card-header">
-            <div class="listview">
-              <div class="lv-header">
-                  My Goals
-              </div>
-              <ul class="actions">
-                <li class="dropdown">
-                  <a href="<%= new_goal_path %>">
-                    <i class="md  md-add"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+    <div class=".col-xs-4 .col-sm-6">
+      <div class="card">
+        <h4>Things To Do <small>one step-at-a-time</small></h4>  
+        <div class="activities-scroll" style="height:300px">
           <table class="table">
             <thead>
               <tr>
-                <th>Status</th>
-                <th>Goal</th>
-                <th>Due Date</th>
+                <th>Description</th>
+                <th>Times Left</th>
+                <th>By</th>
+                <th>Delete</th>
               </tr>
-            </thead>
-            <tbody>
-                <%= render 'goal', goal: @goal %>
+            </thead>                  
+            <% @activities.each do |activity| %>
+            <tbody>       
+              <tr data-activity-id="<%=activity.id %>"  class="<% if activity.remaining_for_period == 0 %>done<% end %>" >
+              <% goal = activity.goal %>
+              <%= form_for([goal, activity]) do |f| %>
+                <%= f.check_box :status, class: "toggle", style: "display:none" %>
+              <% end %>
+
+                <td><%=link_to activity.description, goal_path(activity.goal) %></td>
+                <td class="remaining">
+                <% activity.remaining_for_period.times do %>
+                  <div class="circle" style="<%if activity.complete?%>background-color:green<%end%>;display:inline-block;">
+                  <%= form_for([goal, activity]) do |f| %>
+                    <%= f.check_box :status, class: "toggle", style: "opacity:0" %>
+                  <% end %>
+                  </div>
+                <% end %>
+                </td>
+                <td style="<%if activity.upcoming_deadline <= 3.days.from_now%>color:red<%end%>">
+                <%= activity.upcoming_deadline.strftime("%B %d, %Y") %></td>
+                <td><button class="destroy">X</button></td>
+              <% end %>
+              </tr>
             </tbody>
-          </table>
+          </table>           
         </div>
-      </div> 
+      </div>
     </div>
+    <div class=".col-xs-4 .col-sm-6">
+      <div class="card" style="height:300px">
+        <div class="card-header">
+          <div class="listview">
+            <div class="lv-header">
+                My Goals
+            </div>
+            <ul class="actions">
+              <li class="dropdown">
+                <a href="<%= new_goal_path %>">
+                  <i class="md  md-add"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Goal</th>
+              <th>Due Date</th>
+            </tr>
+          </thead>
+          <tbody>
+              <%= render 'goal', goal: @goal %>
+          </tbody>
+        </table>
+      </div>
+    </div> 
+  </div>
 </section>
